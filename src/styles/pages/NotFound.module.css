@@ -1,0 +1,51 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100%;
+  background-color: #ffffff;
+  font-family: system-ui, -apple-system, sans-serif;
+  margin: 0;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.content {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.logo {
+  width: 100%;
+  max-width: 450px; 
+  height: auto;
+  margin-bottom: 30px;
+}
+
+.title {
+  color: #49108B;
+  font-size: clamp(3rem, 6vw, 5rem); 
+  font-weight: 800;
+  margin: 0 0 5px 0;
+  letter-spacing: -1px;
+  line-height: 1.1;
+}
+
+.subtitle {
+  color: #49108B;
+  font-size: clamp(1.5rem, 3vw, 2.5rem); 
+  font-weight: 600;
+  margin: 0;
+}
+
+@media (max-width: 480px) {
+  .logo {
+    max-width: 280px;
+    margin-bottom: 20px;
+  }
+}

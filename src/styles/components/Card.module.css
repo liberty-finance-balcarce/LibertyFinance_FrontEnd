@@ -1,0 +1,47 @@
+:root{
+    font-family: var(--tipoLetraGeneral);
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    justify-content: center;
+}
+
+.card{
+    border: 1px solid var(--colorBordeVentana);
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 1%;
+    width: 300px;
+    height: 300px; 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
+    overflow-y: hidden;               
+}
+
+.button{
+    background-color: var(--colorPrimario);
+    color: var(--colorLetrasBoton);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.title {
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: var(--colorPrimario);
+}
+
+.long-text-container {
+    margin-top: 10px;
+    color: #555;
+    display: block;
+}

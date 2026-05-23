@@ -1,0 +1,235 @@
+.container {
+  /* =========================================
+     VARIABLES (Design Tokens)
+     Escalabilidad: Cambiar un color aquí 
+     actualizará todo el componente.
+  ========================================= */
+  --color-primary: #7c4c9e;
+  --color-primary-hover: #4a2377;
+  --color-primary-disabled: #9b7eb5;
+  --color-text-main: #333333;
+  --color-text-muted: #666666;
+  --color-border: #cccccc;
+  --color-error: #d9534f;
+  
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  
+  --transition-fast: 0.2s ease-in-out;
+  
+  /* Tipografía nativa del sistema para mayor rendimiento */
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  
+  /* clamp() permite que el padding se reduzca suavemente en móviles */
+  max-width: 900px;
+  margin: 0 auto;
+  padding: clamp(20px, 5vw, 40px) 20px;
+  color: var(--color-text-main);
+}
+
+/* =========================================
+   TIPOGRAFÍA
+========================================= */
+.title {
+  text-align: center;
+  font-size: clamp(1.8rem, 4vw, 2.5rem); /* Tamaño dinámico */
+  color: var(--color-primary);
+  margin-bottom: clamp(25px, 5vw, 40px);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 700;
+}
+
+/* =========================================
+   LAYOUT (Grid & Flexbox)
+========================================= */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.gridContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: clamp(20px, 4vw, 50px);
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 16px;
+  align-items: start; 
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.inputGroup label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.inputGroup input,
+.inputGroup select {
+  box-sizing: border-box; 
+  width: 100%;           
+  height: 44px;           
+  margin: 0;
+  padding: 10px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-size: 1rem;
+  color: var(--color-text-main);
+  background-color: #fff;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.inputGroup input:focus-visible,
+.inputGroup select:focus-visible {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(124, 76, 158, 0.15);
+}
+
+.inputGroup input::placeholder {
+  color: var(--color-primary);
+  opacity: 0.6;
+  font-size: 0.95rem;
+}
+
+.phoneGroup {
+  display: flex;
+  gap: 12px;
+  width: 100%; 
+}
+
+.codArea {
+  flex: 0 0 30%;
+}
+
+.telNumber {
+  flex: 1;
+}
+
+.hint {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.termsGroup {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+  font-weight: 600;
+  color: var(--color-text-main);
+}
+
+.termsGroup input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: var(--color-primary);
+}
+
+.link {
+  color: var(--color-primary);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  transition: color var(--transition-fast);
+}
+
+.link:hover {
+  color: var(--color-primary-hover);
+}
+
+.error {
+  color: var(--color-error);
+  text-align: center;
+  font-weight: 600;
+  background-color: rgba(217, 83, 79, 0.1);
+  padding: 10px;
+  border-radius: var(--radius-sm);
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+  margin-top: 24px;
+  border-top: 1px solid var(--color-border);
+  padding-top: 30px;
+}
+
+.btnVolver,
+.btnSubmit {
+  background-color: var(--color-primary);
+  color: #ffffff;
+  border: 1px solid transparent;
+  padding: 12px 32px;
+  border-radius: var(--radius-md);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btnVolver {
+  background-color: transparent;
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.btnVolver:hover {
+  background-color: rgba(124, 76, 158, 0.05);
+}
+
+.btnSubmit:hover:not(:disabled) {
+  background-color: var(--color-primary-hover);
+  box-shadow: 0 4px 12px rgba(74, 35, 119, 0.2);
+  transform: translateY(-1px);
+}
+
+.btnSubmit:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.btnSubmit:disabled {
+  background-color: var(--color-primary-disabled);
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+@media (max-width: 600px) {
+  .row {
+    grid-template-columns: 1fr; 
+  }
+
+  .actions {
+    flex-direction: column-reverse;
+    gap: 16px;
+  }
+
+  .btnVolver,
+  .btnSubmit {
+    width: 100%;
+  }
+}

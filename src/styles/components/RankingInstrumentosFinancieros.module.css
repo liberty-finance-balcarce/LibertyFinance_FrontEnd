@@ -1,0 +1,96 @@
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  font-family: sans-serif;
+  color: #4a2377;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.mainTitle {
+  font-size: 1.8rem;
+  color: #551a8b;
+  margin: 0;
+  letter-spacing: 0.5px;
+}
+
+.panelsContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+.panel {
+  border: 1px solid #7c4c9e; 
+  padding: 20px 30px;
+  border-radius: 20px;
+  background-color: #ffffff;
+}
+
+.panelTitle {
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #551a8b;
+  margin-top: 0;
+  margin-bottom: 25px;
+}
+
+.list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 15px; 
+}
+
+.listItem {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr; 
+  align-items: center;
+  font-size: 1.1rem;
+  color: #551a8b;
+}
+
+.itemName {
+  text-align: left;
+}
+
+.itemYield {
+  text-align: center;
+}
+
+.itemRisk {
+  text-align: right;
+}
+
+.loadingContainer,
+.errorContainer {
+  text-align: center;
+  padding: 50px;
+  color: #551a8b;
+  font-size: 1.2rem;
+}
+
+.errorContainer {
+  color: #d9534f;
+}
+
+@media (max-width: 768px) {
+  .panelsContainer {
+    grid-template-columns: 1fr;
+  }
+
+  .panel {
+    padding: 15px 20px;
+  }
+
+  .listItem {
+    font-size: 1rem;
+  }
+}

@@ -1,0 +1,21 @@
+:root{
+  width: 100%;
+  --colorPrimario:#4B0082;
+  --colorSecundario:#800080;
+  --colorLetrasBoton:beige;
+  --colorBordeVentana:#E6E6FA;
+  --colorSombraVentana:#DDA0DD;
+
+  --tipoLetraGeneral:system-ui, 'Segoe UI', Roboto, sans-serif;
+
+/*espacio para las cards*/
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+
+  /* Bordes de las cards */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+}

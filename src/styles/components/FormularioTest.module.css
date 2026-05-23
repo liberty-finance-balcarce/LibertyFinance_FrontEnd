@@ -1,0 +1,216 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.testCard {
+  position: relative;
+  background: var(--white, #fff);
+  width: 100%;
+  max-width: 500px;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  overflow: hidden;
+  padding-bottom: 0px;
+}
+
+/* AQUÍ ESTÁ LA MAGIA PARA LIMPIAR EL BOTÓN DE LA "X" */
+.btnClose {
+  position: absolute !important;
+  top: 15px !important;
+  right: 15px !important;
+  background: transparent !important; /* Quita tu fondo violeta global */
+  border: none !important;
+  box-shadow: none !important; /* Quita sombras si las hay */
+  font-size: 32px !important;
+  line-height: 1 !important;
+  color: var(--primary-color, #800080) !important;
+  cursor: pointer !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  min-width: auto !important;
+  min-height: auto !important;
+  width: auto !important;
+  height: auto !important;
+  transition: color 0.2s ease, transform 0.2s ease;
+  z-index: 50 !important;
+}
+
+.btnClose:hover {
+  transform: scale(1.1);
+}
+
+.progressBar {
+  height: 6px;
+  background: #eee;
+  width: 100%;
+}
+
+.progressFill {
+  height: 100%;
+  background: var(--primary-color, #800080);
+  transition: width 0.4s ease;
+}
+
+.testHeader {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 30px;
+}
+
+.stepIndicator {
+  font-size: 0.85rem;
+  font-weight: bold;
+  color: var(--primary-color, #800080);
+  background: #fff4e6;
+  padding: 4px 12px;
+  border-radius: 20px;
+}
+
+.currentScore {
+  font-size: 0.85rem;
+  color: var(--text-light, #4B0082);
+}
+
+.titulo {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-dark, #333);
+  padding: 25px 45px 0 30px; 
+}
+
+.subtext {
+  font-size: 15px;
+  padding: 10px 30px 20px;
+  font-weight: 500;
+  color: var(--text-light, #666);
+}
+
+.optionsGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 0 30px;
+}
+
+.optionBtn {
+  background: var(--white, #fff);
+  border: 2px solid #edf2f4;
+  padding: 15px 20px;
+  border-radius: 12px;
+  text-align: left;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: var(--text-dark, #333);
+}
+
+.optionBtn:hover {
+  border-color: var(--colorBordeVentana, #ccc);
+  background-color: var(--colorSombraVentana, #f9f9f9);
+}
+
+.optionBtn.active {
+  border-color: var(--colorBordeVentana, #800080);
+  background-color: var(--colorSombraVentana, #f3e8ff);
+  font-weight: bold;
+}
+
+.navControls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 10px 0px;
+  padding: 20px 30px;
+  height: auto;
+}
+
+.paginador {
+  max-height: 20px;
+  font-weight: bold;
+  color: var(--text-light, #666);
+}
+
+.btnNav {
+  background: none;
+  border: none;
+  color: var(--text-light, #4B0082);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btnNav:disabled {
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+.btnFinish {
+  background: var(--colorSecundario, #4B0082);
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0px 0px 3px 3px var(--colorSombraVentana, transparent);
+}
+
+.resultCard {
+  position: relative;
+  background: white;
+  width: 100%;
+  max-width: 500px;
+  border-radius: 20px;
+  padding: 40px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.scoreBadge {
+  display: inline-block;
+  background: var(--colorSecundario, #4B0082);
+  color: white;
+  padding: 8px 20px;
+  border-radius: 30px;
+  margin-bottom: 20px;
+}
+
+.resultDetails {
+  text-align: left;
+  background: #fcfcfc;
+  padding: 20px;
+  border-radius: 15px;
+  margin-bottom: 30px;
+  border: 1px solid #eee;
+}
+
+.highlightBox {
+  background: #fff9f2;
+  border-left: 4px solid var(--primary-color, #800080);
+  padding: 10px;
+  margin-top: 15px;
+}
+
+.btnReset {
+  display: block; 
+  width: 100%;
+  background: var(--colorSecundario, #4B0082);
+  color: white;
+  border: none;
+  padding: 15px;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btnReset:hover {
+  opacity: 0.9;
+}
+
+.perfil-conservador h2 { color: #0984e3; }
+.perfil-moderado h2 { color: #00b894; }
+.perfil-agresivo h2 { color: #e17055; }
+.perfil-experto h2 { color: #6c5ce7; }
