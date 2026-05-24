@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "../styles/components/FormularioTest.module.css";
 
 const questions = [
@@ -114,13 +114,17 @@ const questions = [
   },
 ];
 
-// AQUÍ ESTÁ EL CAMBIO CLAVE: Recibimos onClose
 export function FormularioTest({ onClose }: { onClose?: () => void }) {
-  const [currentIdx, setCurrentIdx] = useState(0);
+  const savedTest = localStorage.getItem("testInversor");
+  const parsedTest = savedTest ? JSON.parse(savedTest) : null;
+
+  const [currentIdx, setCurrentIdx] = useState(parsedTest?.currentIdx ?? 0);
+
   const [selections, setSelections] = useState<(number | null)[]>(
-    Array(questions.length).fill(null),
+    parsedTest?.selections ?? Array(questions.length).fill(null),
   );
-  const [finished, setFinished] = useState(false);
+
+  const [finished, setFinished] = useState(parsedTest?.finished ?? false);
 
   const handleSelect = (points: number) => {
     const updated = [...selections];
@@ -143,6 +147,7 @@ export function FormularioTest({ onClose }: { onClose?: () => void }) {
         exposicion: "0-5%",
         clase: "perfilConservador",
       };
+
     if (score <= 60)
       return {
         perfil: "MODERADO",
@@ -151,6 +156,7 @@ export function FormularioTest({ onClose }: { onClose?: () => void }) {
         exposicion: "5-15% (BTC/ETH)",
         clase: "perfilModerado",
       };
+
     if (score <= 85)
       return {
         perfil: "CRECIMIENTO / AGRESIVO",
@@ -159,6 +165,7 @@ export function FormularioTest({ onClose }: { onClose?: () => void }) {
         exposicion: "20-40%",
         clase: "perfilAgresivo",
       };
+
     return {
       perfil: "EXPERTO / MUY AGRESIVO",
       estrategia: "Maximización de retornos.",
@@ -168,13 +175,23 @@ export function FormularioTest({ onClose }: { onClose?: () => void }) {
     };
   };
 
+  useEffect(() => {
+    localStorage.setItem(
+      "testInversor",
+      JSON.stringify({
+        currentIdx,
+        selections,
+        finished,
+      }),
+    );
+  }, [currentIdx, selections, finished]);
+
   if (finished) {
     const total = getScore();
     const result = getResultData(total);
     return (
       <div className={styles.container}>
         <div className={`${styles.resultCard} ${styles[result.clase]}`}>
-          {/* El botón ahora ejecuta directamente onClose */}
           <button
             className={styles.btnClose}
             onClick={onClose}
@@ -198,6 +215,7 @@ export function FormularioTest({ onClose }: { onClose?: () => void }) {
           <button
             className={styles.btnReset}
             onClick={() => {
+              localStorage.removeItem("testInversor");
               setSelections(Array(questions.length).fill(null));
               setCurrentIdx(0);
               setFinished(false);
