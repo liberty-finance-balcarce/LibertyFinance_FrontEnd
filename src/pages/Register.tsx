@@ -3,11 +3,14 @@ import { useNavigate } from "react-router-dom";
 import styles from "../styles/pages/Register.module.css";
 import { useAuth } from "../hooks/useAuth";
 import { useProvincias } from "../hooks/useProvincias";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 export function Register() {
   const navigate = useNavigate();
   const { register } = useAuth();
   const { provinciasList } = useProvincias();
+
+  const [showPassword, setShowPassword] = useState(false);
 
   const [formData, setFormData] = useState({
     nombre: "",
@@ -235,6 +238,7 @@ export function Register() {
                 type="text"
                 id="nombre"
                 name="nombre"
+                placeholder="Juan"
                 value={formData.nombre}
                 onChange={handleChange}
               />
@@ -247,6 +251,7 @@ export function Register() {
                 type="text"
                 id="apellido"
                 name="apellido"
+                placeholder="Pérez"
                 value={formData.apellido}
                 onChange={handleChange}
               />
@@ -256,10 +261,10 @@ export function Register() {
             <div className={styles.inputGroup}>
               <label htmlFor="mail">Mail:</label>
               <input
-                type="text"
+                type="email"
                 id="mail"
                 name="mail"
-                placeholder="ejemplo@ejemplo.com"
+                placeholder="juan.perez@gmail.com"
                 value={formData.mail}
                 onChange={handleChange}
               />
@@ -268,14 +273,32 @@ export function Register() {
 
             <div className={styles.inputGroup}>
               <label htmlFor="contraseña">Contraseña:</label>
-              <input
-                type="text"
-                id="contraseña"
-                name="contraseña"
-                placeholder="Mínimo 4 caracteres"
-                value={formData.contraseña}
-                onChange={handleChange}
-              />
+
+              <div className={styles.passwordGroup}>
+                <input
+                  type={showPassword ? "text" : "password"}
+                  id="contraseña"
+                  name="contraseña"
+                  placeholder="Adminjk12@"
+                  value={formData.contraseña}
+                  onChange={handleChange}
+                />
+
+                <button
+                  type="button"
+                  className={styles.btnPassword}
+                  onClick={() => setShowPassword((prev) => !prev)}
+                  aria-label={
+                    showPassword ? "Ocultar contraseña" : "Mostrar contraseña"
+                  }
+                  title={
+                    showPassword ? "Ocultar contraseña" : "Mostrar contraseña"
+                  }
+                >
+                  {showPassword ? <FaEyeSlash /> : <FaEye />}
+                </button>
+              </div>
+
               <span className={styles.hint}>* CAMPO OBLIGATORIO</span>
             </div>
           </div>
@@ -287,7 +310,7 @@ export function Register() {
                 <input
                   type="text"
                   name="codArea"
-                  placeholder="Cod Area"
+                  placeholder="2266"
                   value={formData.codArea}
                   onChange={handleChange}
                   className={styles.codArea}
@@ -296,7 +319,7 @@ export function Register() {
                 <input
                   type="text"
                   name="telefono"
-                  placeholder="Número sin 0 ni 15"
+                  placeholder="456789"
                   value={formData.telefono}
                   onChange={handleChange}
                   className={styles.telNumber}
@@ -311,6 +334,7 @@ export function Register() {
                   type="date"
                   id="fecha_nacimiento"
                   name="fecha_nacimiento"
+                  placeholder="2000-01-01"
                   value={formData.fecha_nacimiento}
                   onChange={handleChange}
                 />
@@ -323,7 +347,7 @@ export function Register() {
                   type="text"
                   id="dni"
                   name="dni"
-                  placeholder="SIN PUNTOS"
+                  placeholder="40123456"
                   value={formData.dni}
                   onChange={handleChange}
                 />
@@ -340,7 +364,7 @@ export function Register() {
                   value={formData.provincia}
                   onChange={handleChange}
                 >
-                  <option value="">Seleccione...</option>
+                  <option value="">Buenos Aires</option>
                   {provinciasList.map((prov) => (
                     <option key={prov.id} value={prov.id}>
                       {prov.provincia}
@@ -356,6 +380,7 @@ export function Register() {
                   type="text"
                   id="localidad"
                   name="localidad"
+                  placeholder="Balcarce"
                   value={formData.localidad}
                   onChange={handleChange}
                 />
