@@ -109,8 +109,6 @@ export function AuthProvider({ children }: Props) {
       return response; 
     }
 
-    await login(data.dni_usuario, data.contraseña);
-
     return response;
   };
 
@@ -136,9 +134,9 @@ export function AuthProvider({ children }: Props) {
     const data = dataParsed.data;
 
     setUser(data);
-    setRole(data.role || data.rol);
+    setRole(data.rol.nombre);
     localStorage.setItem("user", JSON.stringify(data));
-    localStorage.setItem("role", data.role || data.rol);
+    localStorage.setItem("role", data.rol.nombre);
 
     return response;
   };
