@@ -12,6 +12,24 @@ export function Register() {
 
   const [showPassword, setShowPassword] = useState(false);
 
+  const getPerfilInversorFromTest = () => {
+    const savedTest = localStorage.getItem("testInversor");
+
+    if (!savedTest) return "";
+
+    const data = JSON.parse(savedTest);
+
+    if (!data.finished) return "";
+
+    const selections: number[] = data.selections ?? [];
+    const score = selections.reduce((acc, value) => acc + (value || 0), 0);
+
+    if (score <= 30) return "1";
+    if (score <= 60) return "2";
+
+    return "3";
+  };
+
   const [formData, setFormData] = useState({
     nombre: "",
     apellido: "",
@@ -23,6 +41,7 @@ export function Register() {
     dni: "",
     provincia: "",
     localidad: "",
+    perfilInversor: getPerfilInversorFromTest(),
     terminos: false,
   });
 
@@ -38,6 +57,14 @@ export function Register() {
       setFormData((prev) => ({
         ...prev,
         terminos: (e.target as HTMLInputElement).checked,
+      }));
+      return;
+    }
+
+    if (name === "perfilInversor") {
+      setFormData((prev) => ({
+        ...prev,
+        perfilInversor: value.replace(/\D/g, ""),
       }));
       return;
     }
@@ -115,6 +142,12 @@ export function Register() {
   };
 
   const validateForm = (): string | null => {
+    const perfilInvId = Number(formData.perfilInversor);
+
+    if (!perfilInvId || perfilInvId < 1) {
+      return "Debe seleccionar un perfil de inversor valido.";
+    }
+
     if (!formData.nombre.trim()) {
       return "El nombre de usuario no puede estar vacio.";
     }
@@ -204,7 +237,7 @@ export function Register() {
         numero_telefono: `${formData.codArea}${formData.telefono}`,
         direccion: formData.localidad,
         id_provincia: Number(formData.provincia),
-        id_perfilinv: 1,
+        id_perfilinv: Number(formData.perfilInversor),
         id_codigo_referidos: 0,
         fecha_nacimiento: formData.fecha_nacimiento,
       };
@@ -384,6 +417,22 @@ export function Register() {
                   value={formData.localidad}
                   onChange={handleChange}
                 />
+                <span className={styles.hint}>* CAMPO OBLIGATORIO</span>
+              </div>
+
+              <div className={styles.inputGroup}>
+                <label htmlFor="perfilInversor">Perfil de inversor:</label>
+                <select
+                  id="perfilInversor"
+                  name="perfilInversor"
+                  value={formData.perfilInversor}
+                  onChange={handleChange}
+                >
+                  <option value="">Seleccionar perfil</option>
+                  <option value="1">Conservador</option>
+                  <option value="2">Moderado</option>
+                  <option value="3">Agresivo</option>{" "}
+                </select>
                 <span className={styles.hint}>* CAMPO OBLIGATORIO</span>
               </div>
             </div>
