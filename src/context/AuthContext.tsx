@@ -11,9 +11,10 @@ interface RegisterData {
   id_provincia: number;
   id_perfilinv: number;
   id_codigo_referidos: number;
+  fecha_nacimiento: string;
 }
 
-interface User {
+export interface User {
   id: number;
   dni: number;
   role: string;

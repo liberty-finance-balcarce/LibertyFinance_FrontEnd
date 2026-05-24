@@ -16,7 +16,7 @@ export function Register() {
     contraseña: "",
     codArea: "",
     telefono: "",
-    sexo: "",
+    fecha_nacimiento: "",
     dni: "",
     provincia: "",
     localidad: "",
@@ -87,14 +87,10 @@ export function Register() {
       return;
     }
 
-    if (name === "sexo") {
-      const sexosPermitidos = ["", "F", "M", "X"];
-
-      if (!sexosPermitidos.includes(value)) return;
-
+    if (name === "fecha_nacimiento") {
       setFormData((prev) => ({
         ...prev,
-        sexo: value,
+        fecha_nacimiento: value,
       }));
       return;
     }
@@ -140,6 +136,21 @@ export function Register() {
 
     if (!/^\d+$/.test(formData.codArea) || !/^\d+$/.test(formData.telefono)) {
       return "El numero de telefono debe contener solo numeros.";
+    }
+
+    if (!formData.fecha_nacimiento.trim()) {
+      return "La fecha de nacimiento no puede estar vacia.";
+    }
+
+    const fechaNacimiento = new Date(formData.fecha_nacimiento);
+    const fechaActual = new Date();
+
+    if (Number.isNaN(fechaNacimiento.getTime())) {
+      return "La fecha de nacimiento debe ser valida.";
+    }
+
+    if (fechaNacimiento > fechaActual) {
+      return "La fecha de nacimiento no puede ser mayor a la fecha actual.";
     }
 
     if (!/^\d+$/.test(formData.dni)) {
@@ -192,6 +203,7 @@ export function Register() {
         id_provincia: Number(formData.provincia),
         id_perfilinv: 1,
         id_codigo_referidos: 0,
+        fecha_nacimiento: formData.fecha_nacimiento,
       };
 
       const response = await register(payload);
@@ -270,12 +282,12 @@ export function Register() {
 
           <div className={styles.column}>
             <div className={styles.inputGroup}>
-              <label>Número de teléfono:</label>
+              <label>Numero de telefono:</label>
               <div className={styles.phoneGroup}>
                 <input
                   type="text"
                   name="codArea"
-                  placeholder="Cod Área"
+                  placeholder="Cod Area"
                   value={formData.codArea}
                   onChange={handleChange}
                   className={styles.codArea}
@@ -294,18 +306,15 @@ export function Register() {
 
             <div className={styles.row}>
               <div className={styles.inputGroup}>
-                <label htmlFor="sexo">Sexo:</label>
-                <select
-                  id="sexo"
-                  name="sexo"
-                  value={formData.sexo}
+                <label htmlFor="fecha_nacimiento">Fecha de nacimiento:</label>
+                <input
+                  type="date"
+                  id="fecha_nacimiento"
+                  name="fecha_nacimiento"
+                  value={formData.fecha_nacimiento}
                   onChange={handleChange}
-                >
-                  <option value=""></option>
-                  <option value="F">Femenino</option>
-                  <option value="M">Masculino</option>
-                  <option value="X">Otro</option>
-                </select>
+                />
+                <span className={styles.hint}>* CAMPO OBLIGATORIO</span>
               </div>
 
               <div className={styles.inputGroup}>
