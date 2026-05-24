@@ -6,6 +6,7 @@ import { PublicRoute } from "./routes/PublicRoute";
 import { UserRoute } from "./routes/UserRoute";
 
 import { Layout } from "./layouts/Layout";
+import { UserLayout } from "./layouts/UserLayout";
 
 import { Register } from "./pages/Register";
 import { Home } from "./components/Home";
