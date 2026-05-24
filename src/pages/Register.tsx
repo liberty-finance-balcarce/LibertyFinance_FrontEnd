@@ -29,49 +29,140 @@ export function Register() {
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => {
-    const { name, value, type } = e.target;
-    const checked =
-      type === "checkbox" ? (e.target as HTMLInputElement).checked : undefined;
+    const { name, value } = e.target;
 
-    setFormData((prev) => ({
-      ...prev,
-      [name]: type === "checkbox" ? checked : value,
-    }));
+    if (name === "terminos") {
+      setFormData((prev) => ({
+        ...prev,
+        terminos: (e.target as HTMLInputElement).checked,
+      }));
+      return;
+    }
+
+    if (name === "nombre" || name === "apellido") {
+      setFormData((prev) => ({
+        ...prev,
+        [name]: value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/g, ""),
+      }));
+      return;
+    }
+
+    if (name === "mail") {
+      setFormData((prev) => ({
+        ...prev,
+        mail: value.trim(),
+      }));
+      return;
+    }
+
+    if (name === "contraseña") {
+      setFormData((prev) => ({
+        ...prev,
+        contraseña: value.slice(0, 10),
+      }));
+      return;
+    }
+
+    if (name === "codArea") {
+      setFormData((prev) => ({
+        ...prev,
+        codArea: value.replace(/\D/g, "").slice(0, 4),
+      }));
+      return;
+    }
+
+    if (name === "telefono") {
+      setFormData((prev) => ({
+        ...prev,
+        telefono: value.replace(/\D/g, "").slice(0, 10),
+      }));
+      return;
+    }
+
+    if (name === "dni") {
+      setFormData((prev) => ({
+        ...prev,
+        dni: value.replace(/\D/g, "").slice(0, 8),
+      }));
+      return;
+    }
+
+    if (name === "sexo") {
+      const sexosPermitidos = ["", "F", "M", "X"];
+
+      if (!sexosPermitidos.includes(value)) return;
+
+      setFormData((prev) => ({
+        ...prev,
+        sexo: value,
+      }));
+      return;
+    }
+
+    if (name === "provincia") {
+      setFormData((prev) => ({
+        ...prev,
+        provincia: value.replace(/\D/g, ""),
+      }));
+      return;
+    }
+
+    if (name === "localidad") {
+      setFormData((prev) => ({
+        ...prev,
+        localidad: value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ0-9\s]/g, ""),
+      }));
+    }
   };
 
   const validateForm = (): string | null => {
-    if (!formData.nombre.trim())
+    if (!formData.nombre.trim()) {
       return "El nombre de usuario no puede estar vacio.";
-    if (!formData.apellido.trim()) return "El apellido no puede estar vacio.";
+    }
+
+    if (!formData.apellido.trim()) {
+      return "El apellido no puede estar vacio.";
+    }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(formData.mail)) return "El mail debe ser valido.";
+
+    if (!emailRegex.test(formData.mail)) {
+      return "El mail debe ser valido.";
+    }
 
     if (formData.contraseña.length < 4 || formData.contraseña.length > 10) {
       return "La contraseña debe tener entre 4 y 10 caracteres.";
     }
 
     if (!formData.codArea.trim() || !formData.telefono.trim()) {
-      return "El codigo de área y el telefono no pueden estar vacios.";
+      return "El codigo de area y el telefono no pueden estar vacios.";
     }
+
     if (!/^\d+$/.test(formData.codArea) || !/^\d+$/.test(formData.telefono)) {
-      return "El numero de telefono debe contener solo números.";
+      return "El numero de telefono debe contener solo numeros.";
     }
 
     if (!/^\d+$/.test(formData.dni)) {
       return "El DNI del usuario debe ser un numero sin puntos.";
     }
 
+    if (formData.dni.length < 7 || formData.dni.length > 8) {
+      return "El DNI debe tener entre 7 y 8 numeros.";
+    }
+
     const provId = Number(formData.provincia);
+
     if (!provId || provId < 1) {
       return "Debe seleccionar una provincia valida.";
     }
 
-    if (!formData.localidad.trim())
+    if (!formData.localidad.trim()) {
       return "La localidad (direccion) no puede estar vacia.";
+    }
 
-    if (!formData.terminos)
+    if (!formData.terminos) {
       return "Debes aceptar los Terminos y Condiciones para continuar.";
+    }
 
     return null;
   };
@@ -81,6 +172,7 @@ export function Register() {
     setError(null);
 
     const validationError = validateForm();
+
     if (validationError) {
       setError(validationError);
       return;
@@ -133,7 +225,6 @@ export function Register() {
                 name="nombre"
                 value={formData.nombre}
                 onChange={handleChange}
-                required
               />
               <span className={styles.hint}>* CAMPO OBLIGATORIO</span>
             </div>
@@ -146,7 +237,6 @@ export function Register() {
                 name="apellido"
                 value={formData.apellido}
                 onChange={handleChange}
-                required
               />
               <span className={styles.hint}>* CAMPO OBLIGATORIO</span>
             </div>
@@ -154,13 +244,12 @@ export function Register() {
             <div className={styles.inputGroup}>
               <label htmlFor="mail">Mail:</label>
               <input
-                type="email"
+                type="text"
                 id="mail"
                 name="mail"
                 placeholder="ejemplo@ejemplo.com"
                 value={formData.mail}
                 onChange={handleChange}
-                required
               />
               <span className={styles.hint}>* CAMPO OBLIGATORIO</span>
             </div>
@@ -168,15 +257,12 @@ export function Register() {
             <div className={styles.inputGroup}>
               <label htmlFor="contraseña">Contraseña:</label>
               <input
-                type="password"
+                type="text"
                 id="contraseña"
                 name="contraseña"
                 placeholder="Mínimo 4 caracteres"
-                minLength={4}
-                maxLength={10}
                 value={formData.contraseña}
                 onChange={handleChange}
-                required
               />
               <span className={styles.hint}>* CAMPO OBLIGATORIO</span>
             </div>
@@ -194,6 +280,7 @@ export function Register() {
                   onChange={handleChange}
                   className={styles.codArea}
                 />
+
                 <input
                   type="text"
                   name="telefono"
@@ -230,7 +317,6 @@ export function Register() {
                   placeholder="SIN PUNTOS"
                   value={formData.dni}
                   onChange={handleChange}
-                  required
                 />
                 <span className={styles.hint}>* CAMPO OBLIGATORIO</span>
               </div>
@@ -244,10 +330,8 @@ export function Register() {
                   name="provincia"
                   value={formData.provincia}
                   onChange={handleChange}
-                  required
                 >
                   <option value="">Seleccione...</option>
-                  {/* Mapeo dinámico de provincias usando el hook */}
                   {provinciasList.map((prov) => (
                     <option key={prov.id} value={prov.id}>
                       {prov.provincia}
@@ -265,7 +349,6 @@ export function Register() {
                   name="localidad"
                   value={formData.localidad}
                   onChange={handleChange}
-                  required
                 />
                 <span className={styles.hint}>* CAMPO OBLIGATORIO</span>
               </div>
@@ -281,6 +364,7 @@ export function Register() {
             checked={formData.terminos}
             onChange={handleChange}
           />
+
           <label htmlFor="terminos">
             He leído y acepto los{" "}
             <a href="/terminos-y-condiciones" className={styles.link}>
@@ -299,6 +383,7 @@ export function Register() {
           >
             VOLVER
           </button>
+
           <button
             type="submit"
             className={styles.btnSubmit}
