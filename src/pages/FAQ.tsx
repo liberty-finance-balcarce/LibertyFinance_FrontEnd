@@ -4,7 +4,8 @@ export function FAQ() {
   return (
     <div className={styles.container}>
       <h1>Preguntas frecuentes</h1>
-      <details>
+      
+      <details className={styles.details}>
         <summary>Sobre la plataforma</summary>
         <h3>¿Qué es Liberty Finance?</h3>
         <p>
@@ -29,7 +30,7 @@ export function FAQ() {
         </p>
       </details>
 
-      <details>
+      <details className={styles.details}>
         <summary>Sobre registro y seguridad</summary>
         <h3>¿Quiénes pueden registrarse en la plataforma?</h3>
         <p>
@@ -44,7 +45,7 @@ export function FAQ() {
         </p>
       </details>
 
-      <details>
+      <details className={styles.details}>
         <summary>Sobre niveles de usuarios</summary>
         <h3>¿Qué beneficios tengo como usuario invitado?</h3>
         <p>
@@ -63,7 +64,7 @@ export function FAQ() {
         </p>
       </details>
 
-      <details>
+      <details className={styles.details}>
         <summary>Sobre inversiones</summary>
         <h3>¿Liberty Finance realiza inversiones por mí?</h3>
         <p>
@@ -84,7 +85,7 @@ export function FAQ() {
         </p>
       </details>
 
-      <details>
+      <details className={styles.details}>
         <summary>Sobre el test de inversor</summary>
         <h3>¿Qué es el test de inversor?</h3>
         <p>
