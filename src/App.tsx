@@ -16,6 +16,8 @@ import { NavBar } from "./components/NavBar";
 import { Login } from "./pages/Login";
 import { UserRoute } from "./routes/UserRoute";
 import { Dashboard } from "./pages/Dashboard";
+import { DashboardCart } from "./pages/DashboardCart";
+import { DashboardInversiones } from "./pages/DashboardInversiones";
 
 function App() {
   return (
@@ -25,7 +27,10 @@ function App() {
 
         <Routes>
           <Route element={<UserRoute />}>
-            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/dashboard" element={<Dashboard />}>
+              <Route path="cart" element={<DashboardCart />} />
+              <Route path="inversiones" element={<DashboardInversiones />} />
+            </Route>
           </Route>
           <Route element={<PublicRoute />}>
             <Route path="/" element={<Home />} />
