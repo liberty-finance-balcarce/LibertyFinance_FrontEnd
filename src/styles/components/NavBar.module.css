@@ -1,65 +1,21 @@
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem;
-
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
 }
 
 .logo img {
-    width: 200px;
-    height: 80px;
+  width: 200px;
+  height: 80px;
 }
 
 .links {
-    display: flex;
-    gap: 1rem;
+  display: flex;
+  gap: 1rem;
 }
 
-.button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* width: fit-content; */
-    width: 150px;
-    height: 50px;
-    font-weight: bold;
-    background-color: var(--colorPrimario);
-    color: var(--colorSombraVentana);
-    text-decoration: none;
-    border: none;
-    border-radius: 0.5rem;
-    cursor: pointer;
-}
-
-.button:hover {
-    background-color: var(--colorSecundario);
-}
-
-.buttonActive {
-    background-color: #dda0dd;
-    color: var(--colorPrimario);
-}
-
-.buttonLogin {
-    display: inline-block;
-    width: 60px;
-    height: 60px;
-    font-weight: bold;
-    background-color: var(--colorPrimario);
-    color: #dda0dd;
-    text-decoration: none;
-    border-radius: 50%;
-    cursor: pointer;
-    text-align: center;
-    line-height: 60px;
-}
-
-.buttonLogin:hover {
-    background-color: var(--colorSecundario);
-}
-
-.buttonLoginActive {
-    background-color: #dda0dd;
-    color: var(--colorPrimario);
+.login {
+  display: flex;
+  align-items: center;
 }
