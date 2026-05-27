@@ -15,26 +15,16 @@ export function NavBar() {
       </div>
 
       <div className={styles.links}>
-        <Button to="/" variant="default">
-          Home
-        </Button>
-        <Button to="/nuestro-equipo" variant="default">
-          Nuestro Equipo
-        </Button>
-        <Button to="/contactenos" variant="default">
-          Contactenos
-        </Button>
+        <Button to="/" variant="default">Home</Button>
+        <Button to="/nuestro-equipo" variant="default">Nuestro Equipo</Button>
+        <Button to="/contactenos" variant="default">Contactenos</Button>
       </div>
 
       <div className={styles.login}>
         {user ? (
-          <Button to="/dashboard" variant="default">
-            <AvatarUsuario usuario={user} />
-          </Button>
+          <Button to="/dashboard" variant="default"><AvatarUsuario usuario={user} /></Button>
         ) : (
-          <Button to="/login" variant="login">
-            Login
-          </Button>
+          <Button to="/login" variant="login">Login</Button>
         )}
       </div>
     </nav>
