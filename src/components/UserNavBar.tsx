@@ -3,7 +3,7 @@ import styles from "../styles/components/NavBar.module.css";
 import { AvatarUsuario } from "./AvatarUsuario";
 import { Button } from "./Button";
 
-export function NavBar() {
+export function UserNavBar() {
   const { user } = useAuth();
 
   return (
