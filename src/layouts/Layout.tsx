@@ -1,17 +1,20 @@
 import { Outlet } from "react-router-dom";
 import { NavBar } from "../components/NavBar";
 import { Footer } from "../components/Footer";
+import styles from "@/styles/layouts/Layout.module.css";
 
 export function Layout() {
   return (
     <>
-      <NavBar />
+      <div className={styles.layout}>
+        <NavBar />
 
-      <main>
-        <Outlet />
-      </main>
+        <main className={styles.pageContent}>
+          <Outlet />
+        </main>
 
-      <Footer />
+        <Footer />
+      </div>
     </>
   );
 }

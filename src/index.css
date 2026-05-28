@@ -1,14 +1,14 @@
-:root{
+:root {
   width: 100%;
-  --colorPrimario:#4B0082;
-  --colorSecundario:#800080;
-  --colorLetrasBoton:beige;
-  --colorBordeVentana:#E6E6FA;
-  --colorSombraVentana:#DDA0DD;
+  --colorPrimario: #4B0082;
+  --colorSecundario: #800080;
+  --colorLetrasBoton: beige;
+  --colorBordeVentana: #E6E6FA;
+  --colorSombraVentana: #DDA0DD;
 
-  --tipoLetraGeneral:system-ui, 'Segoe UI', Roboto, sans-serif;
+  --tipoLetraGeneral: system-ui, 'Segoe UI', Roboto, sans-serif;
 
-/*espacio para las cards*/
+  /*espacio para las cards*/
   --spacing-xs: 4px;
   --spacing-sm: 8px;
   --spacing-md: 16px;
@@ -18,4 +18,17 @@
   --radius-sm: 6px;
   --radius-md: 12px;
   --radius-lg: 20px;
+
+  html,
+  body,
+  #root {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
+  }
+
+  body {
+    min-height: 100vh;
+  }
 }
