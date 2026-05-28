@@ -1,14 +1,18 @@
 import { Outlet } from "react-router-dom";
 import { Footer } from "../components/Footer";
+import styles from "../layouts/Layout.module.css";
 
 export function UserLayout() {
   return (
     <>
-      <main>
-        <Outlet />
-      </main>
+      <div className={styles.layout}>
 
-      <Footer />
+        <main className={styles.pageContent}>
+          <Outlet />
+        </main>
+
+        <Footer />
+      </div>
     </>
   );
 }
