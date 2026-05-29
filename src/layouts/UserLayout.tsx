@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import { Footer } from "../components/Footer";
-import styles from "../layouts/Layout.module.css";
+import styles from "../styles/layouts/Layout.module.css";
 
 export function UserLayout() {
   return (
