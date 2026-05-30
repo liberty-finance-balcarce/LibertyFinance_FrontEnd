@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect, type ReactNode } from "react";
+import type { Usuario } from "../types/usuarios";
 
 interface RegisterData {
   dni_usuario: number;
@@ -14,14 +15,8 @@ interface RegisterData {
   fecha_nacimiento: string;
 }
 
-export interface User {
-  id: number;
-  dni: number;
-  role: string;
-}
-
 interface AuthContextType {
-  user: User | null;
+  user: Usuario | null;
   token: string | null;
   loading: boolean;
   role: string | null;
@@ -38,7 +33,7 @@ interface Props {
 }
 
 export function AuthProvider({ children }: Props) {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<Usuario | null>(null);
   const [token, setToken] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [role, setRole] = useState<string | null>(null);

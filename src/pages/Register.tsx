@@ -46,8 +46,94 @@ export function Register() {
     terminos: false,
   });
 
+  const [formErrors, setFormErrors] = useState({
+    nombre: "",
+    apellido: "",
+    mail: "",
+    contraseña: "",
+    codArea: "",
+    telefono: "",
+    fecha_nacimiento: "",
+    dni: "",
+    provincia: "",
+    localidad: "",
+    perfilInversor: "",
+    terminos: "",
+  });
+
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+
+  const validateField = (name: string, value: string | boolean) => {
+    const stringValue = typeof value === "string" ? value : "";
+
+    switch (name) {
+      case "nombre":
+        return stringValue.trim()
+          ? ""
+          : "El nombre de usuario no puede estar vacio.";
+      case "apellido":
+        return stringValue.trim() ? "" : "El apellido no puede estar vacio.";
+      case "mail":
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(stringValue)
+          ? ""
+          : "El mail debe ser valido.";
+      case "contraseña":
+        if (stringValue.length < 8 || stringValue.length > 16) {
+          return "La contraseña debe tener entre 8 y 16 caracteres.";
+        }
+        return /^(?=.*[a-z])(?=.*[A-Z])(?=.*[#*])/.test(stringValue)
+          ? ""
+          : "La contraseña debe incluir al menos una minuscula, una mayuscula y un caracter especial (# o *).";
+      case "codArea":
+        if (!stringValue.trim()) return "El codigo de area es obligatorio.";
+        return /^\d+$/.test(stringValue)
+          ? ""
+          : "El codigo de area debe contener solo numeros.";
+      case "telefono":
+        if (!stringValue.trim()) return "El telefono es obligatorio.";
+        return /^\d+$/.test(stringValue)
+          ? ""
+          : "El telefono debe contener solo numeros.";
+      case "fecha_nacimiento": {
+        if (!stringValue.trim()) {
+          return "La fecha de nacimiento no puede estar vacia.";
+        }
+        const fechaNacimiento = new Date(stringValue);
+        if (Number.isNaN(fechaNacimiento.getTime())) {
+          return "La fecha de nacimiento debe ser valida.";
+        }
+        return fechaNacimiento <= new Date()
+          ? ""
+          : "La fecha de nacimiento no puede ser mayor a la fecha actual.";
+      }
+      case "dni":
+        if (!/^\d+$/.test(stringValue)) {
+          return "El DNI del usuario debe ser un numero sin puntos.";
+        }
+        return stringValue.length >= 7 && stringValue.length <= 8
+          ? ""
+          : "El DNI debe tener entre 7 y 8 numeros.";
+      case "provincia":
+        return Number(stringValue) >= 1
+          ? ""
+          : "Debe seleccionar una provincia valida.";
+      case "localidad":
+        return stringValue.trim()
+          ? ""
+          : "La localidad (direccion) no puede estar vacia.";
+      case "perfilInversor":
+        return Number(stringValue) >= 1
+          ? ""
+          : "Debe seleccionar un perfil de inversor valido.";
+      case "terminos":
+        return value
+          ? ""
+          : "Debes aceptar los Terminos y Condiciones para continuar.";
+      default:
+        return "";
+    }
+  };
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
@@ -55,174 +141,65 @@ export function Register() {
     const { name, value } = e.target;
 
     if (name === "terminos") {
+      const checked = (e.target as HTMLInputElement).checked;
       setFormData((prev) => ({
         ...prev,
-        terminos: (e.target as HTMLInputElement).checked,
+        terminos: checked,
+      }));
+      setFormErrors((prev) => ({
+        ...prev,
+        terminos: validateField("terminos", checked),
       }));
       return;
     }
 
-    if (name === "perfilInversor") {
-      setFormData((prev) => ({
-        ...prev,
-        perfilInversor: value.replace(/\D/g, ""),
-      }));
-      return;
+    let sanitizedValue = value;
+    if (name === "perfilInversor" || name === "provincia") {
+      sanitizedValue = value.replace(/\D/g, "");
     }
-
     if (name === "nombre" || name === "apellido") {
-      setFormData((prev) => ({
-        ...prev,
-        [name]: value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/g, ""),
-      }));
-      return;
+      sanitizedValue = value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/g, "");
     }
-
     if (name === "mail") {
-      setFormData((prev) => ({
-        ...prev,
-        mail: value.trim(),
-      }));
-      return;
+      sanitizedValue = value.trim();
     }
-
     if (name === "contraseña") {
-      setFormData((prev) => ({
-        ...prev,
-        contraseña: value.slice(0, 10),
-      }));
-      return;
+      sanitizedValue = value.slice(0, 16);
     }
-
     if (name === "codArea") {
-      setFormData((prev) => ({
-        ...prev,
-        codArea: value.replace(/\D/g, "").slice(0, 4),
-      }));
-      return;
+      sanitizedValue = value.replace(/\D/g, "").slice(0, 4);
     }
-
     if (name === "telefono") {
-      setFormData((prev) => ({
-        ...prev,
-        telefono: value.replace(/\D/g, "").slice(0, 10),
-      }));
-      return;
+      sanitizedValue = value.replace(/\D/g, "").slice(0, 10);
     }
-
     if (name === "dni") {
-      setFormData((prev) => ({
-        ...prev,
-        dni: value.replace(/\D/g, "").slice(0, 8),
-      }));
-      return;
+      sanitizedValue = value.replace(/\D/g, "").slice(0, 8);
     }
-
-    if (name === "fecha_nacimiento") {
-      setFormData((prev) => ({
-        ...prev,
-        fecha_nacimiento: value,
-      }));
-      return;
-    }
-
-    if (name === "provincia") {
-      setFormData((prev) => ({
-        ...prev,
-        provincia: value.replace(/\D/g, ""),
-      }));
-      return;
-    }
-
     if (name === "localidad") {
-      setFormData((prev) => ({
-        ...prev,
-        localidad: value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ0-9\s]/g, ""),
-      }));
-    }
-  };
-
-  const validateForm = (): string | null => {
-    const perfilInvId = Number(formData.perfilInversor);
-
-    if (!perfilInvId || perfilInvId < 1) {
-      return "Debe seleccionar un perfil de inversor valido.";
+      sanitizedValue = value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ0-9\s]/g, "");
     }
 
-    if (!formData.nombre.trim()) {
-      return "El nombre de usuario no puede estar vacio.";
-    }
-
-    if (!formData.apellido.trim()) {
-      return "El apellido no puede estar vacio.";
-    }
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-    if (!emailRegex.test(formData.mail)) {
-      return "El mail debe ser valido.";
-    }
-
-    if (formData.contraseña.length < 4 || formData.contraseña.length > 10) {
-      return "La contraseña debe tener entre 4 y 10 caracteres.";
-    }
-
-    if (!formData.codArea.trim() || !formData.telefono.trim()) {
-      return "El codigo de area y el telefono no pueden estar vacios.";
-    }
-
-    if (!/^\d+$/.test(formData.codArea) || !/^\d+$/.test(formData.telefono)) {
-      return "El numero de telefono debe contener solo numeros.";
-    }
-
-    if (!formData.fecha_nacimiento.trim()) {
-      return "La fecha de nacimiento no puede estar vacia.";
-    }
-
-    const fechaNacimiento = new Date(formData.fecha_nacimiento);
-    const fechaActual = new Date();
-
-    if (Number.isNaN(fechaNacimiento.getTime())) {
-      return "La fecha de nacimiento debe ser valida.";
-    }
-
-    if (fechaNacimiento > fechaActual) {
-      return "La fecha de nacimiento no puede ser mayor a la fecha actual.";
-    }
-
-    if (!/^\d+$/.test(formData.dni)) {
-      return "El DNI del usuario debe ser un numero sin puntos.";
-    }
-
-    if (formData.dni.length < 7 || formData.dni.length > 8) {
-      return "El DNI debe tener entre 7 y 8 numeros.";
-    }
-
-    const provId = Number(formData.provincia);
-
-    if (!provId || provId < 1) {
-      return "Debe seleccionar una provincia valida.";
-    }
-
-    if (!formData.localidad.trim()) {
-      return "La localidad (direccion) no puede estar vacia.";
-    }
-
-    if (!formData.terminos) {
-      return "Debes aceptar los Terminos y Condiciones para continuar.";
-    }
-
-    return null;
+    setFormData((prev) => ({ ...prev, [name]: sanitizedValue }));
+    setFormErrors((prev) => ({
+      ...prev,
+      [name]: validateField(name, sanitizedValue),
+    }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
 
-    const validationError = validateForm();
+    const newErrors = Object.fromEntries(
+      Object.entries(formData).map(([name, value]) => [
+        name,
+        validateField(name, value),
+      ]),
+    ) as typeof formErrors;
 
-    if (validationError) {
-      setError(validationError);
+    setFormErrors(newErrors);
+
+    if (Object.values(newErrors).some(Boolean)) {
       return;
     }
 
@@ -275,7 +252,11 @@ export function Register() {
                 placeholder="Juan"
                 value={formData.nombre}
                 onChange={handleChange}
+                className={formErrors.nombre ? styles.inputError : ""}
               />
+              {formErrors.nombre && (
+                <span className={styles.fieldError}>{formErrors.nombre}</span>
+              )}
               <span className={styles.hint}>* CAMPO OBLIGATORIO</span>
             </div>
 
@@ -288,7 +269,11 @@ export function Register() {
                 placeholder="Pérez"
                 value={formData.apellido}
                 onChange={handleChange}
+                className={formErrors.apellido ? styles.inputError : ""}
               />
+              {formErrors.apellido && (
+                <span className={styles.fieldError}>{formErrors.apellido}</span>
+              )}
               <span className={styles.hint}>* CAMPO OBLIGATORIO</span>
             </div>
 
@@ -301,7 +286,11 @@ export function Register() {
                 placeholder="juan.perez@gmail.com"
                 value={formData.mail}
                 onChange={handleChange}
+                className={formErrors.mail ? styles.inputError : ""}
               />
+              {formErrors.mail && (
+                <span className={styles.fieldError}>{formErrors.mail}</span>
+              )}
               <span className={styles.hint}>* CAMPO OBLIGATORIO</span>
             </div>
 
@@ -313,9 +302,10 @@ export function Register() {
                   type={showPassword ? "text" : "password"}
                   id="contraseña"
                   name="contraseña"
-                  placeholder="Adminjk12@"
+                  placeholder="Adminjk12*"
                   value={formData.contraseña}
                   onChange={handleChange}
+                  className={formErrors.contraseña ? styles.inputError : ""}
                 />
 
                 <Button
@@ -333,6 +323,11 @@ export function Register() {
                 </Button>
               </div>
 
+              {formErrors.contraseña && (
+                <span className={styles.fieldError}>
+                  {formErrors.contraseña}
+                </span>
+              )}
               <span className={styles.hint}>* CAMPO OBLIGATORIO</span>
             </div>
           </div>
@@ -347,7 +342,7 @@ export function Register() {
                   placeholder="2266"
                   value={formData.codArea}
                   onChange={handleChange}
-                  className={styles.codArea}
+                  className={`${styles.codArea} ${formErrors.codArea ? styles.inputError : ""}`}
                 />
 
                 <input
@@ -356,9 +351,15 @@ export function Register() {
                   placeholder="456789"
                   value={formData.telefono}
                   onChange={handleChange}
-                  className={styles.telNumber}
+                  className={`${styles.telNumber} ${formErrors.telefono ? styles.inputError : ""}`}
                 />
               </div>
+              {formErrors.codArea && (
+                <span className={styles.fieldError}>{formErrors.codArea}</span>
+              )}
+              {formErrors.telefono && (
+                <span className={styles.fieldError}>{formErrors.telefono}</span>
+              )}
             </div>
 
             <div className={styles.row}>
@@ -371,7 +372,15 @@ export function Register() {
                   placeholder="2000-01-01"
                   value={formData.fecha_nacimiento}
                   onChange={handleChange}
+                  className={
+                    formErrors.fecha_nacimiento ? styles.inputError : ""
+                  }
                 />
+                {formErrors.fecha_nacimiento && (
+                  <span className={styles.fieldError}>
+                    {formErrors.fecha_nacimiento}
+                  </span>
+                )}
                 <span className={styles.hint}>* CAMPO OBLIGATORIO</span>
               </div>
 
@@ -384,7 +393,11 @@ export function Register() {
                   placeholder="40123456"
                   value={formData.dni}
                   onChange={handleChange}
+                  className={formErrors.dni ? styles.inputError : ""}
                 />
+                {formErrors.dni && (
+                  <span className={styles.fieldError}>{formErrors.dni}</span>
+                )}
                 <span className={styles.hint}>* CAMPO OBLIGATORIO</span>
               </div>
             </div>
@@ -397,6 +410,7 @@ export function Register() {
                   name="provincia"
                   value={formData.provincia}
                   onChange={handleChange}
+                  className={formErrors.provincia ? styles.inputError : ""}
                 >
                   <option value="">Buenos Aires</option>
                   {provinciasList.map((prov) => (
@@ -405,6 +419,11 @@ export function Register() {
                     </option>
                   ))}
                 </select>
+                {formErrors.provincia && (
+                  <span className={styles.fieldError}>
+                    {formErrors.provincia}
+                  </span>
+                )}
                 <span className={styles.hint}>* CAMPO OBLIGATORIO</span>
               </div>
 
@@ -417,7 +436,13 @@ export function Register() {
                   placeholder="Balcarce"
                   value={formData.localidad}
                   onChange={handleChange}
+                  className={formErrors.localidad ? styles.inputError : ""}
                 />
+                {formErrors.localidad && (
+                  <span className={styles.fieldError}>
+                    {formErrors.localidad}
+                  </span>
+                )}
                 <span className={styles.hint}>* CAMPO OBLIGATORIO</span>
               </div>
 
@@ -428,12 +453,20 @@ export function Register() {
                   name="perfilInversor"
                   value={formData.perfilInversor}
                   onChange={handleChange}
+                  className={
+                    formErrors.perfilInversor ? styles.inputError : ""
+                  }
                 >
                   <option value="">Seleccionar perfil</option>
                   <option value="1">Conservador</option>
                   <option value="2">Moderado</option>
                   <option value="3">Agresivo</option>{" "}
                 </select>
+                {formErrors.perfilInversor && (
+                  <span className={styles.fieldError}>
+                    {formErrors.perfilInversor}
+                  </span>
+                )}
                 <span className={styles.hint}>* CAMPO OBLIGATORIO</span>
               </div>
             </div>
@@ -456,6 +489,9 @@ export function Register() {
             </a>
           </label>
         </div>
+        {formErrors.terminos && (
+          <span className={styles.termsError}>{formErrors.terminos}</span>
+        )}
 
         {error && <p className={styles.error}>{error}</p>}
 
