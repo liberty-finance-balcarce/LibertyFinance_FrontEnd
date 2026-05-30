@@ -135,7 +135,7 @@ export function Contactenos() {
               name="nombre"
               value={formData.nombre}
               onChange={handleChange}
-              placeholder="(Obligatorio)"
+              placeholder="Juan"
               className={formErrors.nombre ? styles.inputError : ""}
             />
             {formErrors.nombre && (
@@ -152,7 +152,7 @@ export function Contactenos() {
               name="apellido"
               value={formData.apellido}
               onChange={handleChange}
-              placeholder="(Obligatorio)"
+              placeholder="Perez"
               className={formErrors.apellido ? styles.inputError : ""}
             />
             {formErrors.apellido && (
@@ -172,7 +172,7 @@ export function Contactenos() {
               name="email"
               value={formData.email}
               onChange={handleChange}
-              placeholder="(Obligatorio)"
+              placeholder="juan.perez@gmail.com"
               className={formErrors.email ? styles.inputError : ""}
             />
             {formErrors.email && (
@@ -180,13 +180,14 @@ export function Contactenos() {
             )}
           </div>
           <div className={styles.formGroup}>
-            <label htmlFor="telefono">Teléfono</label>
+            <label htmlFor="telefono">Telefono</label>
             <input
               type="tel"
               id="telefono"
               name="telefono"
               value={formData.telefono}
               onChange={handleChange}
+              placeholder="+542266630218"
               className={formErrors.telefono ? styles.inputError : ""}
             />
             {formErrors.telefono && (
@@ -210,6 +211,7 @@ export function Contactenos() {
             name="asunto"
             value={formData.asunto}
             onChange={handleChange}
+            placeholder="Consulta sobre instrumentos financieros"
             maxLength={100}
             className={formErrors.asunto ? styles.inputError : ""}
           />
@@ -232,6 +234,7 @@ export function Contactenos() {
             name="mensaje"
             value={formData.mensaje}
             onChange={handleChange}
+            placeholder="Quiero recibir mas informacion sobre las inversiones disponibles"
             rows={4}
             maxLength={500}
             className={formErrors.mensaje ? styles.inputError : ""}
