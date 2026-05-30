@@ -49,10 +49,26 @@
   gap: 15px; 
 }
 
+.listHeader,
 .listItem {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr; 
+  grid-template-columns: 2fr 1.2fr 1fr 1fr;
   align-items: center;
+  column-gap: 8px;
+}
+
+.listHeader {
+  margin-bottom: 12px;
+  color: #4a2377;
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+
+.listHeader span:not(:first-child) {
+  text-align: center;
+}
+
+.listItem {
   font-size: 1.1rem;
   color: #551a8b;
 }
@@ -65,8 +81,9 @@
   text-align: center;
 }
 
-.itemRisk {
-  text-align: right;
+.itemRisk,
+.itemPrice {
+  text-align: center;
 }
 
 .loadingContainer,
