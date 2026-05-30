@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styles from "../styles/pages/Contactenos.module.css";
 import { useContactForm } from "../hooks/useContactForm";
+import { Button } from "../components/Button";
 
 export function Contactenos() {
   const [formData, setFormData] = useState({
@@ -251,13 +252,13 @@ export function Contactenos() {
           </p>
         )}
 
-        <button
+        <Button
           type="submit"
           className={`${styles.submitButton} ${isLoading ? styles.buttonLoading : ""}`}
           disabled={isLoading}
         >
           {isLoading ? "Enviando..." : "Enviar"}
-        </button>
+        </Button>
       </form>
     </section>
   );
