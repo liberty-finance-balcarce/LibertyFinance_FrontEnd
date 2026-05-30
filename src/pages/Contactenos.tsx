@@ -53,13 +53,15 @@ export function Contactenos() {
         }
         break;
       case "asunto":
-        if (value.trim().length > 100) {
+        if (!value.trim()) {
+          errorMessage = "El asunto es obligatorio.";
+        } else if (value.trim().length > 100) {
           errorMessage = "El asunto no puede superar los 100 caracteres.";
         }
         break;
       case "mensaje":
         if (!value.trim()) {
-          errorMessage = "Por favor, escribe un mensaje.";
+          errorMessage = "El mensaje es obligatorio.";
         } else if (value.trim().length < 10) {
           errorMessage = "El mensaje debe tener al menos 10 caracteres.";
         } else if (value.trim().length > 500) {
@@ -123,7 +125,9 @@ export function Contactenos() {
       <form onSubmit={handleSubmit} className={styles.form} noValidate>
         <div className={styles.row}>
           <div className={styles.formGroup}>
-            <label htmlFor="nombre">Nombre</label>
+            <label htmlFor="nombre">
+              Nombre <span className={styles.required}>*</span>
+            </label>
             <input
               type="text"
               id="nombre"
@@ -138,7 +142,9 @@ export function Contactenos() {
             )}
           </div>
           <div className={styles.formGroup}>
-            <label htmlFor="apellido">Apellido</label>
+            <label htmlFor="apellido">
+              Apellido <span className={styles.required}>*</span>
+            </label>
             <input
               type="text"
               id="apellido"
@@ -156,7 +162,9 @@ export function Contactenos() {
 
         <div className={styles.row}>
           <div className={styles.formGroup}>
-            <label htmlFor="email">Email</label>
+            <label htmlFor="email">
+              Email <span className={styles.required}>*</span>
+            </label>
             <input
               type="email"
               id="email"
@@ -188,7 +196,9 @@ export function Contactenos() {
 
         <div className={styles.formGroup}>
           <div className={styles.labelRow}>
-            <label htmlFor="asunto">Asunto</label>
+            <label htmlFor="asunto">
+              Asunto <span className={styles.required}>*</span>
+            </label>
             <span className={styles.charCount}>
               {formData.asunto.length}/100
             </span>
@@ -209,7 +219,9 @@ export function Contactenos() {
 
         <div className={styles.formGroup}>
           <div className={styles.labelRow}>
-            <label htmlFor="mensaje">Mensaje</label>
+            <label htmlFor="mensaje">
+              Mensaje <span className={styles.required}>*</span>
+            </label>
             <span className={styles.charCount}>
               {formData.mensaje.length}/500
             </span>
