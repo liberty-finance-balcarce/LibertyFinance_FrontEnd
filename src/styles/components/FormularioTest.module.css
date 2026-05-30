@@ -8,11 +8,10 @@
 
 .testCard {
   position: relative;
-  background: var(--white, #fff);
-  width: 100%;
-  max-width: 500px;
-  border-radius: 16px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  background-color: #ffffff;
+  width: auto;
+  /*border-radius: 16px;*/
+  /*box-shadow: 0 10px 25px rgba(0,0,0,0.1);*/
   overflow: hidden;
   padding-bottom: 0px;
 }
@@ -92,11 +91,14 @@
 .optionsGrid {
   display: flex;
   flex-direction: column;
+  width: 400px;
   gap: 12px;
   padding: 0 30px;
 }
 
 .optionBtn {
+  width: 300px;
+  height: 65px;
   background: var(--white, #fff);
   border: 2px solid #edf2f4;
   padding: 15px 20px;
@@ -121,11 +123,12 @@
 
 .navControls {
   display: flex;
+  height: 60px;
+  box-sizing: border-box;
   align-items: center;
   justify-content: space-between;
   margin: 10px 0px;
   padding: 20px 30px;
-  height: auto;
 }
 
 .paginador {
@@ -160,13 +163,13 @@
 
 .resultCard {
   position: relative;
-  background: white;
+  background-color:#ffffff;
   width: 100%;
   max-width: 500px;
-  border-radius: 20px;
+ /* border-radius: 20px;*/
   padding: 40px;
   text-align: center;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  /*box-shadow: 0 10px 30px rgba(0,0,0,0.1);*/
 }
 
 .scoreBadge {
@@ -214,3 +217,19 @@
 .perfil-moderado h2 { color: #00b894; }
 .perfil-agresivo h2 { color: #e17055; }
 .perfil-experto h2 { color: #6c5ce7; }
+
+.botonCerrar{
+    display: block; 
+    width: 100%;
+    padding: 10px;
+    background-color: var(--colorPrimario);
+    color: var(--colorLetrasBoton);
+    border-radius: 4px;
+    border:none;
+    transition: 0.2s, background-color 0.2s;
+}
+.botonCerrar:hover{
+cursor:pointer;        
+background-color: var(--colorSecundario); 
+transform: scale(1.1);   
+}
