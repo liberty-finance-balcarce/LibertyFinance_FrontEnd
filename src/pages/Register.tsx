@@ -413,7 +413,7 @@ export function Register() {
                   onChange={handleChange}
                   className={formErrors.provincia ? styles.inputError : ""}
                 >
-                  <option value="">Buenos Aires</option>
+                  <option value="">Elegí una provincia</option>
                   {provinciasList.map((prov) => (
                     <option key={prov.id} value={prov.id}>
                       {prov.provincia}

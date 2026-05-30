@@ -9,7 +9,7 @@ export function SiteStillOnBuilding() {
           alt="Liberty Finance Logo"
           className={styles.logo}
         />
-        <h1 className={styles.title}>Sitio en construcción</h1>
+        <h1 className={styles.title}>Sección en construcción</h1>
         <p className={styles.subtitle}>Estaremos online en breve</p>
       </div>
     </section>
