@@ -4,6 +4,7 @@ import styles from "../styles/pages/Register.module.css";
 import { useAuth } from "../hooks/useAuth";
 import { useProvincias } from "../hooks/useProvincias";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { Button } from "../components/Button";
 
 export function Register() {
   const navigate = useNavigate();
@@ -317,7 +318,7 @@ export function Register() {
                   onChange={handleChange}
                 />
 
-                <button
+                <Button
                   type="button"
                   className={styles.btnPassword}
                   onClick={() => setShowPassword((prev) => !prev)}
@@ -329,7 +330,7 @@ export function Register() {
                   }
                 >
                   {showPassword ? <FaEyeSlash /> : <FaEye />}
-                </button>
+                </Button>
               </div>
 
               <span className={styles.hint}>* CAMPO OBLIGATORIO</span>
@@ -459,21 +460,21 @@ export function Register() {
         {error && <p className={styles.error}>{error}</p>}
 
         <div className={styles.actions}>
-          <button
+          <Button
             type="button"
             className={styles.btnVolver}
             onClick={() => navigate(-1)}
           >
             VOLVER
-          </button>
+          </Button>
 
-          <button
+          <Button
             type="submit"
             className={styles.btnSubmit}
             disabled={isLoading}
           >
             {isLoading ? "CREANDO..." : "CREAR CUENTA"}
-          </button>
+          </Button>
         </div>
       </form>
     </main>

@@ -2,6 +2,7 @@ import { useState, type ChangeEvent, type FormEvent } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import styles from "../styles/pages/Login.module.css";
 import { useAuth } from "../hooks/useAuth";
+import { Button } from "../components/Button";
 
 interface DatosRecibidos {
   dni_usuario: string;
@@ -153,13 +154,14 @@ export function Login() {
           </p>
         )}
 
-        <button
+        <Button
           type="submit"
+          variant="login"
           className={styles.botonLogin}
           disabled={isLoading}
         >
           {isLoading ? "Cargando..." : "Login"}
-        </button>
+        </Button>
 
         <div id={styles.contRegistro}>
           <span>
