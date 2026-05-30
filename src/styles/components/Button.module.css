@@ -56,3 +56,28 @@
 .buttonLogoActive {
   background-color: transparent;
 }
+.buttonTest {
+  display: flex;
+  flex-wrap: wrap;
+  width: 150px;
+  height: 50px;
+  margin-top: 20px;
+  font-size: 30px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 9px;
+  border: none;
+  background-color: var(--colorPrimario);
+  color: var(--colorLetrasBoton);
+  transition: 0.3s;
+}
+
+.buttonTest:hover {
+  background-color: var(--colorSecundario);
+  transform: scale(1.1);
+}
+
+.buttonTestActive {
+  background-color: #dda0dd;
+  color: var(--colorPrimario);
+}
