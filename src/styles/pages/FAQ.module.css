@@ -23,10 +23,6 @@
   transition: background-color 0.3s ease;
 }
 
-.details[open] {
-  background-color: var(--colorSombraVentana);
-}
-
 .details summary {
   cursor: pointer;
   font-weight: bold;
