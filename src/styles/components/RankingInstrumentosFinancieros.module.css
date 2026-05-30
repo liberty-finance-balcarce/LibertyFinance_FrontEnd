@@ -64,6 +64,10 @@
   font-weight: bold;
 }
 
+.listHeader span {
+  text-decoration: underline var(--colorPrimario);
+}
+
 .listHeader span:not(:first-child) {
   text-align: center;
 }
