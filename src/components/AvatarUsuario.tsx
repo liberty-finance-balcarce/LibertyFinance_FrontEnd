@@ -1,4 +1,4 @@
-import styles from "../styles/components/NavBarUsuarioRegistrado.module.css";
+import styles from "../styles/components/NavBar.module.css";
 import type { User } from "../context/AuthContext";
 
 export function AvatarUsuario({ usuario }: { usuario: User }) {

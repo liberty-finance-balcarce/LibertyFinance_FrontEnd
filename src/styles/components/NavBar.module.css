@@ -19,3 +19,9 @@
   display: flex;
   align-items: center;
 }
+
+.usuario{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
