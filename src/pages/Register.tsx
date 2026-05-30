@@ -360,6 +360,7 @@ export function Register() {
               {formErrors.telefono && (
                 <span className={styles.fieldError}>{formErrors.telefono}</span>
               )}
+              <span className={styles.hint}>* CAMPO OBLIGATORIO</span>
             </div>
 
             <div className={styles.row}>
