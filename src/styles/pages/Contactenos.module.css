@@ -50,6 +50,10 @@
   font-size: 0.95rem;
 }
 
+.required {
+  color: #d9534f;
+}
+
 .formGroup input,
 .formGroup textarea {
   padding: 12px 15px;
