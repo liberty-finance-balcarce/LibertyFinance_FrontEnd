@@ -41,6 +41,12 @@ export function RankingInstrumentosFinancieros() {
         {hasTradicionales && (
           <article className={styles.panel}>
             <h3 className={styles.panelTitle}>Instrumentos tradicionales</h3>
+            <div className={styles.listHeader}>
+              <span>Nombre</span>
+              <span>Rendimiento</span>
+              <span>Riesgo</span>
+              <span>Precio</span>
+            </div>
             <ul className={styles.list}>
               {data.tradicionales.map((item) => (
                 <li key={item.id_instrumento} className={styles.listItem}>
@@ -49,6 +55,9 @@ export function RankingInstrumentosFinancieros() {
                   </span>
                   <span className={styles.itemYield}>{item.rendimiento}</span>
                   <span className={styles.itemRisk}>{item.riesgo}</span>
+                  <span className={styles.itemPrice}>
+                    {item.precio_instrumento}
+                  </span>
                 </li>
               ))}
             </ul>
@@ -58,6 +67,12 @@ export function RankingInstrumentosFinancieros() {
         {hasNoTradicionales && (
           <article className={styles.panel}>
             <h3 className={styles.panelTitle}>Instrumentos no tradicionales</h3>
+            <div className={styles.listHeader}>
+              <span>Nombre</span>
+              <span>Rendimiento</span>
+              <span>Riesgo</span>
+              <span>Precio</span>
+            </div>
             <ul className={styles.list}>
               {data.noTradicionales.map((item) => (
                 <li key={item.id_instrumento} className={styles.listItem}>
@@ -66,6 +81,9 @@ export function RankingInstrumentosFinancieros() {
                   </span>
                   <span className={styles.itemYield}>{item.rendimiento}</span>
                   <span className={styles.itemRisk}>{item.riesgo}</span>
+                  <span className={styles.itemPrice}>
+                    {item.precio_instrumento}
+                  </span>
                 </li>
               ))}
             </ul>
