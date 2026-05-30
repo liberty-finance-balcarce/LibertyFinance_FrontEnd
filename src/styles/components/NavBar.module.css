@@ -1,8 +1,17 @@
 .header {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-areas: 
+    "logo links login";
+  grid-template-columns: 1fr 2fr 1fr;
   align-items: center;
   padding: 1rem;
+}
+
+.logo {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  grid-area: logo;
 }
 
 .logo img {
@@ -11,12 +20,16 @@
 }
 
 .links {
+  grid-area: links;
   display: flex;
   gap: 1rem;
+  justify-content: center;
 }
 
 .login {
+  grid-area: login;
   display: flex;
+  justify-content: end;
   align-items: center;
 }
 
