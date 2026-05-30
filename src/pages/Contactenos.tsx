@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styles from "../styles/pages/Contactenos.module.css";
 import { useContactForm } from "../hooks/useContactForm";
+import { Button } from "../components/Button";
 
 export function Contactenos() {
   const [formData, setFormData] = useState({
@@ -53,13 +54,15 @@ export function Contactenos() {
         }
         break;
       case "asunto":
-        if (value.trim().length > 100) {
+        if (!value.trim()) {
+          errorMessage = "El asunto es obligatorio.";
+        } else if (value.trim().length > 100) {
           errorMessage = "El asunto no puede superar los 100 caracteres.";
         }
         break;
       case "mensaje":
         if (!value.trim()) {
-          errorMessage = "Por favor, escribe un mensaje.";
+          errorMessage = "El mensaje es obligatorio.";
         } else if (value.trim().length < 10) {
           errorMessage = "El mensaje debe tener al menos 10 caracteres.";
         } else if (value.trim().length > 500) {
@@ -123,14 +126,16 @@ export function Contactenos() {
       <form onSubmit={handleSubmit} className={styles.form} noValidate>
         <div className={styles.row}>
           <div className={styles.formGroup}>
-            <label htmlFor="nombre">Nombre</label>
+            <label htmlFor="nombre">
+              Nombre <span className={styles.required}>*</span>
+            </label>
             <input
               type="text"
               id="nombre"
               name="nombre"
               value={formData.nombre}
               onChange={handleChange}
-              placeholder="(Obligatorio)"
+              placeholder="Juan"
               className={formErrors.nombre ? styles.inputError : ""}
             />
             {formErrors.nombre && (
@@ -138,14 +143,16 @@ export function Contactenos() {
             )}
           </div>
           <div className={styles.formGroup}>
-            <label htmlFor="apellido">Apellido</label>
+            <label htmlFor="apellido">
+              Apellido <span className={styles.required}>*</span>
+            </label>
             <input
               type="text"
               id="apellido"
               name="apellido"
               value={formData.apellido}
               onChange={handleChange}
-              placeholder="(Obligatorio)"
+              placeholder="Perez"
               className={formErrors.apellido ? styles.inputError : ""}
             />
             {formErrors.apellido && (
@@ -156,14 +163,16 @@ export function Contactenos() {
 
         <div className={styles.row}>
           <div className={styles.formGroup}>
-            <label htmlFor="email">Email</label>
+            <label htmlFor="email">
+              Email <span className={styles.required}>*</span>
+            </label>
             <input
               type="email"
               id="email"
               name="email"
               value={formData.email}
               onChange={handleChange}
-              placeholder="(Obligatorio)"
+              placeholder="juan.perez@gmail.com"
               className={formErrors.email ? styles.inputError : ""}
             />
             {formErrors.email && (
@@ -171,13 +180,14 @@ export function Contactenos() {
             )}
           </div>
           <div className={styles.formGroup}>
-            <label htmlFor="telefono">Teléfono</label>
+            <label htmlFor="telefono">Telefono</label>
             <input
               type="tel"
               id="telefono"
               name="telefono"
               value={formData.telefono}
               onChange={handleChange}
+              placeholder="+542266630218"
               className={formErrors.telefono ? styles.inputError : ""}
             />
             {formErrors.telefono && (
@@ -188,7 +198,9 @@ export function Contactenos() {
 
         <div className={styles.formGroup}>
           <div className={styles.labelRow}>
-            <label htmlFor="asunto">Asunto</label>
+            <label htmlFor="asunto">
+              Asunto <span className={styles.required}>*</span>
+            </label>
             <span className={styles.charCount}>
               {formData.asunto.length}/100
             </span>
@@ -199,6 +211,7 @@ export function Contactenos() {
             name="asunto"
             value={formData.asunto}
             onChange={handleChange}
+            placeholder="Consulta sobre instrumentos financieros"
             maxLength={100}
             className={formErrors.asunto ? styles.inputError : ""}
           />
@@ -209,7 +222,9 @@ export function Contactenos() {
 
         <div className={styles.formGroup}>
           <div className={styles.labelRow}>
-            <label htmlFor="mensaje">Mensaje</label>
+            <label htmlFor="mensaje">
+              Mensaje <span className={styles.required}>*</span>
+            </label>
             <span className={styles.charCount}>
               {formData.mensaje.length}/500
             </span>
@@ -219,6 +234,7 @@ export function Contactenos() {
             name="mensaje"
             value={formData.mensaje}
             onChange={handleChange}
+            placeholder="Quiero recibir mas informacion sobre las inversiones disponibles"
             rows={4}
             maxLength={500}
             className={formErrors.mensaje ? styles.inputError : ""}
@@ -239,13 +255,13 @@ export function Contactenos() {
           </p>
         )}
 
-        <button
+        <Button
           type="submit"
           className={`${styles.submitButton} ${isLoading ? styles.buttonLoading : ""}`}
           disabled={isLoading}
         >
           {isLoading ? "Enviando..." : "Enviar"}
-        </button>
+        </Button>
       </form>
     </section>
   );

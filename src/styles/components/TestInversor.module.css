@@ -14,24 +14,3 @@
     border-radius: 10px;
     padding: 30px;
 }
-
-.botonTest{
-    display: flex;
-    flex-wrap: wrap;
-    width: 150px;
-    height: 70px;
-    margin-top: 20px;
-    font-size: 30px;
-    justify-content: center;
-    align-items: center;
-    border-radius: 9px;
-    border:none;
-    background-color: var(--colorPrimario);
-    color: var(--colorLetrasBoton);
-    transition: 0.3s;
-}
-
-.botonTest:hover{
-    background-color: var(--colorSecundario);
-    transform: scale(1.1);
-}

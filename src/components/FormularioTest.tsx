@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "../styles/components/FormularioTest.module.css";
 
 const questions = [
   {
     id: 1,
     text: "Horizonte Temporal",
-    subtext: "¿Por cuánto tiempo planeas mantener tus inversiones?",
+    subtext: "¿Tiempo planeado de Inversión?",
     options: [
       { label: "A) Menos de 1 año", points: 1 },
       { label: "B) De 1 a 3 años", points: 4 },
@@ -16,7 +16,7 @@ const questions = [
   {
     id: 2,
     text: "Objetivo de la Inversión",
-    subtext: "¿Cuál es tu principal prioridad al invertir?",
+    subtext: "¿Cuál es tu prioridad al invertir?",
     options: [
       { label: "A) Preservar mi capital sin riesgo", points: 1 },
       { label: "B) Generar ingresos recurrentes", points: 4 },
@@ -27,7 +27,7 @@ const questions = [
   {
     id: 3,
     text: "Conocimiento Financiero",
-    subtext: "¿Cuál es tu nivel de conocimiento sobre mercados y cripto?",
+    subtext: "¿Conocimiento sobre mercados y cripto?",
     options: [
       { label: "A) Nulo, no entiendo cómo funcionan", points: 1 },
       { label: "B) Básico, entiendo qué es una acción", points: 4 },
@@ -38,7 +38,7 @@ const questions = [
   {
     id: 4,
     text: "Reacción ante la Volatilidad",
-    subtext: "Si tu portafolio cae un 30% en un mes, ¿qué harías?",
+    subtext: "Si tu portafolio cae un 30%, Que haces?",
     options: [
       { label: "A) Vendo todo por miedo", points: 1 },
       { label: "B) Me preocupo y vendo una parte", points: 4 },
@@ -49,7 +49,7 @@ const questions = [
   {
     id: 5,
     text: "Capacidad de Ahorro",
-    subtext: "¿Qué porcentaje de tus ingresos puedes destinar a invertir?",
+    subtext: "¿Cuanto de tus ingresos invertis?",
     options: [
       { label: "A) Menos del 5%", points: 1 },
       { label: "B) Entre el 5% y el 15%", points: 4 },
@@ -60,9 +60,9 @@ const questions = [
   {
     id: 6,
     text: "Situación Patrimonial",
-    subtext: "¿Tienes un fondo de emergencia cubierto?",
+    subtext: "¿Tienes un fondo de emergencia?",
     options: [
-      { label: "A) No tengo ahorros aparte", points: 1 },
+      { label: "A) No tengo ahorros", points: 1 },
       { label: "B) Tengo ahorros para menos de un mes", points: 4 },
       { label: "C) Sí, tengo un fondo sólido", points: 7 },
       { label: "D) Sí, y tengo otros activos líquidos", points: 10 },
@@ -71,7 +71,7 @@ const questions = [
   {
     id: 7,
     text: "Experiencia Previa",
-    subtext: "¿En qué activos has invertido anteriormente?",
+    subtext: "¿En qué activos has invertido?",
     options: [
       { label: "A) Solo cuentas de ahorro", points: 1 },
       { label: "B) Fondos comunes o bonos", points: 4 },
@@ -81,8 +81,8 @@ const questions = [
   },
   {
     id: 8,
-    text: "Composición del Portafolio Ideal",
-    subtext: "¿Cómo te sentirías más cómodo distribuyendo tu dinero?",
+    text: "Composición Portafolio Ideal",
+    subtext: "¿Cómo distribuirias tu dinero?",
     options: [
       { label: "A) 100% efectivo o bonos", points: 1 },
       { label: "B) 70% bonos y 30% acciones", points: 4 },
@@ -92,8 +92,8 @@ const questions = [
   },
   {
     id: 9,
-    text: "Entendimiento del Riesgo de Bitcoin",
-    subtext: "¿Entiendes que Bitcoin puede caer un 50% o ir a cero?",
+    text: "Entendimiento Riesgo Bitcoin",
+    subtext: "¿Bitcoin puede caer un 50% o ir a cero?",
     options: [
       { label: "A) No, creí que siempre subía", points: 1 },
       { label: "B) Me cuesta aceptarlo, pero lo sé", points: 4 },
@@ -104,7 +104,7 @@ const questions = [
   {
     id: 10,
     text: "Ingresos Futuros",
-    subtext: "¿Cuál es tu expectativa de ingresos profesionales?",
+    subtext: "¿Cuál es tu expectativa de ingresos?",
     options: [
       { label: "A) Disminuirán o son inestables", points: 1 },
       { label: "B) Se mantendrán estables", points: 4 },
@@ -114,13 +114,22 @@ const questions = [
   },
 ];
 
-// AQUÍ ESTÁ EL CAMBIO CLAVE: Recibimos onClose
 export function FormularioTest({ onClose }: { onClose?: () => void }) {
-  const [currentIdx, setCurrentIdx] = useState(0);
+  const finalProfile = localStorage.getItem("perfilInv");
+  const parsedProfile = finalProfile ? JSON.parse(finalProfile) : null;
+
+  const savedTest = localStorage.getItem("testInversor");
+  const parsedTest = savedTest ? JSON.parse(savedTest) : null;
+
+  const [currentIdx, setCurrentIdx] = useState(parsedTest?.currentIdx ?? 0);
+
   const [selections, setSelections] = useState<(number | null)[]>(
-    Array(questions.length).fill(null),
+    parsedTest?.selections ?? Array(questions.length).fill(null),
   );
-  const [finished, setFinished] = useState(false);
+
+  const [finished, setFinished] = useState(
+    parsedProfile ? true : (parsedTest?.finished ?? false),
+  );
 
   const handleSelect = (points: number) => {
     const updated = [...selections];
@@ -132,7 +141,10 @@ export function FormularioTest({ onClose }: { onClose?: () => void }) {
     }
   };
 
-  const getScore = () => selections.reduce<number>((a, b) => a + (b || 0), 0);
+  const getScore = () => {
+    if (parsedProfile) return parsedProfile.total;
+    return selections.reduce<number>((a, b) => a + (b || 0), 0);
+  };
 
   const getResultData = (score: number) => {
     if (score <= 30)
@@ -143,6 +155,7 @@ export function FormularioTest({ onClose }: { onClose?: () => void }) {
         exposicion: "0-5%",
         clase: "perfilConservador",
       };
+
     if (score <= 60)
       return {
         perfil: "MODERADO",
@@ -151,21 +164,54 @@ export function FormularioTest({ onClose }: { onClose?: () => void }) {
         exposicion: "5-15% (BTC/ETH)",
         clase: "perfilModerado",
       };
+
     if (score <= 85)
       return {
-        perfil: "CRECIMIENTO / AGRESIVO",
+        perfil: "AGRESIVO",
         estrategia: "Busca ganancia de capital a largo plazo.",
         activos: "Acciones tecnológicas y Cripto.",
         exposicion: "20-40%",
         clase: "perfilAgresivo",
       };
+
     return {
-      perfil: "EXPERTO / MUY AGRESIVO",
+      perfil: "EXPERTO",
       estrategia: "Maximización de retornos.",
       activos: "Bitcoin, Altcoins, DeFi.",
       exposicion: "+50%",
       clase: "perfilExperto",
     };
+  };
+
+  useEffect(() => {
+    if (!parsedProfile) {
+      localStorage.setItem(
+        "testInversor",
+        JSON.stringify({
+          currentIdx,
+          selections,
+          finished,
+        }),
+      );
+    }
+  }, [currentIdx, selections, finished, parsedProfile]);
+
+  const handleFinishTest = () => {
+    const total = getScore();
+    const result = getResultData(total);
+
+    localStorage.setItem(
+      "perfilInv",
+      JSON.stringify({
+        total: total,
+        perfil: result.perfil,
+        finished: true,
+      }),
+    );
+
+    localStorage.removeItem("testInversor");
+
+    setFinished(true);
   };
 
   if (finished) {
@@ -174,7 +220,6 @@ export function FormularioTest({ onClose }: { onClose?: () => void }) {
     return (
       <div className={styles.container}>
         <div className={`${styles.resultCard} ${styles[result.clase]}`}>
-          {/* El botón ahora ejecuta directamente onClose */}
           <button
             className={styles.btnClose}
             onClick={onClose}
@@ -183,7 +228,6 @@ export function FormularioTest({ onClose }: { onClose?: () => void }) {
             &times;
           </button>
           <h2>Tu Perfil: {result.perfil}</h2>
-          <div className={styles.scoreBadge}>Puntaje: {total}/100</div>
           <div className={styles.resultDetails}>
             <p>
               <strong>Estrategia:</strong> {result.estrategia}
@@ -195,15 +239,8 @@ export function FormularioTest({ onClose }: { onClose?: () => void }) {
               <strong>Exposición Cripto Sugerida:</strong> {result.exposicion}
             </p>
           </div>
-          <button
-            className={styles.btnReset}
-            onClick={() => {
-              setSelections(Array(questions.length).fill(null));
-              setCurrentIdx(0);
-              setFinished(false);
-            }}
-          >
-            Reiniciar Test
+          <button className={styles.botonCerrar} onClick={onClose}>
+            Cerrar
           </button>
         </div>
       </div>
@@ -255,9 +292,7 @@ export function FormularioTest({ onClose }: { onClose?: () => void }) {
           {currentIdx === questions.length - 1 ? (
             <button
               disabled={selections[currentIdx] === null}
-              onClick={() => {
-                setFinished(true);
-              }}
+              onClick={handleFinishTest} // Llamamos a la nueva función que guarda todo blindado
               className={styles.btnFinish}
               style={{
                 backgroundColor:

@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect, type ReactNode } from "react";
+import type { Usuario } from "../types/usuarios";
 
 interface RegisterData {
   dni_usuario: number;
@@ -11,16 +12,11 @@ interface RegisterData {
   id_provincia: number;
   id_perfilinv: number;
   id_codigo_referidos: number;
-}
-
-interface User {
-  id: number;
-  dni: number;
-  role: string;
+  fecha_nacimiento: string;
 }
 
 interface AuthContextType {
-  user: User | null;
+  user: Usuario | null;
   token: string | null;
   loading: boolean;
   role: string | null;
@@ -37,7 +33,7 @@ interface Props {
 }
 
 export function AuthProvider({ children }: Props) {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<Usuario | null>(null);
   const [token, setToken] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [role, setRole] = useState<string | null>(null);
@@ -109,8 +105,6 @@ export function AuthProvider({ children }: Props) {
       return response; 
     }
 
-    await login(data.dni_usuario, data.contraseña);
-
     return response;
   };
 
@@ -136,9 +130,9 @@ export function AuthProvider({ children }: Props) {
     const data = dataParsed.data;
 
     setUser(data);
-    setRole(data.role || data.rol);
+    setRole(data.rol.nombre);
     localStorage.setItem("user", JSON.stringify(data));
-    localStorage.setItem("role", data.role || data.rol);
+    localStorage.setItem("role", data.rol.nombre);
 
     return response;
   };

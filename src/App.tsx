@@ -1,56 +1,71 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
+
 import { PublicRoute } from "./routes/PublicRoute";
+import { UserRoute } from "./routes/UserRoute";
+
+import { Layout } from "./layouts/Layout";
+import { UserLayout } from "./layouts/UserLayout";
+
 import { Register } from "./pages/Register";
 import { Home } from "./components/Home";
 import { NuestroEquipo } from "./pages/NuestroEquipo";
 import { Contactenos } from "./pages/Contactenos";
-import { Footer } from "./components/Footer";
 import { TerminosYCondiciones } from "./pages/TerminosYCondiciones";
 import { DescargoDeResponsabilidad } from "./pages/DescargoDeResponsabilidad";
 import { DerechosReservados } from "./pages/DerechosReservados";
 import { FAQ } from "./pages/FAQ";
 import { NotFound } from "./pages/NotFound";
-import { NavBar } from "./components/NavBar";
 import { Login } from "./pages/Login";
-import { UserRoute } from "./routes/UserRoute";
+
 import { Dashboard } from "./pages/Dashboard";
+import { DashboardCart } from "./pages/DashboardCart";
+import { DashboardInversiones } from "./pages/DashboardInversiones";
 
 function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
-        <NavBar />
-
         <Routes>
           <Route element={<UserRoute />}>
-            <Route path="/dashboard" element={<Dashboard />} />
+            <Route element={<UserLayout />}>
+              <Route path="/dashboard" element={<Dashboard />}>
+                <Route path="cart" element={<DashboardCart />} />
+                <Route path="inversiones" element={<DashboardInversiones />} />
+              </Route>
+            </Route>
           </Route>
-          <Route element={<PublicRoute />}>
-            <Route path="/" element={<Home />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/nuestro-equipo" element={<NuestroEquipo />} />
-            <Route path="/contactenos" element={<Contactenos />} />
-            <Route path="/login" element={<Login />} />
-            <Route
-              path="/terminos-y-condiciones"
-              element={<TerminosYCondiciones />}
-            />
-            <Route
-              path="/descargo-de-responsabilidad"
-              element={<DescargoDeResponsabilidad />}
-            />
-            <Route
-              path="/derechos-reservados"
-              element={<DerechosReservados />}
-            />
-            <Route path="/faq" element={<FAQ />} />
-            <Route path="*" element={<NotFound />} />
-          </Route>
-        </Routes>
 
-        <Footer />
+          <Route element={<PublicRoute />}>
+            <Route element={<Layout />}>
+              <Route path="/" element={<Home />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/nuestro-equipo" element={<NuestroEquipo />} />
+              <Route path="/contactenos" element={<Contactenos />} />
+              <Route path="/login" element={<Login />} />
+
+              <Route
+                path="/terminos-y-condiciones"
+                element={<TerminosYCondiciones />}
+              />
+
+              <Route
+                path="/descargo-de-responsabilidad"
+                element={<DescargoDeResponsabilidad />}
+              />
+
+              <Route
+                path="/derechos-reservados"
+                element={<DerechosReservados />}
+              />
+
+              <Route path="/faq" element={<FAQ />} />
+            </Route>
+          </Route>
+
+          <Route path="*" element={<NotFound />} />
+        </Routes>
       </BrowserRouter>
     </AuthProvider>
   );

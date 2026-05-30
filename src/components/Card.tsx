@@ -1,68 +1,34 @@
-import React from "react";
-import style from "./Card.module.css";
+import { useState } from "react";
+import styles from "../styles/components/Card.module.css";
 
 interface CardProps {
-    header?: React.ReactNode;
-    children: React.ReactNode;
-    footer?: React.ReactNode;
-    expandedContent?: React.ReactNode;
-    expandable?: boolean;
-    defaultExpanded?: boolean;
-    clickable?: boolean;
-    onClick?: () => void;
+  title: string;
+  shortText: string;
+  longText: string;
 }
 
-export function Card({header, children, footer, expandedContent, expandable = false, defaultExpanded = false, clickable = false, onClick}: CardProps) {
-    const [isExpanded, setIsExpanded] = React.useState(defaultExpanded);
+export function Card({ title, shortText, longText }: CardProps) {
+  const [isExpanded, setIsExpanded] = useState(false);
 
-    const handleToggleExpand = () => {
-        if (expandable) {
-            setIsExpanded(prev => !prev);
-        }
-    };
+  const toggleReadMore = () => {
+    setIsExpanded(!isExpanded);
+  };
 
-    const handleClick = () => {
-        if (clickable && onClick) {
-            onClick();
-        }
-    };
+  return (
+    <div className={styles.card}>
+      <h3 className={styles.title}>{title}</h3>
+      <p>
+        {shortText}
+        {isExpanded && (
+          <div className="long-text-container">
+            <p>{longText}</p>
+          </div>
+        )}
+      </p>
 
-    return (
-        <div
-            className={style.card}
-            onClick={clickable ? handleClick : undefined}
-        >
-            {header && (
-                <div className={style.header}>
-                    {header}
-                </div>
-            )}
-
-            <div className={style.body}>
-                {children}
-
-                {expandable && (
-                    <button
-                        className={style.expandButton}
-                        onClick={handleToggleExpand}
-                        type="button"
-                    >
-                        {isExpanded ? "Leer menos" : "Leer más"}
-                    </button>
-                )}
-
-                {isExpanded && expandedContent && (
-                    <div className={style.expandedContent}>
-                        {expandedContent}
-                    </div>
-                )}
-            </div>
-
-            {footer && (
-                <div className={style.footer}>
-                    {footer}
-                </div>
-            )}
-        </div>
-    );
+      <button onClick={toggleReadMore} className={styles.button}>
+        {isExpanded ? "Leer menos" : "Leer más"}
+      </button>
+    </div>
+  );
 }
