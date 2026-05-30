@@ -1,7 +1,7 @@
 import styles from "../styles/components/NavBar.module.css";
-import type { User } from "../context/AuthContext";
+import type { Usuario } from "../types/usuarios";
 
-export function AvatarUsuario({ usuario }: { usuario: User }) {
+export function AvatarUsuario({ usuario }: { usuario: Usuario }) {
 
     const iniciales = `${usuario.nombre[0]}${usuario.apellido[0]}`.toUpperCase();
 
