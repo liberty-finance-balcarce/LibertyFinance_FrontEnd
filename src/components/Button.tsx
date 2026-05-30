@@ -9,6 +9,8 @@ interface ButtonProps {
   type?: "button" | "submit" | "reset";
   className?: string;
   disabled?: boolean;
+  title?: string;
+  ariaLabel?: string;
 }
 
 export function Button({
@@ -19,6 +21,8 @@ export function Button({
   type = "button",
   className,
   disabled = false,
+  title,
+  ariaLabel,
 }: ButtonProps) {
   let baseClass = styles.button;
   let activeClass = styles.buttonActive;
@@ -49,6 +53,8 @@ export function Button({
             ? `${baseClass} ${activeClass} ${className || ""}`
             : `${baseClass} ${className || ""}`
         }
+        title={title}
+        aria-label={ariaLabel}
       >
         {children}
       </NavLink>
@@ -61,6 +67,8 @@ export function Button({
       onClick={onClick}
       className={`${baseClass} ${className || ""}`}
       disabled={disabled}
+      title={title}
+      aria-label={ariaLabel}
     >
       {children}
     </button>
