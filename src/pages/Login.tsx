@@ -103,7 +103,11 @@ export function Login() {
 
       navigate("/");
     } catch (err: any) {
-      setError(err.message || "Ocurrió un error al intentar iniciar sesión.");
+      if (err.message === "Failed to fetch") {
+        setError("Error en la conexión");
+      } else {
+        setError(err.message || "Ocurrió un error al intentar iniciar sesión.");
+      }
     } finally {
       setIsLoading(false);
     }
