@@ -30,33 +30,11 @@ function App() {
         <Routes>
           <Route element={<UserRoute />}>
             <Route element={<UserLayout />}>
-              <Route path="/" element={<Home />} />
-              <Route path="/nuestro-equipo" element={<NuestroEquipo />} />
-              <Route path="/contactenos" element={<Contactenos />} />
-
-              <Route
-                path="/terminos-y-condiciones"
-                element={<TerminosYCondiciones />}
-              />
-
-              <Route
-                path="/descargo-de-responsabilidad"
-                element={<DescargoDeResponsabilidad />}
-              />
-
-              <Route
-                path="/derechos-reservados"
-                element={<DerechosReservados />}
-              />
-
-              <Route path="/faq" element={<FAQ />} />
-
               <Route path="/dashboard" element={<Dashboard />}>
                 <Route path="cart" element={<DashboardCart />} />
                 <Route path="inversiones" element={<DashboardInversiones />} />
               </Route>
             </Route>
-            <Route path="*" element={<NotFound />} />
           </Route>
 
           <Route element={<PublicRoute />}>
