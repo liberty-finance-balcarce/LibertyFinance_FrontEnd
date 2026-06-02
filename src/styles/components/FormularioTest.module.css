@@ -218,6 +218,11 @@
 .perfil-agresivo h2 { color: #e17055; }
 .perfil-experto h2 { color: #6c5ce7; }
 
+.trophy{
+  height: 180px;
+  width: 180px;
+}
+
 .botonCerrar{
     display: block; 
     width: 100%;

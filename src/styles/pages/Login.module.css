@@ -45,13 +45,10 @@
 
 .errorLogin {
   text-align: center;
-  width: 80%;
   min-height: 20px;
   display: block;
   font-size: 10px;
   color: red;
-  margin-top: 7px;
-  margin-bottom: 10px;
 }
 
 .botonLogin {

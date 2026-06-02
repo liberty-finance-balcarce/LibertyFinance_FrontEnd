@@ -1,10 +1,9 @@
 .container {
   font-family: var(--tipoLetraGeneral);
-
   max-width: 900px;
   margin: 0 auto;
-  padding: clamp(20px, 5vw, 40px) 20px;
   color: var(--colorPrimario);
+  padding-bottom: 30px;
 }
 
 .title {
@@ -166,13 +165,12 @@
 
 .btnVolver,
 .btnSubmit {
-  background-color: var(--colorPrimario);
+  height: 60px;
+  width: 191px;
   color: var(--colorLetrasBoton);
-  border: 1px solid transparent;
   padding: 12px 32px;
   border-radius: var(--radius-md);
   font-size: 1rem;
-  font-weight: 600;
   cursor: pointer;
   transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out,
     box-shadow 0.2s ease-in-out;
@@ -181,14 +179,8 @@
   align-items: center;
 }
 
-.btnVolver {
-  background-color: transparent;
-  color: var(--colorPrimario);
-  border-color: var(--colorPrimario);
-}
-
 .btnVolver:hover {
-  background-color: var(--colorBordeVentana);
+  background-color: var(--colorSecundario);
 }
 
 .btnSubmit:hover:not(:disabled) {
@@ -222,10 +214,10 @@
   cursor: pointer;
   background-color: var(--colorPrimario);
   color: var(--colorLetrasBoton);
-  border: 1px solid var(--colorPrimario);
   border-radius: var(--radius-sm);
   padding: 0 12px;
   height: 44px;
+  width: 80px;
   font-family: var(--tipoLetraGeneral);
   transition: background-color 0.2s ease-in-out;
   display: flex;

@@ -238,7 +238,7 @@ export function Register() {
 
   return (
     <main className={styles.container}>
-      <h1 className={styles.title}>REGISTRARSE</h1>
+      <h1 className={styles.title}>Registrarse</h1>
 
       <form onSubmit={handleSubmit} className={styles.form}>
         <div className={styles.gridContainer}>
@@ -442,30 +442,6 @@ export function Register() {
                 {formErrors.localidad && (
                   <span className={styles.fieldError}>
                     {formErrors.localidad}
-                  </span>
-                )}
-                <span className={styles.hint}>* CAMPO OBLIGATORIO</span>
-              </div>
-
-              <div className={styles.inputGroup}>
-                <label htmlFor="perfilInversor">Perfil de inversor:</label>
-                <select
-                  id="perfilInversor"
-                  name="perfilInversor"
-                  value={formData.perfilInversor}
-                  onChange={handleChange}
-                  className={
-                    formErrors.perfilInversor ? styles.inputError : ""
-                  }
-                >
-                  <option value="">Seleccionar perfil</option>
-                  <option value="1">Conservador</option>
-                  <option value="2">Moderado</option>
-                  <option value="3">Agresivo</option>{" "}
-                </select>
-                {formErrors.perfilInversor && (
-                  <span className={styles.fieldError}>
-                    {formErrors.perfilInversor}
                   </span>
                 )}
                 <span className={styles.hint}>* CAMPO OBLIGATORIO</span>
