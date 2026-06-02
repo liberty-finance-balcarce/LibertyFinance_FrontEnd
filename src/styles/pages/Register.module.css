@@ -165,7 +165,7 @@
 
 .btnVolver,
 .btnSubmit {
-  height: 60px;
+  height: 50px;
   width: 191px;
   color: var(--colorLetrasBoton);
   padding: 12px 32px;
