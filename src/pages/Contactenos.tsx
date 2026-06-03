@@ -118,9 +118,6 @@ export function Contactenos() {
     <section className={styles.container}>
       <header className={styles.header}>
         <h1 className={styles.title}>Contáctenos</h1>
-        <p className={styles.subtitle}>
-          <a href="#">Ponte en Contacto con nosotros</a>
-        </p>
       </header>
 
       <form onSubmit={handleSubmit} className={styles.form} noValidate>
@@ -235,7 +232,7 @@ export function Contactenos() {
             value={formData.mensaje}
             onChange={handleChange}
             placeholder="Quiero recibir mas informacion sobre las inversiones disponibles"
-            rows={4}
+            rows={2}
             maxLength={500}
             className={formErrors.mensaje ? styles.inputError : ""}
           />

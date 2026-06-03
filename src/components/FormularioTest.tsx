@@ -227,6 +227,13 @@ export function FormularioTest({ onClose }: { onClose?: () => void }) {
           >
             &times;
           </button>
+
+          <img
+            className={styles.trophy}
+            src="../assets/trophy.png"
+            alt="Trofeo Liberty Finance"
+          />
+          
           <h2>Tu Perfil: {result.perfil}</h2>
           <div className={styles.resultDetails}>
             <p>

@@ -5,6 +5,7 @@
   grid-template-columns: 1fr 2fr 1fr;
   align-items: center;
   padding: 1rem;
+  font-family: var(--tipoLetraGeneral);
 }
 
 .logo {

@@ -5,6 +5,7 @@
     margin-left: 200px;
     margin-right: 200px;
     font-size: 1.2em;
+    font-family: var(--tipoLetraGeneral);
 }
 
 .container h1 {

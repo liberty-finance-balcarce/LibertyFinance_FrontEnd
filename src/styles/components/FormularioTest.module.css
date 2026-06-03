@@ -4,6 +4,7 @@
   align-items: center;
   min-height: 100vh;
   padding: 20px;
+  font-family: var(--tipoLetraGeneral);
 }
 
 .testCard {
@@ -217,6 +218,11 @@
 .perfil-moderado h2 { color: #00b894; }
 .perfil-agresivo h2 { color: #e17055; }
 .perfil-experto h2 { color: #6c5ce7; }
+
+.trophy{
+  height: 180px;
+  width: 180px;
+}
 
 .botonCerrar{
     display: block; 
