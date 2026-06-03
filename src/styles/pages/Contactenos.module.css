@@ -2,7 +2,7 @@
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
-  font-family: sans-serif;
+  font-family: var(--tipoLetraGeneral);
 }
 
 .header {
@@ -71,6 +71,7 @@
 }
 
 .submitButton {
+  font-family: inherit;
   height: auto;
   width: auto;
   border: none;

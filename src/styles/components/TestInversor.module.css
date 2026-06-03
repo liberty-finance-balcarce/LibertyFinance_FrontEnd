@@ -1,4 +1,5 @@
 .contTestInversor{
+    font-family: var(--tipoLetraGeneral);
     margin-top: 30px;
     margin-bottom: 30px;
     display: flex;

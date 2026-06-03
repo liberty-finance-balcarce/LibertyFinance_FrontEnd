@@ -65,6 +65,7 @@
   font-size: 1rem;
   color: var(--colorPrimario);
   transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  font-family: var(--tipoLetraGeneral);
 }
 
 .inputGroup input:focus-visible,

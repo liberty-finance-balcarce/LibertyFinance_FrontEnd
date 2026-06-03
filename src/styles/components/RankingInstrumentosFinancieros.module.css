@@ -2,8 +2,8 @@
   max-width: 1000px;
   margin: 0 auto;
   padding: 40px 20px;
-  font-family: sans-serif;
   color: #4a2377;
+  font-family: var(--tipoLetraGeneral);
 }
 
 .header {

@@ -9,6 +9,7 @@
     padding: 1rem;
     background-color: var(--colorSombraVentana);
     color: var(--colorLetrasBoton);
+    font-family: var(--tipoLetraGeneral);
 }
 
 .socials {

@@ -1,12 +1,9 @@
-:root{
-    font-family: var(--tipoLetraGeneral);
-}
-
 .container {
     display: flex;
     flex-direction: row;
     gap: 20px;
     justify-content: center;
+    font-family: var(--tipoLetraGeneral);
 }
 
 .card{

@@ -5,13 +5,12 @@
     justify-content: center;
     padding: 2%;
     text-align: center;
-    font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
+    font-family: var(--tipoLetraGeneral);
 }
 
 .h1{
     background-color: var(--colorSecundario);
     color: var(--colorLetrasBoton);
     text-align: center;
-    font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
 }
 
