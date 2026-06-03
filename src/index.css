@@ -1,12 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap');
+
 :root {
   width: 100%;
-  --colorPrimario: #4B0082;
+  --colorPrimario: #4b0082;
   --colorSecundario: #800080;
   --colorLetrasBoton: beige;
-  --colorBordeVentana: #E6E6FA;
-  --colorSombraVentana: #DDA0DD;
+  --colorBordeVentana: #e6e6fa;
+  --colorSombraVentana: #dda0dd;
 
-  --tipoLetraGeneral: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --tipoLetraGeneral: 'Bricolage Grotesque', sans-serif;
+  background-color: rgb(243, 243, 243);
 
   /*espacio para las cards*/
   --spacing-xs: 4px;
