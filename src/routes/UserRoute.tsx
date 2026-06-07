@@ -8,7 +8,7 @@ export function UserRoute() {
 
   if (!isAuthenticated) return <Navigate to="/login" replace />;
 
-  if (role === "admin") return <Navigate to="/dashboard" replace />;
+  if (role === "Admin") return <Navigate to="/dashboard" replace />;
 
   return <Outlet />;
 }

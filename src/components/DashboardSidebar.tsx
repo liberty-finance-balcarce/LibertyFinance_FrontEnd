@@ -13,6 +13,8 @@ export function DashboardSidebar() {
   };
 
   return (
+
+    
     <aside className={styles.sidebar}>
       <nav className={styles.nav}>
         <NavLink
@@ -39,10 +41,11 @@ export function DashboardSidebar() {
           <span>Mis Inversiones</span>
         </NavLink>
       </nav>
-
+    
       <button onClick={handleLogout} className={styles.logoutButton}>
         <span>&larr;</span> Cerrar sesión
       </button>
     </aside>
+
   );
 }
