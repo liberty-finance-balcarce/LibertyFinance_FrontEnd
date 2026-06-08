@@ -30,6 +30,7 @@
   width: 80%;
   height: 80%;
   object-fit: contain;
+  filter:opacity(75%);
 }
 
 @keyframes spin {
