@@ -53,7 +53,7 @@ export function RankingInstrumentosFinancieros() {
                   <span className={styles.itemName}>
                     {item.nombre_instrumento}
                   </span>
-                  <span className={styles.itemYield}>{item.rendimiento}</span>
+                  <span className={styles.itemYield}>{item.rendimiento}%</span>
                   <span className={styles.itemRisk}>{item.riesgo}</span>
                   <span className={styles.itemPrice}>
                     {item.precio_instrumento}
@@ -79,7 +79,7 @@ export function RankingInstrumentosFinancieros() {
                   <span className={styles.itemName}>
                     {item.nombre_instrumento}
                   </span>
-                  <span className={styles.itemYield}>{item.rendimiento}</span>
+                  <span className={styles.itemYield}>{item.rendimiento}%</span>
                   <span className={styles.itemRisk}>{item.riesgo}</span>
                   <span className={styles.itemPrice}>
                     {item.precio_instrumento}
