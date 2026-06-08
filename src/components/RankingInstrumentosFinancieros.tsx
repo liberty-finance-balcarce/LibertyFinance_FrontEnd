@@ -1,5 +1,6 @@
 import styles from "../styles/components/RankingInstrumentosFinancieros.module.css";
 import { useRankingInstrumentos } from "../hooks/useRankingInstrumentos";
+import { LoadingSpinner } from "../components/LoadingSpinner.tsx";
 
 export function RankingInstrumentosFinancieros() {
   const { data, isLoading, error } = useRankingInstrumentos();
@@ -7,7 +8,7 @@ export function RankingInstrumentosFinancieros() {
   if (isLoading) {
     return (
       <div className={styles.loadingContainer}>
-        <p>Cargando ranking de instrumentos...</p>
+        <LoadingSpinner logoSrc="assets/logo-icon.png" size={120} />
       </div>
     );
   }

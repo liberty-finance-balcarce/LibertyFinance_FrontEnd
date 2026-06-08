@@ -96,6 +96,11 @@
   padding: 50px;
   color: #551a8b;
   font-size: 1.2rem;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .errorContainer {
