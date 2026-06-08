@@ -1,14 +1,144 @@
-import { useState, type ChangeEvent, type FormEvent } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate, NavLink } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { useAuth } from "../hooks/useAuth"; // <-- Importamos tu hook global
+import { Button } from "../components/Button"; // Reutilizo tu componente Button si querés
 import styles from "../styles/pages/Login.module.css";
-import { useAuth } from "../hooks/useAuth";
-import { Button } from "../components/Button";
 
 interface DatosRecibidos {
   dni_usuario: string;
   password: string;
 }
 
+export function Login() {
+  const navigate = useNavigate();
+  const { login } = useAuth(); // <-- Traemos la función mágica del contexto
+
+  // Estados locales solo para la UI (carga y errores del servidor)
+  const [errorServidor, setErrorServidor] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<DatosRecibidos>({
+    mode: "onTouched",
+    defaultValues: {
+      dni_usuario: "",
+      password: "",
+    },
+  });
+
+  const enviarForm = async (data: DatosRecibidos) => {
+    setErrorServidor(null);
+    setIsLoading(true);
+
+    try {
+      // 1. Convertimos el DNI a número porque tu AuthContext lo requiere así
+      const dniNumerico = Number(data.dni_usuario);
+
+      // 2. Ejecutamos el login del contexto (que hace el fetch, guarda token, user, etc.)
+      const response = await login(dniNumerico, data.password);
+
+      // 3. Si el contexto devolvió una respuesta no exitosa, manejamos el error
+      if (!response.ok) {
+        throw new Error("Credenciales incorrectas.");
+      }
+
+      // 4. Si todo salió bien, redirigimos al Home o Dashboard
+      navigate("/");
+    } catch (err: any) {
+      if (err.message === "Failed to fetch") {
+        setErrorServidor("Error en la conexión con el servidor.");
+      } else {
+        setErrorServidor(err.message || "Ocurrió un error inesperado.");
+      }
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return (
+    <section className={styles.containerLogin}>
+      <h1 className={styles.h1}>Iniciar sesión</h1>
+      <form
+        className={styles.formLogin}
+        onSubmit={handleSubmit(enviarForm)}
+        noValidate
+      >
+        {/* Campo DNI */}
+        <label htmlFor="dni_usuario" className={styles.etiquetaForm}>
+          DNI
+        </label>
+        <input
+          className={styles.inputForm}
+          id="dni_usuario"
+          maxLength={8}
+          autoComplete="off"
+          type="text"
+          {...register("dni_usuario", {
+            required: "Debe ingresar DNI.",
+            pattern: { value: /^[0-9]+$/, message: "Solo se permiten números" },
+            minLength: { value: 7, message: "Deben ser mínimo 7 números" },
+            maxLength: { value: 8, message: "Deben ser máximo 8 números" },
+          })}
+          placeholder="Ingresa tu DNI"
+        />
+        <span className={styles.errorLogin}>
+          {errors.dni_usuario?.message || ""}
+        </span>
+
+        {/* Campo Password */}
+        <label htmlFor="password" className={styles.etiquetaForm}>
+          Contraseña
+        </label>
+        <input
+          className={styles.inputForm}
+          id="password"
+          maxLength={16}
+          autoComplete="off"
+          type="password"
+          {...register("password", {
+            required: "Debe ingresar contraseña.",
+          })}
+          placeholder="********"
+        />
+        <span className={styles.errorLogin}>
+          {errors.password?.message || ""}
+        </span>
+
+        {/* Mensaje de error del Servidor (Credenciales incorrectas / Caída) */}
+        {errorServidor && (
+          <p
+            style={{ color: "red", textAlign: "center", marginBottom: "10px" }}
+          >
+            {errorServidor}
+          </p>
+        )}
+
+        {/* Botón de envío con control de Loading */}
+        <Button
+          type="submit"
+          variant="login"
+          className={styles.botonLogin}
+          disabled={isLoading}
+        >
+          {isLoading ? "Cargando..." : "Login"}
+        </Button>
+
+        {/* Links de navegación corregidos con NavLink */}
+        <div className={styles.contRegistro}>
+          <span>¿No tienes cuenta? </span>
+          <NavLink to="/register">Crear una</NavLink>
+        </div>
+      </form>
+    </section>
+  );
+}
+
+//////////////////////////////////////////////////////////////
+/*
 type ValidationErrors = Partial<Record<keyof DatosRecibidos, string>>;
 
 export function Login() {
@@ -175,4 +305,4 @@ export function Login() {
       </form>
     </section>
   );
-}
+}*/

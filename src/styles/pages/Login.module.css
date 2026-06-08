@@ -35,11 +35,12 @@
   padding: 0px 16px;
   height: 52px;
   font-size: 18px;
+  border-radius: 7px;
   border: 2px solid var(--colorBordeVentana);
 }
 .inputForm:focus {
   outline: none;
-  border: 1px solid var(--colorBordeVentana);
+  border: 2px solid var(--colorBordeVentana);
   box-shadow: 0 0 8px 4px var(--colorSombraVentana);
 }
 
