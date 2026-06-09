@@ -39,6 +39,16 @@ export function AuthProvider({ children }: Props) {
   const [role, setRole] = useState<string | null>(null);
 
   useEffect(() => {
+    if (!token) return;
+    const time = 15 * 60 * 1000;
+    const interval = setInterval(() => {
+      refreshToken();
+    }, time);
+
+    return () => clearInterval(interval);
+  }, [token]);
+
+  useEffect(() => {
     const loadAuth = async () => {
       const savedToken = localStorage.getItem("token");
       const savedUser = localStorage.getItem("user");
@@ -102,26 +112,58 @@ export function AuthProvider({ children }: Props) {
 
     if (!response.ok) {
       console.error("Error en el registro", response.statusText);
-      return response; 
+      return response;
     }
 
     return response;
   };
 
-  const getUserInfo = async (authToken?: string) => {
-    const finalToken = authToken ?? localStorage.getItem("token");
+  const refreshToken = async () => {
+    const currentToken = localStorage.getItem("token");
 
-    if (!finalToken) return;
+    if (!currentToken) return;
+
+    try {
+      const response = await fetch(
+        "http://localhost:3000/api/v1/auth/refresh-token",
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${currentToken}`,
+          },
+        },
+      );
+
+      if (!response.ok) {
+        if (response.status === 401 || response.status === 403) logout();
+
+        return;
+      }
+
+      const dataParsed = await response.json();
+      const data = dataParsed.data ?? dataParsed;
+
+      setToken(data.token);
+      localStorage.setItem("token", data.token);
+    } catch (error) {
+      console.error("Error al refrescar el token:", error);
+    }
+  };
+
+  const getUserInfo = async (authToken?: string) => {
+    const token = authToken ?? localStorage.getItem("token");
+
+    if (!token) return;
 
     const response = await fetch("http://localhost:3000/api/v1/auth/profile", {
       method: "GET",
       headers: {
-        Authorization: `Bearer ${finalToken}`,
+        Authorization: `Bearer ${token}`,
       },
     });
 
     if (!response.ok) {
-      console.error("Token inválido o expirado", response.statusText);
+      console.error("Token invalido o expirado", response.statusText);
       logout();
       return response;
     }
