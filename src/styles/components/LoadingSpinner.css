@@ -30,7 +30,8 @@
   width: 80%;
   height: 80%;
   object-fit: contain;
-  filter:opacity(75%);
+  filter: grayscale(100%);
+  animation: colorPulse 2s ease-in-out infinite alternate;
 }
 
 @keyframes spin {
@@ -40,5 +41,14 @@
 
   to {
     transform: rotate(360deg);
+  }
+}
+
+@keyframes colorPulse {
+  0% {
+    filter: grayscale(100%) opacity(60%);
+  }
+  100% {
+    filter: grayscale(0%); /* Aquí recupera todo su color original */
   }
 }
