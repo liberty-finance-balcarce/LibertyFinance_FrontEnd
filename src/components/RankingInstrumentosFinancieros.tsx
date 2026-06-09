@@ -8,7 +8,7 @@ export function RankingInstrumentosFinancieros() {
   if (isLoading) {
     return (
       <div className={styles.loadingContainer}>
-        <LoadingSpinner logoSrc="assets/logo-icon.png" size={120} />
+        <LoadingSpinner logo="assets/logo-icon.png" size={120} />
       </div>
     );
   }
