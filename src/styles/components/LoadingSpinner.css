@@ -31,7 +31,7 @@
   height: 80%;
   object-fit: contain;
   filter: grayscale(100%);
-  animation: colorPulse 2s ease-in-out infinite alternate;
+  animation: colorPulse 1s ease-in-out infinite alternate;
 }
 
 @keyframes spin {
