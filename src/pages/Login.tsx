@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useNavigate, NavLink } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { useAuth } from "../hooks/useAuth"; // <-- Importamos tu hook global
-import { Button } from "../components/Button"; // Reutilizo tu componente Button si querés
+import { useAuth } from "../hooks/useAuth"; 
+import { Button } from "../components/Button";
 import styles from "../styles/pages/Login.module.css";
 
 interface DatosRecibidos {
@@ -12,9 +12,9 @@ interface DatosRecibidos {
 
 export function Login() {
   const navigate = useNavigate();
-  const { login } = useAuth(); // <-- Traemos la función mágica del contexto
+  const { login } = useAuth(); 
 
-  // Estados locales solo para la UI (carga y errores del servidor)
+  
   const [errorServidor, setErrorServidor] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -35,18 +35,14 @@ export function Login() {
     setIsLoading(true);
 
     try {
-      // 1. Convertimos el DNI a número porque tu AuthContext lo requiere así
       const dniNumerico = Number(data.dni_usuario);
 
-      // 2. Ejecutamos el login del contexto (que hace el fetch, guarda token, user, etc.)
       const response = await login(dniNumerico, data.password);
 
-      // 3. Si el contexto devolvió una respuesta no exitosa, manejamos el error
       if (!response.ok) {
         throw new Error("Credenciales incorrectas.");
       }
 
-      // 4. Si todo salió bien, redirigimos al Home o Dashboard
       navigate("/");
     } catch (err: any) {
       if (err.message === "Failed to fetch") {
@@ -67,7 +63,6 @@ export function Login() {
         onSubmit={handleSubmit(enviarForm)}
         noValidate
       >
-        {/* Campo DNI */}
         <label htmlFor="dni_usuario" className={styles.etiquetaForm}>
           DNI
         </label>
@@ -89,7 +84,6 @@ export function Login() {
           {errors.dni_usuario?.message || ""}
         </span>
 
-        {/* Campo Password */}
         <label htmlFor="password" className={styles.etiquetaForm}>
           Contraseña
         </label>
@@ -108,7 +102,6 @@ export function Login() {
           {errors.password?.message || ""}
         </span>
 
-        {/* Mensaje de error del Servidor (Credenciales incorrectas / Caída) */}
         {errorServidor && (
           <p
             style={{ color: "red", textAlign: "center", marginBottom: "10px" }}
@@ -117,7 +110,6 @@ export function Login() {
           </p>
         )}
 
-        {/* Botón de envío con control de Loading */}
         <Button
           type="submit"
           variant="login"
@@ -127,7 +119,6 @@ export function Login() {
           {isLoading ? "Cargando..." : "Login"}
         </Button>
 
-        {/* Links de navegación corregidos con NavLink */}
         <div className={styles.contRegistro}>
           <span>¿No tienes cuenta? </span>
           <NavLink to="/register">Crear una</NavLink>
