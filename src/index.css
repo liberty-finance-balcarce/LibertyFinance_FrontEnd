@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap");
 
 :root {
   width: 100%;
@@ -7,10 +7,8 @@
   --colorLetrasBoton: beige;
   --colorBordeVentana: #e6e6fa;
   --colorSombraVentana: #dda0dd;
-
-  --tipoLetraGeneral: 'Bricolage Grotesque', sans-serif;
-  
-  background-color: rgb(243, 243, 243);
+  --colorFondoGeneral: #f8f8ff;
+  --tipoLetraGeneral: "Bricolage Grotesque", sans-serif;
 
   /*espacio para las cards*/
   --spacing-xs: 4px;
@@ -22,17 +20,15 @@
   --radius-sm: 6px;
   --radius-md: 12px;
   --radius-lg: 20px;
+}
 
-  html,
-  body,
-  #root {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    min-height: 100%;
-  }
-
-  body {
-    min-height: 100vh;
-  }
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  font-family: var(--tipoLetraGeneral);
+  background-color: var(--colorFondoGeneral);
 }
