@@ -1,226 +1,96 @@
 import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import styles from "../styles/pages/Register.module.css";
 import { useAuth } from "../hooks/useAuth";
 import { useProvincias } from "../hooks/useProvincias";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Button } from "../components/Button";
+
+type FormData = {
+  nombre: string;
+  apellido: string;
+  mail: string;
+  contraseña: string;
+  codArea: string;
+  telefono: string;
+  fecha_nacimiento: string;
+  dni: string;
+  provincia: string;
+  localidad: string;
+  perfilInversor: string;
+  terminos: boolean;
+};
+
+const onlyText = (value: string) =>
+  value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/g, "");
+
+const onlyNumbers = (value: string, max?: number) =>
+  value.replace(/\D/g, "").slice(0, max);
+
+const getPerfilInversorFromTest = () => {
+  const savedTest = localStorage.getItem("testInversor");
+  if (!savedTest) return "";
+
+  const data = JSON.parse(savedTest);
+  if (!data.finished) return "";
+
+  const score = (data.selections ?? []).reduce(
+    (acc: number, value: number) => acc + (value || 0),
+    0,
+  );
+
+  if (score <= 30) return "1";
+  if (score <= 60) return "2";
+  return "3";
+};
 
 export function Register() {
   const navigate = useNavigate();
-  const { register } = useAuth();
+  const { register: registerUser } = useAuth();
   const { provinciasList } = useProvincias();
-
   const [showPassword, setShowPassword] = useState(false);
-
-  const getPerfilInversorFromTest = () => {
-    const savedTest = localStorage.getItem("testInversor");
-
-    if (!savedTest) return "";
-
-    const data = JSON.parse(savedTest);
-
-    if (!data.finished) return "";
-
-    const selections: number[] = data.selections ?? [];
-    const score = selections.reduce((acc, value) => acc + (value || 0), 0);
-
-    if (score <= 30) return "1";
-    if (score <= 60) return "2";
-
-    return "3";
-  };
-
-  const [formData, setFormData] = useState({
-    nombre: "",
-    apellido: "",
-    mail: "",
-    contraseña: "",
-    codArea: "",
-    telefono: "",
-    fecha_nacimiento: "",
-    dni: "",
-    provincia: "",
-    localidad: "",
-    perfilInversor: getPerfilInversorFromTest(),
-    terminos: false,
-  });
-
-  const [formErrors, setFormErrors] = useState({
-    nombre: "",
-    apellido: "",
-    mail: "",
-    contraseña: "",
-    codArea: "",
-    telefono: "",
-    fecha_nacimiento: "",
-    dni: "",
-    provincia: "",
-    localidad: "",
-    perfilInversor: "",
-    terminos: "",
-  });
-
   const [error, setError] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
 
-  const validateField = (name: string, value: string | boolean) => {
-    const stringValue = typeof value === "string" ? value : "";
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<FormData>({
+    mode: "onChange",
+    defaultValues: {
+      nombre: "",
+      apellido: "",
+      mail: "",
+      contraseña: "",
+      codArea: "",
+      telefono: "",
+      fecha_nacimiento: "",
+      dni: "",
+      provincia: "",
+      localidad: "",
+      perfilInversor: getPerfilInversorFromTest(),
+      terminos: false,
+    },
+  });
 
-    switch (name) {
-      case "nombre":
-        return stringValue.trim()
-          ? ""
-          : "El nombre de usuario no puede estar vacio.";
-      case "apellido":
-        return stringValue.trim() ? "" : "El apellido no puede estar vacio.";
-      case "mail":
-        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(stringValue)
-          ? ""
-          : "El mail debe ser valido.";
-      case "contraseña":
-        if (stringValue.length < 8 || stringValue.length > 16) {
-          return "La contraseña debe tener entre 8 y 16 caracteres.";
-        }
-        return /^(?=.*[a-z])(?=.*[A-Z])(?=.*[#*])/.test(stringValue)
-          ? ""
-          : "La contraseña debe incluir al menos una minuscula, una mayuscula y un caracter especial (# o *).";
-      case "codArea":
-        if (!stringValue.trim()) return "El codigo de area es obligatorio.";
-        return /^\d+$/.test(stringValue)
-          ? ""
-          : "El codigo de area debe contener solo numeros.";
-      case "telefono":
-        if (!stringValue.trim()) return "El telefono es obligatorio.";
-        return /^\d+$/.test(stringValue)
-          ? ""
-          : "El telefono debe contener solo numeros.";
-      case "fecha_nacimiento": {
-        if (!stringValue.trim()) {
-          return "La fecha de nacimiento no puede estar vacia.";
-        }
-        const fechaNacimiento = new Date(stringValue);
-        if (Number.isNaN(fechaNacimiento.getTime())) {
-          return "La fecha de nacimiento debe ser valida.";
-        }
-        return fechaNacimiento <= new Date()
-          ? ""
-          : "La fecha de nacimiento no puede ser mayor a la fecha actual.";
-      }
-      case "dni":
-        if (!/^\d+$/.test(stringValue)) {
-          return "El DNI del usuario debe ser un numero sin puntos.";
-        }
-        return stringValue.length >= 7 && stringValue.length <= 8
-          ? ""
-          : "El DNI debe tener entre 7 y 8 numeros.";
-      case "provincia":
-        return Number(stringValue) >= 1
-          ? ""
-          : "Debe seleccionar una provincia valida.";
-      case "localidad":
-        return stringValue.trim()
-          ? ""
-          : "La localidad (direccion) no puede estar vacia.";
-      case "perfilInversor":
-        return Number(stringValue) >= 1
-          ? ""
-          : "Debe seleccionar un perfil de inversor valido.";
-      case "terminos":
-        return value
-          ? ""
-          : "Debes aceptar los Terminos y Condiciones para continuar.";
-      default:
-        return "";
-    }
-  };
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
-  ) => {
-    const { name, value } = e.target;
-
-    if (name === "terminos") {
-      const checked = (e.target as HTMLInputElement).checked;
-      setFormData((prev) => ({
-        ...prev,
-        terminos: checked,
-      }));
-      setFormErrors((prev) => ({
-        ...prev,
-        terminos: validateField("terminos", checked),
-      }));
-      return;
-    }
-
-    let sanitizedValue = value;
-    if (name === "perfilInversor" || name === "provincia") {
-      sanitizedValue = value.replace(/\D/g, "");
-    }
-    if (name === "nombre" || name === "apellido") {
-      sanitizedValue = value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/g, "");
-    }
-    if (name === "mail") {
-      sanitizedValue = value.trim();
-    }
-    if (name === "contraseña") {
-      sanitizedValue = value.slice(0, 16);
-    }
-    if (name === "codArea") {
-      sanitizedValue = value.replace(/\D/g, "").slice(0, 4);
-    }
-    if (name === "telefono") {
-      sanitizedValue = value.replace(/\D/g, "").slice(0, 10);
-    }
-    if (name === "dni") {
-      sanitizedValue = value.replace(/\D/g, "").slice(0, 8);
-    }
-    if (name === "localidad") {
-      sanitizedValue = value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ0-9\s]/g, "");
-    }
-
-    setFormData((prev) => ({ ...prev, [name]: sanitizedValue }));
-    setFormErrors((prev) => ({
-      ...prev,
-      [name]: validateField(name, sanitizedValue),
-    }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const onSubmit = async (data: FormData) => {
     setError(null);
 
-    const newErrors = Object.fromEntries(
-      Object.entries(formData).map(([name, value]) => [
-        name,
-        validateField(name, value),
-      ]),
-    ) as typeof formErrors;
-
-    setFormErrors(newErrors);
-
-    if (Object.values(newErrors).some(Boolean)) {
-      return;
-    }
-
-    setIsLoading(true);
-
     try {
-      const payload = {
-        dni_usuario: Number(formData.dni),
-        nombre: formData.nombre,
-        apellido: formData.apellido,
-        mail: formData.mail,
-        contraseña: formData.contraseña,
-        numero_telefono: `${formData.codArea}${formData.telefono}`,
-        direccion: formData.localidad,
-        id_provincia: Number(formData.provincia),
-        id_perfilinv: Number(formData.perfilInversor),
+      const response = await registerUser({
+        dni_usuario: Number(data.dni),
+        nombre: data.nombre,
+        apellido: data.apellido,
+        mail: data.mail,
+        contraseña: data.contraseña,
+        numero_telefono: `${data.codArea}${data.telefono}`,
+        direccion: data.localidad,
+        id_provincia: Number(data.provincia),
+        id_perfilinv: Number(data.perfilInversor),
         id_codigo_referidos: 0,
-        fecha_nacimiento: formData.fecha_nacimiento,
-      };
-
-      const response = await register(payload);
+        fecha_nacimiento: data.fecha_nacimiento,
+      });
 
       if (!response.ok) {
         throw new Error(
@@ -231,8 +101,6 @@ export function Register() {
       navigate("/login");
     } catch (err: any) {
       setError(err.message || "Error desconocido");
-    } finally {
-      setIsLoading(false);
     }
   };
 
@@ -240,22 +108,24 @@ export function Register() {
     <main className={styles.container}>
       <h1 className={styles.title}>Registrarse</h1>
 
-      <form onSubmit={handleSubmit} className={styles.form}>
+      <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
         <div className={styles.gridContainer}>
           <div className={styles.column}>
             <div className={styles.inputGroup}>
               <label htmlFor="nombre">Nombre:</label>
               <input
-                type="text"
                 id="nombre"
-                name="nombre"
                 placeholder="Juan"
-                value={formData.nombre}
-                onChange={handleChange}
-                className={formErrors.nombre ? styles.inputError : ""}
+                className={errors.nombre ? styles.inputError : ""}
+                {...register("nombre", {
+                  required: "El nombre no puede estar vacio.",
+                  setValueAs: onlyText,
+                })}
               />
-              {formErrors.nombre && (
-                <span className={styles.fieldError}>{formErrors.nombre}</span>
+              {errors.nombre && (
+                <span className={styles.fieldError}>
+                  {errors.nombre.message}
+                </span>
               )}
               <span className={styles.hint}>* CAMPO OBLIGATORIO</span>
             </div>
@@ -263,16 +133,18 @@ export function Register() {
             <div className={styles.inputGroup}>
               <label htmlFor="apellido">Apellido:</label>
               <input
-                type="text"
                 id="apellido"
-                name="apellido"
                 placeholder="Pérez"
-                value={formData.apellido}
-                onChange={handleChange}
-                className={formErrors.apellido ? styles.inputError : ""}
+                className={errors.apellido ? styles.inputError : ""}
+                {...register("apellido", {
+                  required: "El apellido no puede estar vacio.",
+                  setValueAs: onlyText,
+                })}
               />
-              {formErrors.apellido && (
-                <span className={styles.fieldError}>{formErrors.apellido}</span>
+              {errors.apellido && (
+                <span className={styles.fieldError}>
+                  {errors.apellido.message}
+                </span>
               )}
               <span className={styles.hint}>* CAMPO OBLIGATORIO</span>
             </div>
@@ -282,14 +154,19 @@ export function Register() {
               <input
                 type="email"
                 id="mail"
-                name="mail"
                 placeholder="juan.perez@gmail.com"
-                value={formData.mail}
-                onChange={handleChange}
-                className={formErrors.mail ? styles.inputError : ""}
+                className={errors.mail ? styles.inputError : ""}
+                {...register("mail", {
+                  required: "El mail debe ser valido.",
+                  pattern: {
+                    value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                    message: "El mail debe ser valido.",
+                  },
+                  setValueAs: (value) => value.trim(),
+                })}
               />
-              {formErrors.mail && (
-                <span className={styles.fieldError}>{formErrors.mail}</span>
+              {errors.mail && (
+                <span className={styles.fieldError}>{errors.mail.message}</span>
               )}
               <span className={styles.hint}>* CAMPO OBLIGATORIO</span>
             </div>
@@ -301,11 +178,27 @@ export function Register() {
                 <input
                   type={showPassword ? "text" : "password"}
                   id="contraseña"
-                  name="contraseña"
                   placeholder="Adminjk12*"
-                  value={formData.contraseña}
-                  onChange={handleChange}
-                  className={formErrors.contraseña ? styles.inputError : ""}
+                  maxLength={16}
+                  className={errors.contraseña ? styles.inputError : ""}
+                  {...register("contraseña", {
+                    required: "La contraseña es obligatoria.",
+                    minLength: {
+                      value: 8,
+                      message:
+                        "La contraseña debe tener entre 8 y 16 caracteres.",
+                    },
+                    maxLength: {
+                      value: 16,
+                      message:
+                        "La contraseña debe tener entre 8 y 16 caracteres.",
+                    },
+                    pattern: {
+                      value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[#*])/,
+                      message:
+                        "La contraseña debe incluir al menos una minuscula, una mayuscula y un caracter especial (# o *).",
+                    },
+                  })}
                 />
 
                 <Button
@@ -323,9 +216,9 @@ export function Register() {
                 </Button>
               </div>
 
-              {formErrors.contraseña && (
+              {errors.contraseña && (
                 <span className={styles.fieldError}>
-                  {formErrors.contraseña}
+                  {errors.contraseña.message}
                 </span>
               )}
               <span className={styles.hint}>* CAMPO OBLIGATORIO</span>
@@ -335,30 +228,60 @@ export function Register() {
           <div className={styles.column}>
             <div className={styles.inputGroup}>
               <label>Numero de telefono:</label>
+
               <div className={styles.phoneGroup}>
                 <input
-                  type="text"
-                  name="codArea"
                   placeholder="2266"
-                  value={formData.codArea}
-                  onChange={handleChange}
-                  className={`${styles.codArea} ${formErrors.codArea ? styles.inputError : ""}`}
+                  className={`${styles.codArea} ${
+                    errors.codArea ? styles.inputError : ""
+                  }`}
+                  {...register("codArea", {
+                    required: "El codigo de area es obligatorio.",
+                    pattern: {
+                      value: /^\d+$/,
+                      message: "El codigo de area debe contener solo numeros.",
+                    },
+                    onChange: (e) => {
+                      e.currentTarget.value = e.currentTarget.value.replace(
+                        /\D/g,
+                        "",
+                      );
+                    },
+                    setValueAs: (value) => onlyNumbers(value, 4),
+                  })}
                 />
 
                 <input
-                  type="text"
-                  name="telefono"
                   placeholder="456789"
-                  value={formData.telefono}
-                  onChange={handleChange}
-                  className={`${styles.telNumber} ${formErrors.telefono ? styles.inputError : ""}`}
+                  className={`${styles.telNumber} ${
+                    errors.telefono ? styles.inputError : ""
+                  }`}
+                  {...register("telefono", {
+                    required: "El telefono es obligatorio.",
+                    pattern: {
+                      value: /^\d+$/,
+                      message: "El telefono debe contener solo numeros.",
+                    },
+                    onChange: (e) => {
+                      e.currentTarget.value = e.currentTarget.value.replace(
+                        /\D/g,
+                        "",
+                      );
+                    },
+                    setValueAs: (value) => onlyNumbers(value, 10),
+                  })}
                 />
               </div>
-              {formErrors.codArea && (
-                <span className={styles.fieldError}>{formErrors.codArea}</span>
+
+              {errors.codArea && (
+                <span className={styles.fieldError}>
+                  {errors.codArea.message}
+                </span>
               )}
-              {formErrors.telefono && (
-                <span className={styles.fieldError}>{formErrors.telefono}</span>
+              {errors.telefono && (
+                <span className={styles.fieldError}>
+                  {errors.telefono.message}
+                </span>
               )}
               <span className={styles.hint}>* CAMPO OBLIGATORIO</span>
             </div>
@@ -369,17 +292,17 @@ export function Register() {
                 <input
                   type="date"
                   id="fecha_nacimiento"
-                  name="fecha_nacimiento"
-                  placeholder="2000-01-01"
-                  value={formData.fecha_nacimiento}
-                  onChange={handleChange}
-                  className={
-                    formErrors.fecha_nacimiento ? styles.inputError : ""
-                  }
+                  className={errors.fecha_nacimiento ? styles.inputError : ""}
+                  {...register("fecha_nacimiento", {
+                    required: "La fecha de nacimiento no puede estar vacia.",
+                    validate: (value) =>
+                      new Date(value) <= new Date() ||
+                      "La fecha de nacimiento no puede ser mayor a la fecha actual.",
+                  })}
                 />
-                {formErrors.fecha_nacimiento && (
+                {errors.fecha_nacimiento && (
                   <span className={styles.fieldError}>
-                    {formErrors.fecha_nacimiento}
+                    {errors.fecha_nacimiento.message}
                   </span>
                 )}
                 <span className={styles.hint}>* CAMPO OBLIGATORIO</span>
@@ -388,16 +311,32 @@ export function Register() {
               <div className={styles.inputGroup}>
                 <label htmlFor="dni">DNI:</label>
                 <input
-                  type="text"
                   id="dni"
-                  name="dni"
+                  type="text"
+                  inputMode="numeric"
+                  maxLength={8}
                   placeholder="40123456"
-                  value={formData.dni}
-                  onChange={handleChange}
-                  className={formErrors.dni ? styles.inputError : ""}
+                  className={errors.dni ? styles.inputError : ""}
+                  {...register("dni", {
+                    required: "El DNI es obligatorio.",
+                    pattern: {
+                      value: /^\d{7,8}$/,
+                      message:
+                        "El DNI debe tener entre 7 y 8 numeros, sin puntos.",
+                    },
+                    onChange: (e) => {
+                      e.currentTarget.value = e.currentTarget.value
+                        .replace(/\D/g, "")
+                        .slice(0, 8);
+                    },
+                    setValueAs: (value) => onlyNumbers(value, 8),
+                  })}
                 />
-                {formErrors.dni && (
-                  <span className={styles.fieldError}>{formErrors.dni}</span>
+
+                {errors.dni && (
+                  <span className={styles.fieldError}>
+                    {errors.dni.message}
+                  </span>
                 )}
                 <span className={styles.hint}>* CAMPO OBLIGATORIO</span>
               </div>
@@ -408,10 +347,13 @@ export function Register() {
                 <label htmlFor="provincia">Provincia:</label>
                 <select
                   id="provincia"
-                  name="provincia"
-                  value={formData.provincia}
-                  onChange={handleChange}
-                  className={formErrors.provincia ? styles.inputError : ""}
+                  className={errors.provincia ? styles.inputError : ""}
+                  {...register("provincia", {
+                    required: "Debe seleccionar una provincia valida.",
+                    validate: (value) =>
+                      Number(value) >= 1 ||
+                      "Debe seleccionar una provincia valida.",
+                  })}
                 >
                   <option value="">Elegí una provincia</option>
                   {provinciasList.map((prov) => (
@@ -420,9 +362,9 @@ export function Register() {
                     </option>
                   ))}
                 </select>
-                {formErrors.provincia && (
+                {errors.provincia && (
                   <span className={styles.fieldError}>
-                    {formErrors.provincia}
+                    {errors.provincia.message}
                   </span>
                 )}
                 <span className={styles.hint}>* CAMPO OBLIGATORIO</span>
@@ -431,17 +373,18 @@ export function Register() {
               <div className={styles.inputGroup}>
                 <label htmlFor="localidad">Localidad:</label>
                 <input
-                  type="text"
                   id="localidad"
-                  name="localidad"
                   placeholder="Balcarce"
-                  value={formData.localidad}
-                  onChange={handleChange}
-                  className={formErrors.localidad ? styles.inputError : ""}
+                  className={errors.localidad ? styles.inputError : ""}
+                  {...register("localidad", {
+                    required: "La localidad (direccion) no puede estar vacia.",
+                    setValueAs: (value) =>
+                      value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ0-9\s]/g, ""),
+                  })}
                 />
-                {formErrors.localidad && (
+                {errors.localidad && (
                   <span className={styles.fieldError}>
-                    {formErrors.localidad}
+                    {errors.localidad.message}
                   </span>
                 )}
                 <span className={styles.hint}>* CAMPO OBLIGATORIO</span>
@@ -450,24 +393,45 @@ export function Register() {
           </div>
         </div>
 
+        <input
+          type="hidden"
+          {...register("perfilInversor", {
+            validate: (value) =>
+              Number(value) >= 1 ||
+              "Debe seleccionar un perfil de inversor valido.",
+          })}
+        />
+
+        {errors.perfilInversor && (
+          <span className={styles.termsError}>
+            {errors.perfilInversor.message}
+          </span>
+        )}
+
         <div className={styles.termsGroup}>
           <input
             type="checkbox"
             id="terminos"
-            name="terminos"
-            checked={formData.terminos}
-            onChange={handleChange}
+            {...register("terminos", {
+              required:
+                "Debes aceptar los Terminos y Condiciones y el Descargo de responsabilidad para continuar.",
+            })}
           />
 
           <label htmlFor="terminos">
             He leído y acepto los{" "}
             <a href="/terminos-y-condiciones" className={styles.link}>
               Términos y Condiciones
+            </a>{" "}
+            y el{" "}
+            <a href="/descargo-de-responsabilidad" className={styles.link}>
+              Descargo de responsabilidad
             </a>
           </label>
         </div>
-        {formErrors.terminos && (
-          <span className={styles.termsError}>{formErrors.terminos}</span>
+
+        {errors.terminos && (
+          <span className={styles.termsError}>{errors.terminos.message}</span>
         )}
 
         {error && <p className={styles.error}>{error}</p>}
@@ -484,9 +448,9 @@ export function Register() {
           <Button
             type="submit"
             className={styles.btnSubmit}
-            disabled={isLoading}
+            disabled={isSubmitting}
           >
-            {isLoading ? "CREANDO..." : "CREAR CUENTA"}
+            {isSubmitting ? "CREANDO..." : "CREAR CUENTA"}
           </Button>
         </div>
       </form>
