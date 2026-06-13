@@ -227,7 +227,7 @@ export function Register() {
 
           <div className={styles.column}>
             <div className={styles.inputGroup}>
-              <label>Numero de telefono:</label>
+              <label>Número de teléfono:</label>
 
               <div className={styles.phoneGroup}>
                 <input

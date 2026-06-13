@@ -119,7 +119,7 @@ export function Login() {
           {isLoading ? "Cargando..." : "Login"}
         </Button>
 
-        <div className={styles.contRegistro}>
+        <div className={styles.contRegistro}> <br />
           <span>¿No tienes cuenta? </span>
           <NavLink to="/register">Registrarse</NavLink>
         </div>
