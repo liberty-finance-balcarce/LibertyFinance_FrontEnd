@@ -121,7 +121,7 @@ export function Login() {
 
         <div className={styles.contRegistro}>
           <span>¿No tienes cuenta? </span>
-          <NavLink to="/register">Crear una</NavLink>
+          <NavLink to="/register">Registrarse</NavLink>
         </div>
       </form>
     </section>
