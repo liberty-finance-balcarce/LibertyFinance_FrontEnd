@@ -1,4 +1,4 @@
-import "../styles/components/LoadingSpinner.css"
+import "../styles/components/LoadingSpinner.css";
 
 interface LoadingSpinnerProps {
   logo: string;

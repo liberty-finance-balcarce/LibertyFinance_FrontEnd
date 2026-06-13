@@ -1,13 +1,10 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
-
 import { PublicRoute } from "./routes/PublicRoute";
 import { UserRoute } from "./routes/UserRoute";
-
 import { Layout } from "./layouts/Layout";
 import { UserLayout } from "./layouts/UserLayout";
-
 import { Register } from "./pages/Register";
 import { Home } from "./components/Home";
 import { NuestroEquipo } from "./pages/NuestroEquipo";
@@ -18,7 +15,6 @@ import { DerechosReservados } from "./pages/DerechosReservados";
 import { FAQ } from "./pages/FAQ";
 import { NotFound } from "./pages/NotFound";
 import { Login } from "./pages/Login";
-
 import { Dashboard } from "./pages/Dashboard";
 import { DashboardCart } from "./pages/DashboardCart";
 import { DashboardInversiones } from "./pages/DashboardInversiones";

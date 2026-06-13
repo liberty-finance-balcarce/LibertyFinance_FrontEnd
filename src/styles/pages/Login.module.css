@@ -45,6 +45,7 @@
 }
 
 .errorLogin {
+margin-top: 3px;
   text-align: center;
   min-height: 20px;
   display: block;
