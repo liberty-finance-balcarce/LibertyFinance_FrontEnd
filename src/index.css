@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap");
 
 :root {
   width: 100%;
@@ -7,10 +7,8 @@
   --colorLetrasBoton: beige;
   --colorBordeVentana: #e6e6fa;
   --colorSombraVentana: #dda0dd;
-
-  --tipoLetraGeneral: 'Bricolage Grotesque', sans-serif;
-  
-  background-color: rgb(243, 243, 243);
+  --colorFondoGeneral: #f8f8ff;
+  --tipoLetraGeneral: "Bricolage Grotesque", sans-serif;
 
   /*espacio para las cards*/
   --spacing-xs: 4px;
@@ -22,17 +20,41 @@
   --radius-sm: 6px;
   --radius-md: 12px;
   --radius-lg: 20px;
+}
 
-  html,
-  body,
-  #root {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    min-height: 100%;
-  }
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  font-family: var(--tipoLetraGeneral);
+  background-color: var(--colorFondoGeneral);
+}
 
-  body {
-    min-height: 100vh;
-  }
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-button:vertical:start {
+  height: 14px;
+  background:
+    linear-gradient(135deg, transparent 50%, var(--colorPrimario) 50%) 2px 4px / 6px 6px no-repeat,
+    linear-gradient(-135deg, transparent 50%, var(--colorPrimario) 50%) 6px 4px / 6px 6px no-repeat,
+    var(--colorBordeVentana);
+}
+
+::-webkit-scrollbar-button:vertical:end {
+  height: 14px;
+  background:
+    linear-gradient(45deg, transparent 50%, var(--colorPrimario) 50%) 2px 4px / 6px 6px no-repeat,
+    linear-gradient(-45deg, transparent 50%, var(--colorPrimario) 50%) 6px 4px / 6px 6px no-repeat,
+    var(--colorBordeVentana);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--colorPrimario);
+  border-radius: 5px;
+  border: 2px solid var(--colorBordeVentana);
 }
