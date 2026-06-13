@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate, NavLink } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { useAuth } from "../hooks/useAuth"; 
+import { useAuth } from "../hooks/useAuth";
 import { Button } from "../components/Button";
 import styles from "../styles/pages/Login.module.css";
 
@@ -12,9 +12,8 @@ interface DatosRecibidos {
 
 export function Login() {
   const navigate = useNavigate();
-  const { login } = useAuth(); 
+  const { login } = useAuth();
 
-  
   const [errorServidor, setErrorServidor] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -119,9 +118,10 @@ export function Login() {
           {isLoading ? "Cargando..." : "Login"}
         </Button>
 
-        <div className={styles.contRegistro}> <br />
-          <span>¿No tienes cuenta? </span>
-          <NavLink to="/register">Registrarse</NavLink>
+        <div className={styles.contRegistro}>
+          <span>
+            ¿No tienes cuenta? <NavLink to="/register">Registrarse</NavLink>
+          </span>
         </div>
       </form>
     </section>
