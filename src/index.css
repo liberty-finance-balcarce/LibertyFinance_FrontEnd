@@ -32,3 +32,29 @@ body,
   font-family: var(--tipoLetraGeneral);
   background-color: var(--colorFondoGeneral);
 }
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-button:vertical:start {
+  height: 14px;
+  background:
+    linear-gradient(135deg, transparent 50%, var(--colorPrimario) 50%) 2px 4px / 6px 6px no-repeat,
+    linear-gradient(-135deg, transparent 50%, var(--colorPrimario) 50%) 6px 4px / 6px 6px no-repeat,
+    var(--colorBordeVentana);
+}
+
+::-webkit-scrollbar-button:vertical:end {
+  height: 14px;
+  background:
+    linear-gradient(45deg, transparent 50%, var(--colorPrimario) 50%) 2px 4px / 6px 6px no-repeat,
+    linear-gradient(-45deg, transparent 50%, var(--colorPrimario) 50%) 6px 4px / 6px 6px no-repeat,
+    var(--colorBordeVentana);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--colorPrimario);
+  border-radius: 5px;
+  border: 2px solid var(--colorBordeVentana);
+}
