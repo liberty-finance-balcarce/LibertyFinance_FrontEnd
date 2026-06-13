@@ -1,5 +1,5 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import { FaShoppingCart, FaChartLine } from "react-icons/fa";
+import { FaShoppingCart, FaChartLine, FaListAlt } from "react-icons/fa";
 import { useAuth } from "../hooks/useAuth";
 import styles from "../styles/components/DashboardSidebar.module.css";
 
@@ -13,6 +13,8 @@ export function DashboardSidebar() {
   };
 
   return (
+
+    
     <aside className={styles.sidebar}>
       <nav className={styles.nav}>
         <NavLink
@@ -38,11 +40,24 @@ export function DashboardSidebar() {
           <FaChartLine size={22} color="var(--colorBordeVentana)" />
           <span>Mis Inversiones</span>
         </NavLink>
-      </nav>
 
+        <NavLink
+          to="/dashboard/test-inversor" 
+          className={({ isActive }) =>
+            isActive
+              ? `${styles.navLink} ${styles.navLinkActive}`
+              : styles.navLink
+          }
+        >
+          <FaListAlt size={22} color="var(--colorBordeVentana)" />
+          <span>Test Perfil de Inversor</span>
+        </NavLink>
+      </nav>
+    
       <button onClick={handleLogout} className={styles.logoutButton}>
         <span>&larr;</span> Cerrar sesión
       </button>
     </aside>
+
   );
 }

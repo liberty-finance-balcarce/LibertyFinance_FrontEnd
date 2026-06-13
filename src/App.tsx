@@ -18,6 +18,8 @@ import { Login } from "./pages/Login";
 import { Dashboard } from "./pages/Dashboard";
 import { DashboardCart } from "./pages/DashboardCart";
 import { DashboardInversiones } from "./pages/DashboardInversiones";
+import { DashboardTestPerfil } from "./pages/DashboardTestPerfil";
+
 
 function App() {
   return (
@@ -29,6 +31,7 @@ function App() {
               <Route path="/dashboard" element={<Dashboard />}>
                 <Route path="cart" element={<DashboardCart />} />
                 <Route path="inversiones" element={<DashboardInversiones />} />
+                <Route path="test-inversor" element={<DashboardTestPerfil />} />
               </Route>
             </Route>
           </Route>
