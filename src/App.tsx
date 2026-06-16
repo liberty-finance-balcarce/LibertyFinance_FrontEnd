@@ -3,8 +3,10 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import { PublicRoute } from "./routes/PublicRoute";
 import { UserRoute } from "./routes/UserRoute";
+import { AdminRoute } from "./routes/AdminRoute";
 import { Layout } from "./layouts/Layout";
 import { UserLayout } from "./layouts/UserLayout";
+import { AdminLayout } from "./layouts/AdminLayout";
 import { Register } from "./pages/Register";
 import { Home } from "./components/Home";
 import { NuestroEquipo } from "./pages/NuestroEquipo";
@@ -19,7 +21,7 @@ import { Dashboard } from "./pages/Dashboard";
 import { DashboardCart } from "./pages/DashboardCart";
 import { DashboardInversiones } from "./pages/DashboardInversiones";
 import { DashboardTestPerfil } from "./pages/DashboardTestPerfil";
-
+import AdminDashboard from "./pages/DashboardAdmin";
 
 function App() {
   return (
@@ -33,6 +35,12 @@ function App() {
                 <Route path="inversiones" element={<DashboardInversiones />} />
                 <Route path="test-inversor" element={<DashboardTestPerfil />} />
               </Route>
+            </Route>
+          </Route>
+
+          <Route element={<AdminRoute />}>
+            <Route element={<AdminLayout />}>
+              <Route path="/admin" element={<AdminDashboard />} />
             </Route>
           </Route>
 
