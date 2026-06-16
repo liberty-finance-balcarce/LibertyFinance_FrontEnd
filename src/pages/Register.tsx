@@ -28,21 +28,32 @@ const onlyText = (value: string) =>
 const onlyNumbers = (value: string, max?: number) =>
   value.replace(/\D/g, "").slice(0, max);
 
+const PERFIL_CONSERVADOR = "1";
+
 const getPerfilInversorFromTest = () => {
-  const savedTest = localStorage.getItem("testInversor");
-  if (!savedTest) return "";
+  const savedProfile = localStorage.getItem("perfilInv");
+  if (!savedProfile) return PERFIL_CONSERVADOR;
 
-  const data = JSON.parse(savedTest);
-  if (!data.finished) return "";
+  try {
+    const data = JSON.parse(savedProfile);
 
-  const score = (data.selections ?? []).reduce(
-    (acc: number, value: number) => acc + (value || 0),
-    0,
-  );
+    if (!data.finished) return PERFIL_CONSERVADOR;
 
-  if (score <= 30) return "1";
-  if (score <= 60) return "2";
-  return "3";
+    const perfil = String(data.perfil ?? "").toUpperCase();
+
+    if (perfil === "MODERADO") return "2";
+    if (perfil === "AGRESIVO" || perfil === "EXPERTO") return "3";
+    if (perfil === "CONSERVADOR") return PERFIL_CONSERVADOR;
+
+    const score = Number(data.total);
+    if (!Number.isFinite(score)) return PERFIL_CONSERVADOR;
+
+    if (score <= 30) return PERFIL_CONSERVADOR;
+    if (score <= 60) return "2";
+    return "3";
+  } catch {
+    return PERFIL_CONSERVADOR;
+  }
 };
 
 export function Register() {
@@ -87,7 +98,7 @@ export function Register() {
         numero_telefono: `${data.codArea}${data.telefono}`,
         direccion: data.localidad,
         id_provincia: Number(data.provincia),
-        id_perfilinv: Number(data.perfilInversor),
+        id_perfilinv: Number(data.perfilInversor || PERFIL_CONSERVADOR),
         id_codigo_referidos: 0,
         fecha_nacimiento: data.fecha_nacimiento,
       });
@@ -395,18 +406,8 @@ export function Register() {
 
         <input
           type="hidden"
-          {...register("perfilInversor", {
-            validate: (value) =>
-              Number(value) >= 1 ||
-              "Debe seleccionar un perfil de inversor valido.",
-          })}
+          {...register("perfilInversor")}
         />
-
-        {errors.perfilInversor && (
-          <span className={styles.termsError}>
-            {errors.perfilInversor.message}
-          </span>
-        )}
 
         <div className={styles.termsGroup}>
           <input
