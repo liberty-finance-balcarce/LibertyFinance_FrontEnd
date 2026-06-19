@@ -15,14 +15,14 @@ export function Login() {
   const { login } = useAuth();
 
   const [errorServidor, setErrorServidor] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<DatosRecibidos>({
     mode: "onTouched",
+
     defaultValues: {
       dni_usuario: "",
       password: "",
@@ -31,7 +31,6 @@ export function Login() {
 
   const enviarForm = async (data: DatosRecibidos) => {
     setErrorServidor(null);
-    setIsLoading(true);
 
     try {
       const dniNumerico = Number(data.dni_usuario);
@@ -49,8 +48,6 @@ export function Login() {
       } else {
         setErrorServidor(err.message || "Ocurrió un error inesperado.");
       }
-    } finally {
-      setIsLoading(false);
     }
   };
 
@@ -113,9 +110,9 @@ export function Login() {
           type="submit"
           variant="login"
           className={styles.botonLogin}
-          disabled={isLoading}
+          disabled={isSubmitting}
         >
-          {isLoading ? "Cargando..." : "Login"}
+          {isSubmitting ? "Cargando..." : "Login"}
         </Button>
 
         <div className={styles.contRegistro}>
