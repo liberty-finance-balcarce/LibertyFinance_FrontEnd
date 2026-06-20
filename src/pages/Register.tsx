@@ -6,6 +6,7 @@ import styles from "../styles/pages/Register.module.css";
 import { useAuth } from "../hooks/useAuth";
 import { useProvincias } from "../hooks/useProvincias";
 import { Button } from "../components/Button";
+import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 
 type FormData = {
   nombre: string;
@@ -185,13 +186,13 @@ export function Register() {
             <div className={styles.inputGroup}>
               <label htmlFor="contraseña">Contraseña:</label>
 
-              <div className={styles.passwordGroup}>
+              <div className={styles.contPassword}>
                 <input
                   type={showPassword ? "text" : "password"}
                   id="contraseña"
                   placeholder="Adminjk12*"
                   maxLength={16}
-                  className={errors.contraseña ? styles.inputError : ""}
+                  className={`${styles.contPassword} ${errors.contraseña ? styles.inputError : ""}`}
                   {...register("contraseña", {
                     required: "La contraseña es obligatoria.",
                     minLength: {
@@ -212,9 +213,10 @@ export function Register() {
                   })}
                 />
 
-                <Button
+                <button
+                
                   type="button"
-                  className={styles.btnPassword}
+                  className={styles.botonEye}
                   onClick={() => setShowPassword((prev) => !prev)}
                   aria-label={
                     showPassword ? "Ocultar contraseña" : "Mostrar contraseña"
@@ -223,8 +225,8 @@ export function Register() {
                     showPassword ? "Ocultar contraseña" : "Mostrar contraseña"
                   }
                 >
-                  {showPassword ? <FaEyeSlash /> : <FaEye />}
-                </Button>
+                  {showPassword ? <IoEyeOffOutline />:<IoEyeOutline />}
+                </button>
               </div>
 
               {errors.contraseña && (
