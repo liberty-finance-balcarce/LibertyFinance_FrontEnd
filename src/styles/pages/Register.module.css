@@ -200,11 +200,16 @@
   cursor: not-allowed;
   opacity: 0.7;
 }
-
+.contPassword {
+  position: relative;
+  width: 100%; 
+  box-sizing: border-box; /* Asegura que el contenedor no se desborde */
+}
 .passwordGroup {
   display: flex;
   gap: var(--spacing-sm);
   align-items: center;
+
 }
 
 .passwordGroup input {
@@ -245,4 +250,34 @@
   .btnSubmit {
     width: 100%;
   }
+}
+
+.botonEye{
+position: absolute;
+  right: 14px; /* Separación desde el borde derecho del input */
+  top: 50%;
+  transform: translateY(-50%); /* Centrado vertical matemático perfecto */
+  font-size: 22px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  color: #666; /* Un color grisáceo sutil para el icono, o el que prefieras */
+  padding: 0;
+  z-index: 2; /* Nos asegura que el botón siempre quede por encima del input */
+}
+
+/*Problema Edge*/
+/* 1. Apaga el ojo nativo de Microsoft Edge / Internet Explorer */
+.contPassword::-ms-reveal {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+/* 2. Por seguridad, apaga también el botón nativo de limpiar texto (la X) que mete Edge */
+.contPassword::-ms-clear {
+  display: none;
+  width: 0;
+  height: 0;
 }
