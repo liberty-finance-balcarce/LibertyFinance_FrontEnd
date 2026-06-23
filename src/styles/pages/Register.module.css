@@ -64,7 +64,9 @@
   border-radius: var(--radius-sm);
   font-size: 1rem;
   color: var(--colorPrimario);
-  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  transition:
+    border-color 0.2s ease-in-out,
+    box-shadow 0.2s ease-in-out;
   font-family: var(--tipoLetraGeneral);
 }
 
@@ -173,7 +175,9 @@
   border-radius: var(--radius-md);
   font-size: 1rem;
   cursor: pointer;
-  transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out,
+  transition:
+    background-color 0.2s ease-in-out,
+    transform 0.2s ease-in-out,
     box-shadow 0.2s ease-in-out;
   display: inline-flex;
   justify-content: center;
@@ -202,14 +206,13 @@
 }
 .contPassword {
   position: relative;
-  width: 100%; 
+  width: 100%;
   box-sizing: border-box; /* Asegura que el contenedor no se desborde */
 }
 .passwordGroup {
   display: flex;
   gap: var(--spacing-sm);
   align-items: center;
-
 }
 
 .passwordGroup input {
@@ -252,8 +255,8 @@
   }
 }
 
-.botonEye{
-position: absolute;
+.botonEye {
+  position: absolute;
   right: 14px; /* Separación desde el borde derecho del input */
   top: 50%;
   transform: translateY(-50%); /* Centrado vertical matemático perfecto */
@@ -262,7 +265,7 @@ position: absolute;
   border: none;
   cursor: pointer;
   display: flex;
-  color: #666; /* Un color grisáceo sutil para el icono, o el que prefieras */
+  color: var(--colorPrimario);
   padding: 0;
   z-index: 2; /* Nos asegura que el botón siempre quede por encima del input */
 }

@@ -16,6 +16,9 @@
 
 .button:hover {
   background-color: var(--colorSecundario);
+  color: var(--colorLetrasBoton);
+  transform: scale(1.12);
+  transition: transform 0.3s ease;
 }
 
 .buttonActive {
@@ -24,21 +27,24 @@
 }
 
 .buttonLogin {
-  display: inline-block;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
   width: 60px;
   height: 60px;
-  font-weight: bold;
   background-color: var(--colorPrimario);
   color: var(--colorLetrasBoton);
   text-decoration: none;
   border-radius: 50%;
   cursor: pointer;
-  text-align: center;
-  line-height: 60px;
+  font-size: 40px;
 }
 
 .buttonLogin:hover {
   background-color: var(--colorSecundario);
+  color: var(--colorLetrasBoton);
+  transform: scale(1.12);
+  transition: transform 0.3s ease;
 }
 
 .buttonLoginActive {
@@ -76,7 +82,9 @@
 
 .buttonTest:hover {
   background-color: var(--colorSecundario);
-  transform: scale(1.1);
+  color: var(--colorLetrasBoton);
+  transform: scale(1.12);
+  transition: transform 0.3s ease;
 }
 
 .buttonTestActive {

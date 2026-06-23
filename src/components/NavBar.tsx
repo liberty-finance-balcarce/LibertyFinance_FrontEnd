@@ -1,6 +1,7 @@
 import { useAuth } from "../hooks/useAuth";
 import { AvatarUsuario } from "./AvatarUsuario";
 import { Button } from "./Button";
+import { BsPersonFill } from "react-icons/bs";
 import styles from "../styles/components/NavBar.module.css";
 
 export function NavBar() {
@@ -16,10 +17,10 @@ export function NavBar() {
 
       <div className={styles.links}>
         <Button to="/" variant="default">
-          Home
+          Inicio
         </Button>
-        <Button to="/nuestro-equipo" variant="default">
-          Nuestro Equipo
+        <Button to="/sobre-nosotros" variant="default">
+          Sobre Nosotros
         </Button>
         <Button to="/contactenos" variant="default">
           Contactenos
@@ -35,7 +36,7 @@ export function NavBar() {
           </div>
         ) : (
           <Button to="/login" variant="login">
-            Login
+            <BsPersonFill />
           </Button>
         )}
       </div>
