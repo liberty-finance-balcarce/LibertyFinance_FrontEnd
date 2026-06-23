@@ -66,7 +66,7 @@
 
 .formGroup input:focus,
 .formGroup textarea:focus {
-  border-color: #8a2be2;
+  border-color: var(--colorPrimario);
 }
 
 .formGroup textarea {
@@ -112,6 +112,8 @@
   font-size: 1.2rem;
   transition: background-color 0.3s ease;
   margin: 10px auto;
+  
+  
 }
 
 .submitButton.buttonLoading {

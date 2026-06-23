@@ -186,12 +186,16 @@
 
 .btnVolver:hover {
   background-color: var(--colorSecundario);
+  color: var(--colorLetrasBoton);
+  transform: scale(1.06);
+  transition: transform 0.3s ease;
 }
 
 .btnSubmit:hover:not(:disabled) {
   background-color: var(--colorSecundario);
-  box-shadow: 0 4px 12px var(--colorSombraVentana);
-  transform: translateY(-1px);
+  color: var(--colorLetrasBoton);
+  transform: scale(1.06);
+  transition: transform 0.3s ease;
 }
 
 .btnSubmit:active:not(:disabled) {
