@@ -1,4 +1,4 @@
-import styles from "../styles/components/AdminUsersCard.module.css"
+import styles from "../styles/components/AdminCardUsers.module.css"
 
 interface UserCardsProps {
   totalRegistrados: number;
