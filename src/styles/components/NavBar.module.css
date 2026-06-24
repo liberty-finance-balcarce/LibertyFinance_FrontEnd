@@ -1,6 +1,6 @@
 .header {
   display: grid;
-  grid-template-areas: 
+  grid-template-areas:
     "logo links login";
   grid-template-columns: 1fr 2fr 1fr;
   align-items: center;
@@ -34,8 +34,15 @@
   align-items: center;
 }
 
-.usuario{
+.usuario {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.titulo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--tipoLetraGeneral);
 }

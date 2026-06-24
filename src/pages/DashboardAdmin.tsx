@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getUsers } from "../services/api";
+import { getUsers } from "../services/usuarios";
 import CardAdmin from "../components/AdminCardUsers";
 import { AdminUserList } from "../components/AdminUsersList";
 import type { Usuario } from "../types/usuarios";

@@ -19,7 +19,7 @@ export default function AdminCardUsers({totalRegistrados, totalUsuarios, totalAd
         <p>Usuarios Registrados</p>
       </div>
 
-      <div className={styles.card}>
+      <div className={styles.cardAdmin}>
         <h2>{totalAdmins}</h2>
         <p>Administradores</p>
       </div>

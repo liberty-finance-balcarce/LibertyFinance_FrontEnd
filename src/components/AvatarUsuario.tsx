@@ -3,7 +3,7 @@ import type { Usuario } from "../types/usuarios";
 
 export function AvatarUsuario({ usuario }: { usuario: Usuario }) {
 
-    const iniciales = `${usuario.nombre[0]}${usuario.apellido[0]}`.toUpperCase();
+    const iniciales =   `${usuario.nombre?.[0] ?? ""}${usuario.apellido?.[0] ?? ""}`.toUpperCase();
 
     if(usuario.imagen) {
         return (
