@@ -7,7 +7,7 @@ import type { Usuario } from "../types/usuarios";
 
 import { ModalEditarUsuario } from "./ModalEditarUsuario";
 import { ModalEliminarUsuario } from "./ModalEliminarUsuario";
-
+ 
 import { AvatarUsuario } from "./AvatarUsuario";
 import styles from "../styles/components/AdminUserList.module.css";
 import type { Provincia } from "../types/provincias";
