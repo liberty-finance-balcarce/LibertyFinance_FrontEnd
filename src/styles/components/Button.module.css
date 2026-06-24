@@ -12,6 +12,7 @@
   border: none;
   border-radius: 0.5rem;
   cursor: pointer;
+  transition: transform 0.3s ease;
 }
 
 .button:hover {
@@ -38,6 +39,7 @@
   border-radius: 50%;
   cursor: pointer;
   font-size: 40px;
+  transition: transform 0.3s ease;
 }
 
 .buttonLogin:hover {
@@ -77,14 +79,14 @@
   border: none;
   background-color: var(--colorPrimario);
   color: var(--colorLetrasBoton);
-  transition: background-color 0.3s ease;
+  transition: transform 0.3s ease; 
 }
 
 .buttonTest:hover {
   background-color: var(--colorSecundario);
   color: var(--colorLetrasBoton);
   transform: scale(1.12);
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease; 
 }
 
 .buttonTestActive {
