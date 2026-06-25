@@ -17,13 +17,7 @@ interface Props {
   onSave: (data: UpdateUsuarioDTO) => void;
 }
 
-export function FormEditarUsuario({
-  usuario,
-  provincias,
-  roles,
-  onClose,
-  onSave,
-}: Props) {
+export function FormEditarUsuario({usuario, provincias, roles, onClose, onSave}: Props) {
   const [formData, setFormData] = useState({
     nombre: "",
     apellido: "",
@@ -154,10 +148,9 @@ export function FormEditarUsuario({
           </select>
 
           <div className={styles.boton}>
+            <Button type="button" onClick={onClose}>Cancelar</Button>
+            
             <Button type="submit">Guardar</Button>
-            <Button type="button" onClick={onClose}>
-              Cancelar
-            </Button>
           </div>
         </form>
       </div>

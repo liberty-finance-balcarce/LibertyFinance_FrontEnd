@@ -1,11 +1,12 @@
 import styles from "../styles/components/ModalEditarUsuario.module.css";
 
 import type { Usuario } from "../types/usuarios";
-
-import type { UpdateUsuarioDTO } from "../types/usuario/updateUsuarioDTO";
-import { FormEditarUsuario } from "../components/FormEditarUsuario";
 import type { Rol } from "../types/rol";
 import type { Provincia } from "../types/provincias";
+
+import type { UpdateUsuarioDTO } from "../types/usuario/updateUsuarioDTO";
+
+import { FormEditarUsuario } from "../components/FormEditarUsuario";
 
 interface Props {
   usuario: Usuario | null;
@@ -15,13 +16,7 @@ interface Props {
   onSave: (data: UpdateUsuarioDTO) => void;
 }
 
-export function ModalEditarUsuario({
-  usuario,
-  provincias,
-  roles,
-  onClose,
-  onSave,
-}: Props) {
+export function ModalEditarUsuario({usuario, provincias, roles, onClose, onSave}: Props) {
   return (
     <div className={styles.container}>
       <div className={styles.modal}>

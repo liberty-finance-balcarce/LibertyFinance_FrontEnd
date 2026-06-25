@@ -24,13 +24,10 @@ export function AdminUserList({ usuarios }: Props) {
   const [usuariosState, setUsuariosState] = useState<Usuario[]>([]);
   const [provinciasState, setProvinciasState] = useState<Provincia[]>([]);
   const [rolesState, setRolesState] = useState<Rol[]>([]);
-  const [usuarioSeleccionado, setUsuarioSeleccionado] =
-    useState<Usuario | null>(null);
+  const [usuarioSeleccionado, setUsuarioSeleccionado] = useState<Usuario | null>(null);
   const [modalEditarAbierto, setModalEditarAbierto] = useState(false);
 
-  const [usuarioAEliminar, setUsuarioAEliminar] = useState<Usuario | null>(
-    null,
-  );
+  const [usuarioAEliminar, setUsuarioAEliminar] = useState<Usuario | null>(null);
   const [modalEliminarAbierto, setModalEliminarAbierto] = useState(false);
 
   useEffect(() => {
@@ -82,7 +79,7 @@ export function AdminUserList({ usuarios }: Props) {
       const nuevosUsuarios = await getUsers();
       setUsuariosState(nuevosUsuarios);
     } catch (error) {
-      alert("Hubo un error al guardar los cambios.");
+      console.error("Ocurrio un error al guardar los cambios", error)
       setModalEditarAbierto(false);
       setUsuarioSeleccionado(null);
     }
@@ -120,7 +117,7 @@ export function AdminUserList({ usuarios }: Props) {
               <AvatarUsuario usuario={user} />
             </div>
             <div className={styles.userInfo}>
-              <h3>{user.nombre}</h3>
+              <h3>{user.nombre} {user.apellido}</h3>
               <p>{user.mail}</p>
             </div>
 

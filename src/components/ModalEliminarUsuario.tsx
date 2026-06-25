@@ -8,12 +8,7 @@ interface Props {
   onClose: () => void;
 }
 
-export function ModalEliminarUsuario({
-  abierto,
-  usuario,
-  onConfirmar,
-  onClose,
-}: Props) {
+export function ModalEliminarUsuario({abierto, usuario, onConfirmar, onClose}: Props) {
   if (!abierto || !usuario) return null;
 
   return (
