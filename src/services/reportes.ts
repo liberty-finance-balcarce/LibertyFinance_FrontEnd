@@ -12,8 +12,9 @@ export async function fetchReporteResumen(token:string|null): Promise<ResumenByI
       "Authorization": `Bearer ${token}` 
     }
   });
+  console.log(res);
   if (!res.ok) {
-    throw new Error(`Error ${res.status}: No se ha podido cargar Resumen.`);
+    throw new Error(`No se ha podido cargar resumen o resumen inexistente.`);
   }
   const respuestaCompleta = await res.json() as ResponseDTO & {data: ResumenByInstrumento[]};
   return respuestaCompleta.data;
