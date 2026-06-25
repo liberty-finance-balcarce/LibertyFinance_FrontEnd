@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
-import { getUsers } from "../services/api";
+import { getInstrumentos, getUsers } from "../services/api";
 import CardAdmin from "../components/AdminCardUsers";
 import { AdminUserList } from "../components/AdminUsersList";
 import type { Usuario } from "../types/usuarios";
 import styles from "../styles/pages/DashboardAdmin.module.css";
+import { AdminListInstFin } from "../components/AdminListInsFin";
+import type { Instrumento } from "../types/instrumento-financiero";
 
 export default function AdminDashboard() {
   const [users, setUsers] = useState<Usuario[]>([]);
+  const [instrumentos, setInstrumentos] = useState<Instrumento[]>([]);
 
   useEffect(() => {
     cargarUsuarios();
@@ -21,6 +24,14 @@ export default function AdminDashboard() {
     console.error(error);
   }
 };
+
+useEffect(() => {
+  const cargarInstrumentos = async () => {
+    const data = await getInstrumentos(); // Tu service
+    setInstrumentos(data); // Guardamos la lista del back
+  };
+  cargarInstrumentos();
+}, []);
   
 const totalUsuarios = users.filter(
   (user) => user.rol?.nombre === "user"
@@ -45,6 +56,9 @@ const totalRegistrados = totalUsuarios + totalAdmins;
       />
       <h2 className={styles.subtitle}>Lista de Usuarios</h2>
       <AdminUserList usuarios={users} />
+
+      <h2 className={styles.subtitle}>Lista de Instrumentos</h2>
+      <AdminListInstFin instrumentos={instrumentos} />
     </div>
   );
 }
