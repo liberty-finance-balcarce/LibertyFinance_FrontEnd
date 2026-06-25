@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;  
+  align-items: center;
   width: 300px;
   height: auto;
   padding: 15px;
@@ -31,12 +31,12 @@
 }
 
 .inputForm {
-  padding: 0px 16px; 
+  padding: 0px 16px;
   height: 52px;
   font-size: 18px;
   border-radius: 7px;
   border: 2px solid var(--colorBordeVentana);
-  width: 100%;        /* <-- CLAVE: obliga a ambos inputs a ocupar todo el ancho del contenedor */
+  width: 100%; /* <-- CLAVE: obliga a ambos inputs a ocupar todo el ancho del contenedor */
   box-sizing: border-box; /* <-- CLAVE: evita que el padding ensanche la caja */
 }
 .inputForm:focus {
@@ -44,15 +44,15 @@
   box-shadow: 0 0 8px 4px var(--colorSombraVentana);
 }
 .inputPasswordSpec {
-  padding-right: 45px; 
+  padding-right: 45px;
 }
 .contPassword {
   position: relative;
-  width: 100%; 
+  width: 100%;
   box-sizing: border-box; /* Asegura que el contenedor no se desborde */
 }
 .errorLogin {
-margin-top: 3px;
+  margin-top: 3px;
   text-align: center;
   min-height: 20px;
   display: block;
@@ -64,24 +64,23 @@ margin-top: 3px;
 .botonLogin {
   display: flex;
   justify-content: center;
-  align-items: center;  
+  align-items: center;
   width: 100%;
   height: 52px;
   background-color: var(--colorPrimario);
   color: var(--colorLetrasBoton);
   border-radius: 4px;
   border: none;
-  transition:
-    0.2s,
-    background-color 0.2s;
+  transition: transform 0.3s ease;
   font-family: var(--tipoLetraGeneral);
   font-size: 16px;
 }
 
 .botonLogin:hover {
-  cursor: pointer;
   background-color: var(--colorSecundario);
-  transform: scale(1.1);
+  color: var(--colorLetrasBoton);
+  transform: scale(1.06);
+  transition: transform 0.3s ease;
 }
 .botonLogin:disabled {
   background-color: #ccc;
@@ -98,27 +97,27 @@ margin-top: 3px;
   justify-content: center;
 }
 
-.botonEye{
-position: absolute;
-  right: 14px; /* Separación desde el borde derecho del input */
+.botonEye {
+  position: absolute;
+  right: 14px;
   top: 50%;
-  transform: translateY(-50%); /* Centrado vertical matemático perfecto */
+  transform: translateY(-50%);
   font-size: 22px;
   background: none;
   border: none;
   cursor: pointer;
   display: flex;
-  color: #666; /* Un color grisáceo sutil para el icono, o el que prefieras */
+  color: var(--colorPrimario);
   padding: 0;
-  z-index: 2; /* Nos asegura que el botón siempre quede por encima del input */
+  z-index: 2;
 }
 
-.errorLogin{
+.errorLogin {
   color: red;
   text-align: center;
-  margin-Bottom: 10px; 
+  margin-bottom: 10px;
+  font-size:smaller;
 }
-
 
 /*Problema Edge*/
 /* 1. Apaga el ojo nativo de Microsoft Edge / Internet Explorer */

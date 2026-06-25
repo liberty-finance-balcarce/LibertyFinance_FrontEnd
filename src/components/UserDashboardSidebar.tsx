@@ -3,13 +3,13 @@ import { FaShoppingCart, FaChartLine, FaListAlt } from "react-icons/fa";
 import { useAuth } from "../hooks/useAuth";
 import styles from "../styles/components/DashboardSidebar.module.css";
 
-export function DashboardSidebar() {
+export function UserDashboardSidebar() {
   const { logout } = useAuth();
   const navigate = useNavigate();
 
   const handleLogout = () => {
     logout();
-    navigate("/login");
+    navigate("/login"); 
   };
 
   return (
