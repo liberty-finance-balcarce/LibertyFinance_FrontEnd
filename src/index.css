@@ -2,55 +2,120 @@
 
 :root {
   width: 100%;
+
+  /* Colores principales */
   --colorPrimario: #4b0082;
   --colorSecundario: #800080;
   --colorLetrasBoton: beige;
+
+  /* Ventanas */
   --colorBordeVentana: #e6e6fa;
   --colorSombraVentana: #dda0dd;
   --colorFondoGeneral: #f8f8ff;
+
+  /* Tipografía */
   --tipoLetraGeneral: "Bricolage Grotesque", sans-serif;
 
-  /*espacio para las cards*/
+  /* Espaciados */
   --spacing-xs: 4px;
   --spacing-sm: 8px;
   --spacing-md: 16px;
   --spacing-lg: 24px;
 
-  /* Bordes de las cards */
+  /* Bordes */
   --radius-sm: 6px;
   --radius-md: 12px;
   --radius-lg: 20px;
+
+  /* Variables generales */
+  --text: #374151;
+  --text-h: #111827;
+  --text-muted: #6b7280;
+
+  --accent: #6366f1;
+  --accent-bg: rgba(99, 102, 241, 0.12);
+  --accent-border: rgba(99, 102, 241, 0.4);
+
+  --social-bg: rgba(255, 255, 255, 0.65);
+
+  --shadow:
+    rgba(0, 0, 0, 0.08) 0 8px 20px,
+    rgba(0, 0, 0, 0.04) 0 2px 6px;
+
+  --completed-bg: rgba(34, 197, 94, 0.15);
+  --completed-text: #16a34a;
+  --completed-border: rgba(34, 197, 94, 0.4);
+
+  --pending-bg: rgba(239, 68, 68, 0.15);
+  --pending-text: #dc2626;
+  --pending-border: rgba(239, 68, 68, 0.4);
 }
+
+/* ===================== */
+/* MODO CLARO */
+/* ===================== */
 
 html.light {
-  --colorBordeVentana: #d6e4e5;
-  --colorFondoGeneral: #e6f0f0;
   --colorPrimario: #3b4a6d;
+  --colorSecundario: #6b5ca5;
+
+  --colorBordeVentana: #d6e4e5;
+  --colorSombraVentana: rgba(59, 74, 109, 0.18);
+
+  --colorFondoGeneral: #e6f0f0;
+
+  --text: #374151;
+  --text-h: #111827;
+  --text-muted: #6b7280;
+
+  --accent: #6366f1;
+  --accent-bg: rgba(99, 102, 241, 0.12);
+  --accent-border: rgba(99, 102, 241, 0.4);
+
+  --social-bg: rgba(255, 255, 255, 0.65);
 }
 
+/* ===================== */
+/* MODO OSCURO */
+/* ===================== */
+
 html.dark {
-  --colorBordeVentana: #4b5b74;
-  --colorFondoGeneral: #192333;
-  --colorPrimario: #eef1f5;
-}:root.dark {
-  --text: #9ca3af;
-  --text-h: #f3f4f6;
-  --text-muted: rgb(71, 69, 69);
-  --bg: #16171d;
-  --border: #2e303a;
+  --colorPrimario: #d8c7ff;
+  --colorSecundario: #b48cff;
+
+  --colorBordeVentana: #2b3447;
+  --colorSombraVentana: rgba(180, 140, 255, 0.2);
+
+  --colorFondoGeneral: #121722;
+}
+
+:root.dark {
+  --text: #c9d1e0;
+  --text-h: #f8fafc;
+  --text-muted: #94a3b8;
+
   --accent: #c084fc;
   --accent-bg: rgba(192, 132, 252, 0.15);
-  --accent-border: rgba(192, 132, 252, 0.5);
-  --social-bg: rgba(47, 48, 58, 0.5);
+  --accent-border: rgba(192, 132, 252, 0.45);
+
+  --social-bg: rgba(43, 52, 71, 0.55);
+
   --shadow:
-    rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+    rgba(0, 0, 0, 0.45) 0 12px 24px,
+    rgba(0, 0, 0, 0.25) 0 4px 8px;
+
   --completed-bg: rgba(34, 197, 94, 0.15);
-  --completed-text: rgb(34, 197, 94);
-  --completed-border: rgba(34, 197, 94, 0.5);
+  --completed-text: #4ade80;
+  --completed-border: rgba(74, 222, 128, 0.45);
+
   --pending-bg: rgba(239, 68, 68, 0.15);
-  --pending-text: rgb(239, 68, 68);
-  --pending-border: rgba(239, 68, 68, 0.5);
+  --pending-text: #f87171;
+  --pending-border: rgba(248, 113, 113, 0.45);
 }
+
+/* ===================== */
+/* BASE */
+/* ===================== */
 
 html,
 body,
@@ -59,9 +124,21 @@ body,
   padding: 0;
   width: 100%;
   height: 100dvh;
+
   font-family: var(--tipoLetraGeneral);
   background-color: var(--colorFondoGeneral);
+  color: var(--text);
+
+  transition:
+    background-color 0.35s ease,
+    color 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
 }
+
+/* ===================== */
+/* SCROLLBAR */
+/* ===================== */
 
 ::-webkit-scrollbar {
   width: 12px;
@@ -72,8 +149,8 @@ body,
   background:
     linear-gradient(135deg, transparent 50%, var(--colorPrimario) 50%) 2px 4px /
       6px 6px no-repeat,
-    linear-gradient(-135deg, transparent 50%, var(--colorPrimario) 50%) 6px
-      4px / 6px 6px no-repeat,
+    linear-gradient(-135deg, transparent 50%, var(--colorPrimario) 50%) 6px 4px /
+      6px 6px no-repeat,
     var(--colorBordeVentana);
 }
 
@@ -91,4 +168,15 @@ body,
   background: var(--colorPrimario);
   border-radius: 5px;
   border: 2px solid var(--colorBordeVentana);
+}
+
+::-webkit-scrollbar-track {
+  background: var(--colorFondoGeneral);
+}
+* {
+  transition:
+    background-color 0.35s ease,
+    color 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
 }

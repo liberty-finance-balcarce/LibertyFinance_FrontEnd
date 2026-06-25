@@ -7,7 +7,7 @@ function getSystemTheme() {
 
 export function useThemeMode() {
 
-    const [theme, setTheme] = useState<'light' | 'dark'>(getSystemTheme());
+    const [theme, setTheme] = useState<ThemeMode>(getSystemTheme());
 
 
     useEffect(() => {

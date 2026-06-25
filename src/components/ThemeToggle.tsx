@@ -1,8 +1,10 @@
-import type { ThemeMode } from '../types/themeMode'
 import styles from '../styles/components/ThemeToggle.module.css'
+import { BsSunFill, BsMoonFill } from "react-icons/bs";
+
+import type { ThemeMode } from '../types/themeMode'
 
 interface Props {
-    theme: 'light' | 'dark'
+    theme: ThemeMode
     onToggle: () => void
 }
 
@@ -10,13 +12,22 @@ export function ThemeToggle({ theme, onToggle }: Props) {
     const isDark = theme === 'dark'
 
     return (
-        <button
-            className={styles.button}
-            onClick={onToggle}
+     <button
+    className={styles.button}
+    onClick={onToggle}
+    aria-label={isDark ? 'Activar modo claro' : 'Activar modo oscuro'}
+>
+    <BsSunFill
+        className={`${styles.icon} ${
+            isDark ? styles.active : styles.inactive
+        }`}
+    />
 
-            aria-label={isDark ? 'Activar modo claro' : 'Activar modo oscuro'}
-        >
-            {isDark ? '☀️ Claro' : '🌙 Oscuro'}
-        </button>
+    <BsMoonFill
+        className={`${styles.icon} ${
+            !isDark ? styles.active : styles.inactive
+        }`}
+    />
+</button>
     )
 }

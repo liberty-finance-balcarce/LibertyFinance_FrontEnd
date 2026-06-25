@@ -8,6 +8,8 @@ import { useThemeMode } from "../hooks/useThemeMode";
 
 export function NavBar() {
   const { user } = useAuth();
+  const { theme, toggleTheme } = useThemeMode()
+
 
   return (
     <nav className={styles.header}>
@@ -31,7 +33,7 @@ export function NavBar() {
 
       <div className={styles.login}>
       <div className={styles.themeToggle}>
-        <ThemeToggle theme={useThemeMode().theme} onToggle={useThemeMode().toggleTheme} />
+        <ThemeToggle theme={theme} onToggle={toggleTheme} />
       </div>
         {user ? (
           <div className={styles.usuario}>
