@@ -13,8 +13,8 @@ export function AdminNavBar() {
         </Button>
       </div>
 
-      <div>
-        <h1>Bienvenido, {user?.nombre}</h1>
+      <div className={styles.titulo}>
+        <h1>Bienvenido, {user?.nombre} {user?.apellido}</h1>
       </div>
 
     </nav>

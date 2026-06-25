@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import { getRankingInstrumentos } from "../services/api";
+import { getRankingInstrumentos } from "../services/instrumentos-financieros";
 import type { RankingData } from "../types/instrumento-financiero";
 
-export const useRankingInstrumentos = () => {
+export function useInstrumentosFinancieros() {
   const [data, setData] = useState<RankingData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -15,7 +15,10 @@ export const useRankingInstrumentos = () => {
       setError(null);
 
       try {
-        const ranking = await getRankingInstrumentos({ orderby: 'rendimiento:DESC', limit: 8 });
+        const ranking = await getRankingInstrumentos({
+          orderby: "rendimiento:DESC",
+          limit: 8,
+        });
         if (!cancelled) setData(ranking);
       } catch (err: any) {
         if (!cancelled) {
@@ -28,8 +31,10 @@ export const useRankingInstrumentos = () => {
     };
 
     loadRanking();
-    return () => { cancelled = true; };
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   return { data, isLoading, error };
-};
+}
