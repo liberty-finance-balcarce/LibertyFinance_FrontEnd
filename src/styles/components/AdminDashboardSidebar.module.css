@@ -11,6 +11,19 @@
   margin-bottom: 2vw;
 }
 
+.container {
+  width: 100%;
+}
+
+.layout {
+  display: flex;
+  min-height: 100%;
+}
+
+.mainContent {
+  flex: 1;
+  padding: 20px;
+}
 .nav {
   display: flex;
   flex-direction: column;

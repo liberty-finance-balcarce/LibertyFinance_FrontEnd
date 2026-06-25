@@ -5,24 +5,35 @@ export function NuestroEquipo() {
   return (
     <div className={styles.container}>
       <h1 className={styles.h1}>
-        Nuestro equipo: Funcion de tecnologia, educacion y respaldo regulatorio
+        Liberty Finance: Tu Camino a la Libertad Financiera
       </h1>
-      <h3 className={styles.h3}>
-        Somos un equipo de desarrolladores e ideólogos apasionados por la
-        rentabilidad, complementados por un experto autorizado por la CVN.
-        Nuestra misión es democratizar la inversión con seguridad y legalidad.
-      </h3>
 
-      <h2 className={styles.h2}>Nuestros pilares</h2>
-      <h4 className={styles.h4}>
-        -Transparencia total: Tarifas y riesgos claros.
-      </h4>
-      <h4 className={styles.h4}>
-        -Innovación: La mejor tecnología, bajo estrícto cumplimiento normativo.
-      </h4>
-      <h4 className={styles.h4}>
-        -Educacion continua: Herramientas para el crecimiento del inversor.
-      </h4>
+      <p className={styles.h3}>
+        Una plataforma diseñada para transformar ahorros en inversiones
+        rentables, respondiendo a la pregunta clave: ¿Qué puedo hacer con mis
+        ahorros?
+      </p>
+
+      <h2 className={styles.h2}>¿Qué soluciona Liberty Finance?</h2>
+
+      <ul className={styles.listaSoluciones}>
+        <li>
+          <strong>Centralización:</strong> Integra instrumentos financieros para
+          que encuentres todo en una misma plataforma, sin tener que recorrer
+          diferentes sitios web.
+        </li>
+        <li>
+          <strong>Variedad de Activos:</strong> Ofrece un listado ordenado por
+          rentabilidad y riesgo con opciones tradicionales (Plazos fijos, Bonos,
+          Acciones) y no tradicionales (Criptomonedas, Finanzas
+          Descentralizadas, DCA).
+        </li>
+        <li>
+          <strong>Personalización:</strong> Permite invertir tus ahorros de la
+          manera que más se ajuste a vos, dependiendo del resultado de tu Test
+          de Perfil de Inversor.
+        </li>
+      </ul>
 
       <CardPersona />
     </div>

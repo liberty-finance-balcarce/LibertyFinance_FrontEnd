@@ -9,7 +9,7 @@ export function AdminNavBar() {
     <nav className={styles.header}>
       <div className={styles.logo}>
         <Button to="/" variant="logo">
-          <img src="../assets/logo-complete.png" alt="Logo Liberty Finance" />
+          <img src="/assets/logo-complete.png" alt="Logo Liberty Finance" />
         </Button>
       </div>
 
