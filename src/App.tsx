@@ -18,7 +18,7 @@ import { FAQ } from "./pages/FAQ";
 import { NotFound } from "./pages/NotFound";
 import { Login } from "./pages/Login";
 import { UserDashboard } from "./pages/UserDashboard";
-import { DashboardCart } from "./pages/DashboardCart";
+import { UserDashboardCart } from "./pages/UserDashboardCart";
 import { DashboardInversiones } from "./pages/DashboardInversiones";
 import { DashboardTestPerfil } from "./pages/DashboardTestPerfil";
 import AdminDashboard from "./pages/AdminDashboard";
@@ -32,7 +32,7 @@ function App() {
           <Route element={<UserRoute />}>
             <Route element={<UserLayout />}>
               <Route path="/dashboard/user" element={<UserDashboard />}>
-                <Route path="cart" element={<DashboardCart />} />
+                <Route path="carrito" element={<UserDashboardCart />} />
                 <Route path="inversiones" element={<DashboardInversiones />} />
                 <Route path="test-inversor" element={<DashboardTestPerfil />} />
               </Route>

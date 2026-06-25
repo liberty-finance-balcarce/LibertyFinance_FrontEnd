@@ -3,7 +3,7 @@ import { useAuth } from "../hooks/useAuth";
 import { BsPersonFill } from "react-icons/bs";
 import { FaMoneyBillTrendUp } from "react-icons/fa6";
 import { LuClipboardList } from "react-icons/lu";
-import styles from "../styles/components/DashboardSidebar.module.css";
+import styles from "../styles/components/AdminDashboardSidebar.module.css";
 
 export function AdminDashboardSidebar() {
   const { logout } = useAuth();
