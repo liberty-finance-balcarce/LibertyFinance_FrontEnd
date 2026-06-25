@@ -21,8 +21,8 @@ import { UserDashboard } from "./pages/UserDashboard";
 import { DashboardCart } from "./pages/DashboardCart";
 import { DashboardInversiones } from "./pages/DashboardInversiones";
 import { DashboardTestPerfil } from "./pages/DashboardTestPerfil";
-import AdminDashboard from "./pages/DashboardAdmin";
-import AdminCardUsers from "./components/AdminCardUsers";
+import AdminDashboard from "./pages/AdminDashboard";
+import {AdminUsersCard} from "./components/AdminUsersCard";
 
 function App() {
   return (
@@ -42,7 +42,16 @@ function App() {
           <Route element={<AdminRoute />}>
             <Route element={<AdminLayout />}>
               <Route path="/dashboard/admin" element={<AdminDashboard />}>
-                <Route path="users" element={<AdminCardUsers totalRegistrados={0} totalUsuarios={0} totalAdmins={0} />} />
+                <Route
+                  path="users"
+                  element={
+                    <AdminUsersCard
+                      totalRegistrados={0}
+                      totalUsuarios={0}
+                      totalAdmins={0}
+                    />
+                  }
+                />
               </Route>
             </Route>
           </Route>

@@ -51,15 +51,3 @@ export async function getRankingInstrumentos(
 
   return { tradicionales, noTradicionales };
 }
-
-export async function getUsers() {
-  const response = await fetch(`${BASE_API}/usuarios`);
-
-  if (!response.ok) {
-    throw new Error("Error al obtener usuarios");
-  }
-
-  const result = await response.json();
-
-  return result.data;
-}
