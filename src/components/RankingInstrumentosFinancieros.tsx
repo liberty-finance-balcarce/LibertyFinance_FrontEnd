@@ -58,7 +58,7 @@ export function RankingInstrumentosFinancieros() {
                   <span className={styles.itemRisk}>{item.riesgo}</span>
                   <span className={styles.priceCell}>
                     <span className={styles.itemPrice}>
-                      ${item.precio_instrumento} USD
+                      US${item.precio_instrumento}
                     </span>
                   </span>{" "}
                 </li>
@@ -86,7 +86,7 @@ export function RankingInstrumentosFinancieros() {
                   <span className={styles.itemRisk}>{item.riesgo}</span>
                   <span className={styles.priceCell}>
                     <span className={styles.itemPrice}>
-                      ${item.precio_instrumento} USD
+                      US${item.precio_instrumento}
                     </span>
                   </span>{" "}
                 </li>
