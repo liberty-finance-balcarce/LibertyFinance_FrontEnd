@@ -22,6 +22,36 @@
   --radius-lg: 20px;
 }
 
+html.light {
+  --colorBordeVentana: #d6e4e5;
+  --colorFondoGeneral: #e6f0f0;
+  --colorPrimario: #3b4a6d;
+}
+
+html.dark {
+  --colorBordeVentana: #4b5b74;
+  --colorFondoGeneral: #192333;
+  --colorPrimario: #eef1f5;
+}:root.dark {
+  --text: #9ca3af;
+  --text-h: #f3f4f6;
+  --text-muted: rgb(71, 69, 69);
+  --bg: #16171d;
+  --border: #2e303a;
+  --accent: #c084fc;
+  --accent-bg: rgba(192, 132, 252, 0.15);
+  --accent-border: rgba(192, 132, 252, 0.5);
+  --social-bg: rgba(47, 48, 58, 0.5);
+  --shadow:
+    rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+  --completed-bg: rgba(34, 197, 94, 0.15);
+  --completed-text: rgb(34, 197, 94);
+  --completed-border: rgba(34, 197, 94, 0.5);
+  --pending-bg: rgba(239, 68, 68, 0.15);
+  --pending-text: rgb(239, 68, 68);
+  --pending-border: rgba(239, 68, 68, 0.5);
+}
+
 html,
 body,
 #root {

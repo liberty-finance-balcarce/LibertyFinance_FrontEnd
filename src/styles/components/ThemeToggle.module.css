@@ -1,0 +1,15 @@
+.button {
+    padding: 0.4rem 0.8rem;
+    border-radius: 7px;
+    border: 1px solid var(--accent-border);
+    background-color: var(--accent-bg);
+    color: var(--text);
+    margin-right: 50px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+
+    &:hover {
+        background-color: var(--accent-border);
+    }
+}

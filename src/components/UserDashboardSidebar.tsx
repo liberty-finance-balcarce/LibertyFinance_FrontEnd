@@ -18,7 +18,7 @@ export function UserDashboardSidebar() {
     <aside className={styles.sidebar}>
       <nav className={styles.nav}>
         <NavLink
-          to="/dashboard/cart"
+          to="/dashboard/user/cart"
           className={({ isActive }) =>
             isActive
               ? `${styles.navLink} ${styles.navLinkActive}`
@@ -30,7 +30,7 @@ export function UserDashboardSidebar() {
         </NavLink>
 
         <NavLink
-          to="/dashboard/inversiones"
+          to="/dashboard/user/inversiones"
           className={({ isActive }) =>
             isActive
               ? `${styles.navLink} ${styles.navLinkActive}`
@@ -42,7 +42,7 @@ export function UserDashboardSidebar() {
         </NavLink>
 
         <NavLink
-          to="/dashboard/test-inversor" 
+          to="/dashboard/user/test-inversor" 
           className={({ isActive }) =>
             isActive
               ? `${styles.navLink} ${styles.navLinkActive}`

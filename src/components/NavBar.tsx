@@ -3,6 +3,8 @@ import { AvatarUsuario } from "./AvatarUsuario";
 import { Button } from "./Button";
 import { BsPersonFill } from "react-icons/bs";
 import styles from "../styles/components/NavBar.module.css";
+import { ThemeToggle } from "./ThemeToggle";
+import { useThemeMode } from "../hooks/useThemeMode";
 
 export function NavBar() {
   const { user } = useAuth();
@@ -28,6 +30,9 @@ export function NavBar() {
       </div>
 
       <div className={styles.login}>
+      <div className={styles.themeToggle}>
+        <ThemeToggle theme={useThemeMode().theme} onToggle={useThemeMode().toggleTheme} />
+      </div>
         {user ? (
           <div className={styles.usuario}>
             <Button to="/dashboard" variant="login">

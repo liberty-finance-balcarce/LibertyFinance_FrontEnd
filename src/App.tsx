@@ -23,6 +23,8 @@ import { DashboardInversiones } from "./pages/DashboardInversiones";
 import { DashboardTestPerfil } from "./pages/DashboardTestPerfil";
 import AdminDashboard from "./pages/DashboardAdmin";
 import AdminCardUsers from "./components/AdminCardUsers";
+import { AdminDashboardInstrumentos } from "./components/AdminDashboardInstrumentos";
+import { AdminDashboardPaquetes } from "./components/AdminDashboardPaquetes";
 
 function App() {
   return (
@@ -43,6 +45,8 @@ function App() {
             <Route element={<AdminLayout />}>
               <Route path="/dashboard/admin" element={<AdminDashboard />}>
                 <Route path="users" element={<AdminCardUsers totalRegistrados={0} totalUsuarios={0} totalAdmins={0} />} />
+                <Route path="instrumentos-financieros" element={<AdminDashboardInstrumentos />} />
+                <Route path="paquetes-inversion" element={<AdminDashboardPaquetes />} />
               </Route>
             </Route>
           </Route>
