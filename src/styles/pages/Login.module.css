@@ -1,5 +1,4 @@
 .containerLogin {
-  color: var(--colorPrimario);
   font-family: var(--tipoLetraGeneral);
   display: flex;
   flex-direction: column;
@@ -107,7 +106,7 @@
   border: none;
   cursor: pointer;
   display: flex;
-  color: var(--colorPrimario);
+  color: var(--colorLetraGeneral);
   padding: 0;
   z-index: 2;
 }
@@ -116,7 +115,7 @@
   color: red;
   text-align: center;
   margin-bottom: 10px;
-  font-size:smaller;
+  font-size: smaller;
 }
 
 /*Problema Edge*/

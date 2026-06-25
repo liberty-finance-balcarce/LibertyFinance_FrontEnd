@@ -2,13 +2,13 @@
 
 :root {
   width: 100%;
-
   --colorPrimario: #4b0082;
   --colorSecundario: #800080;
   --colorLetrasBoton: beige;
   --colorBordeVentana: #e6e6fa;
   --colorSombraVentana: #dda0dd;
   --colorFondoGeneral: #f8f8ff;
+  --colorLetraGeneral: #4b0082;
   --tipoLetraGeneral: "Bricolage Grotesque", sans-serif;
 
   /*espacio para las cards*/
@@ -25,13 +25,13 @@
 
 /* Estilos para modo oscuro */
 :root.dark {
-  color: #d16fff;
   --colorPrimario: #4b0082;
   --colorSecundario: #800080;
   --colorLetrasBoton: #f0f0f0;
   --colorBordeVentana: #3a3a3a;
   --colorSombraVentana: #dda0dd;
   --colorFondoGeneral: #09030d;
+  --colorLetraGeneral: #d16fff;
 }
 
 html,
@@ -42,6 +42,7 @@ body,
   width: 100%;
   height: 100dvh;
   font-family: var(--tipoLetraGeneral);
+  color: var(--colorLetraGeneral);
   background-color: var(--colorFondoGeneral);
   transition:
     background-color 0.35s ease,

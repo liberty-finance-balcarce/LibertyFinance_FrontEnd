@@ -23,16 +23,22 @@
 }
 
 .active {
-  color: var(--accent);
   opacity: 1;
   transform: scale(1);
   animation: popIn 0.45s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .inactive {
-  color: var(--colorPrimario);
   opacity: 0;
   transform: scale(0.3);
+}
+
+.lightMode .icon {
+  color: var(--colorPrimario);
+}
+
+.darkMode .icon {
+  color: var(--colorSombraVentana);
 }
 
 @keyframes popIn {
