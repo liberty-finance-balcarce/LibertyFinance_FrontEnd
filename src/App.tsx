@@ -19,8 +19,8 @@ import { NotFound } from "./pages/NotFound";
 import { Login } from "./pages/Login";
 import { UserDashboard } from "./pages/UserDashboard";
 import { UserDashboardCart } from "./pages/UserDashboardCart";
-import { DashboardInversiones } from "./pages/DashboardInversiones";
-import { DashboardTestPerfil } from "./pages/DashboardTestPerfil";
+import { DashboardInversiones } from "./pages/UserDashboardInversiones";
+import { UserDashboardTestPerfil } from "./pages/UserDashboardTestPerfil";
 import AdminDashboard from "./pages/AdminDashboard";
 import {AdminUsersCard} from "./components/AdminUsersCard";
 
@@ -34,7 +34,7 @@ function App() {
               <Route path="/dashboard/user" element={<UserDashboard />}>
                 <Route path="carrito" element={<UserDashboardCart />} />
                 <Route path="inversiones" element={<DashboardInversiones />} />
-                <Route path="test-inversor" element={<DashboardTestPerfil />} />
+                <Route path="test-inversor" element={<UserDashboardTestPerfil />} />
               </Route>
             </Route>
           </Route>
