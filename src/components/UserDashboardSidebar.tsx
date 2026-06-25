@@ -1,7 +1,7 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { FaShoppingCart, FaChartLine, FaListAlt } from "react-icons/fa";
 import { useAuth } from "../hooks/useAuth";
-import styles from "../styles/components/DashboardSidebar.module.css";
+import styles from "../styles/components/UserDashboardSidebar.module.css";
 
 export function UserDashboardSidebar() {
   const { logout } = useAuth();
@@ -18,7 +18,7 @@ export function UserDashboardSidebar() {
     <aside className={styles.sidebar}>
       <nav className={styles.nav}>
         <NavLink
-          to="/dashboard/cart"
+          to="/dashboard/user/carrito"
           className={({ isActive }) =>
             isActive
               ? `${styles.navLink} ${styles.navLinkActive}`
@@ -30,7 +30,7 @@ export function UserDashboardSidebar() {
         </NavLink>
 
         <NavLink
-          to="/dashboard/inversiones"
+          to="/dashboard/user/inversiones"
           className={({ isActive }) =>
             isActive
               ? `${styles.navLink} ${styles.navLinkActive}`
@@ -42,7 +42,7 @@ export function UserDashboardSidebar() {
         </NavLink>
 
         <NavLink
-          to="/dashboard/test-inversor" 
+          to="/dashboard/user/test-inversor" 
           className={({ isActive }) =>
             isActive
               ? `${styles.navLink} ${styles.navLinkActive}`

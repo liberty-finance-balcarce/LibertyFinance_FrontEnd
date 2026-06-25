@@ -5,13 +5,13 @@ import { BsPersonFill } from "react-icons/bs";
 import styles from "../styles/components/NavBar.module.css";
 
 export function NavBar() {
-  const { user } = useAuth();
+  const { role, user } = useAuth();
 
   return (
     <nav className={styles.header}>
       <div className={styles.logo}>
         <Button to="/" variant="logo">
-          <img src="../assets/logo-complete.png" alt="Logo Liberty Finance" />
+          <img src="/assets/logo-complete.png" alt="Logo Liberty Finance" />
         </Button>
       </div>
 
@@ -28,9 +28,15 @@ export function NavBar() {
       </div>
 
       <div className={styles.login}>
-        {user ? (
+        {role === "user" ? (
           <div className={styles.usuario}>
-            <Button to="/dashboard" variant="login">
+            <Button to="/dashboard/user" variant="login">
+              <AvatarUsuario usuario={user} />
+            </Button>
+          </div>
+        ) : role === "admin" ? (
+          <div className={styles.usuario}>
+            <Button to="/dashboard/admin" variant="login">
               <AvatarUsuario usuario={user} />
             </Button>
           </div>

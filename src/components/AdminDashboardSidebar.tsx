@@ -1,9 +1,9 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import { FaChartLine, FaListAlt } from "react-icons/fa";
 import { useAuth } from "../hooks/useAuth";
-import styles from "../styles/components/DashboardSidebar.module.css";
 import { BsPersonFill } from "react-icons/bs";
-
+import { FaMoneyBillTrendUp } from "react-icons/fa6";
+import { LuClipboardList } from "react-icons/lu";
+import styles from "../styles/components/AdminDashboardSidebar.module.css";
 
 export function AdminDashboardSidebar() {
   const { logout } = useAuth();
@@ -11,16 +11,14 @@ export function AdminDashboardSidebar() {
 
   const handleLogout = () => {
     logout();
-    navigate("/login"); 
+    navigate("/login");
   };
 
   return (
-
-    
     <aside className={styles.sidebar}>
       <nav className={styles.nav}>
         <NavLink
-          to="/dashboard/users"
+          to="/dashboard/admin/users"
           className={({ isActive }) =>
             isActive
               ? `${styles.navLink} ${styles.navLinkActive}`
@@ -32,34 +30,33 @@ export function AdminDashboardSidebar() {
         </NavLink>
 
         <NavLink
-          to="/dashboard/inversiones"
+          to="/dashboard/admin/instrumentos-financieros"
           className={({ isActive }) =>
             isActive
               ? `${styles.navLink} ${styles.navLinkActive}`
               : styles.navLink
           }
         >
-          <FaChartLine size={22} color="var(--colorBordeVentana)" />
-          <span>Mis Inversiones</span>
+          <LuClipboardList size={22} color="var(--colorBordeVentana)" />
+          <span>Instrumentos Financieros</span>
         </NavLink>
 
         <NavLink
-          to="/dashboard/test-inversor" 
+          to="/dashboard/admin/paquetes-inversion"
           className={({ isActive }) =>
             isActive
               ? `${styles.navLink} ${styles.navLinkActive}`
               : styles.navLink
           }
         >
-          <FaListAlt size={22} color="var(--colorBordeVentana)" />
-          <span>Test Perfil de Inversor</span>
+          <FaMoneyBillTrendUp size={22} color="var(--colorBordeVentana)" />
+          <span>Paquetes de Inversión</span>
         </NavLink>
       </nav>
-    
+
       <button onClick={handleLogout} className={styles.logoutButton}>
         <span>&larr;</span> Cerrar sesión
       </button>
     </aside>
-
   );
 }
