@@ -8,7 +8,7 @@ export function CardPersona() {
         <div className={styles.card}>
           <img
             className={styles.img}
-            src="../assets/foto1_convertida.png"
+            src="/assets/foto1_convertida.png"
             alt="foto mati"
           />
           <p className={styles.nombre}>Matias Mendez</p>
@@ -18,7 +18,7 @@ export function CardPersona() {
         <div className={styles.card}>
           <img
             className={styles.img}
-            src="../assets/foto2.png"
+            src="/assets/foto2.png"
             alt="foto Mile"
           />
           <p className={styles.nombre}>Milena Martinez</p>
@@ -28,7 +28,7 @@ export function CardPersona() {
         <div className={styles.card}>
           <img
             className={styles.img}
-            src="../assets/foto_3.png"
+            src="/assets/foto_3.png"
             alt="foto Tizi"
           />
           <p className={styles.nombre}>Tiziano Luzi Ramos</p>
@@ -38,7 +38,7 @@ export function CardPersona() {
         <div className={styles.card}>
           <img
             className={styles.img}
-            src="../assets/foto_4.png"
+            src="/assets/foto_4.png"
             alt="foto Cris"
           />
           <p className={styles.nombre}>Cristian Falcone</p>
