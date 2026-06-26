@@ -8,7 +8,7 @@
   min-height: 400px;
   font-family: var(--tipoLetraGeneral);
   color: var(--colorLetrasBoton);
-  margin-bottom: 2vw;
+  border-radius: var(--radius-lg) 0 0 var(--radius-lg);
 }
 
 .nav {

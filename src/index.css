@@ -9,6 +9,7 @@
   --colorSombraVentana: #dda0dd;
   --colorFondoGeneral: #f8f8ff;
   --colorLetraGeneral: #4b0082;
+  --colorFooter: var(--colorSombraVentana);
   --tipoLetraGeneral: "Bricolage Grotesque", sans-serif;
 
   /*espacio para las cards*/
@@ -32,6 +33,8 @@
   --colorSombraVentana: #dda0dd;
   --colorFondoGeneral: #09030d;
   --colorLetraGeneral: #d16fff;
+  --colorFooter: var(--colorLetraGeneral);
+  --tipoLetraGeneral: "Bricolage Grotesque", sans-serif;
 }
 
 html,

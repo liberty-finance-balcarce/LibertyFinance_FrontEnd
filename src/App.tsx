@@ -22,7 +22,7 @@ import { UserDashboardCart } from "./pages/UserDashboardCart";
 import { DashboardInversiones } from "./pages/DashboardInversiones";
 import { DashboardTestPerfil } from "./pages/DashboardTestPerfil";
 import AdminDashboard from "./pages/AdminDashboard";
-import {AdminUsersCard} from "./components/AdminUsersCard";
+import { AdminUsersCard } from "./components/AdminUsersCard";
 
 function App() {
   return (

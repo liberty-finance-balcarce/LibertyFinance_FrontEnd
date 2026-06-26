@@ -2,14 +2,13 @@ import { useAuth } from "../hooks/useAuth";
 import { AvatarUsuario } from "./AvatarUsuario";
 import { Button } from "./Button";
 import { BsPersonFill } from "react-icons/bs";
-import styles from "../styles/components/NavBar.module.css";
 import { ThemeToggle } from "./ThemeToggle";
 import { useThemeMode } from "../hooks/useThemeMode";
+import styles from "../styles/components/NavBar.module.css";
 
 export function NavBar() {
   const { user } = useAuth();
-  const { theme, toggleTheme } = useThemeMode()
-
+  const { theme, toggleTheme } = useThemeMode();
 
   return (
     <nav className={styles.header}>
@@ -32,9 +31,9 @@ export function NavBar() {
       </div>
 
       <div className={styles.login}>
-      <div className={styles.themeToggle}>
-        <ThemeToggle theme={theme} onToggle={toggleTheme} />
-      </div>
+        <div className={styles.themeToggle}>
+          <ThemeToggle theme={theme} onToggle={toggleTheme} />
+        </div>
         {user ? (
           <div className={styles.usuario}>
             <Button to="/dashboard/admin" variant="login">
