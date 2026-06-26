@@ -23,6 +23,7 @@ import { DashboardInversiones } from "./pages/DashboardInversiones";
 import { DashboardTestPerfil } from "./pages/DashboardTestPerfil";
 import AdminDashboard from "./pages/AdminDashboard";
 import { AdminUsersCard } from "./components/AdminUsersCard";
+import ForgotPassword from "./pages/ForgotPassword";
 
 function App() {
   return (
@@ -60,6 +61,7 @@ function App() {
             <Route element={<Layout />}>
               <Route path="/" element={<Home />} />
               <Route path="/register" element={<Register />} />
+              <Route path="/forgot-password" element={<ForgotPassword />} />
               <Route path="/sobre-nosotros" element={<NuestroEquipo />} />
               <Route path="/contactenos" element={<Contactenos />} />
               <Route path="/login" element={<Login />} />

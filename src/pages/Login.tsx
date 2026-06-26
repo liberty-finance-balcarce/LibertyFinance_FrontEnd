@@ -16,7 +16,7 @@ export function Login() {
   const { login } = useAuth();
 
   const [errorServidor, setErrorServidor] = useState<string | null>(null);
-  const [isVisible, setIsVisible]=useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   const {
     register,
@@ -31,9 +31,9 @@ export function Login() {
     },
   });
 
-  const visibleOnOff = ()=>{
-    setIsVisible((prev)=>!prev);
-  }
+  const visibleOnOff = () => {
+    setIsVisible((prev) => !prev);
+  };
 
   const enviarForm = async (data: DatosRecibidos) => {
     setErrorServidor(null);
@@ -74,13 +74,14 @@ export function Login() {
           maxLength={8}
           autoComplete="off"
           type="text"
+          inputMode="numeric"
           {...register("dni_usuario", {
             required: "Debe ingresar DNI.",
             pattern: { value: /^[0-9]+$/, message: "Solo se permiten números" },
             minLength: { value: 7, message: "Deben ser mínimo 7 números" },
             maxLength: { value: 8, message: "Deben ser máximo 8 números" },
           })}
-          placeholder="Ingresa tu DNI"
+          placeholder="Ingresá tu DNI"
         />
         <span className={styles.errorLogin}>
           {errors.dni_usuario?.message || ""}
@@ -90,32 +91,30 @@ export function Login() {
           Contraseña
         </label>
         <div className={styles.contPassword}>
-         <input
-           className={styles.inputForm}
-           id="password"
-           maxLength={16}
-           autoComplete="off"
-           type={isVisible? "text" : "password"}
-           {...register("password", {
-             required: "Debe ingresar contraseña.",
-           })}
-           placeholder="********"
-         />
-         <button type="button" onClick={visibleOnOff} className={styles.botonEye}>
-          {isVisible?<IoEyeOffOutline/>:<IoEyeOutline/>}
-         </button>
+          <input
+            className={styles.inputForm}
+            id="password"
+            maxLength={16}
+            autoComplete="off"
+            type={isVisible ? "text" : "password"}
+            {...register("password", {
+              required: "Debe ingresar contraseña.",
+            })}
+            placeholder="********"
+          />
+          <button
+            type="button"
+            onClick={visibleOnOff}
+            className={styles.botonEye}
+          >
+            {isVisible ? <IoEyeOffOutline /> : <IoEyeOutline />}
+          </button>
         </div>
         <span className={styles.errorLogin}>
           {errors.password?.message || ""}
         </span>
 
-        {errorServidor && (
-          <p
-            className={styles.errorLogin}
-          >
-            {errorServidor}
-          </p>
-        )}
+        {errorServidor && <p className={styles.errorLogin}>{errorServidor}</p>}
 
         <Button
           type="submit"
@@ -130,6 +129,10 @@ export function Login() {
           <span>
             ¿No tienes cuenta? <NavLink to="/register">Registrarse</NavLink>
           </span>
+        </div>
+
+        <div className={styles.contOlvidar}>
+          <NavLink to="/forgot-password">Olvidé mi contraseña</NavLink>
         </div>
       </form>
     </section>

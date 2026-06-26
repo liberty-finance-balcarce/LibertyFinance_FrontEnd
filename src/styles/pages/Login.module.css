@@ -26,10 +26,12 @@
   margin-top: 10px;
   font-size: 14px;
   margin-right: auto;
+  margin-left: 5px;
   padding: 0px 0px 8px;
 }
 
 .inputForm {
+  
   padding: 0px 16px;
   height: 52px;
   font-size: 18px;
@@ -59,12 +61,13 @@
 }
 .errorLogin {
   margin-top: 3px;
+  margin-bottom: 10px;
   text-align: center;
   min-height: 20px;
   display: block;
-  font-size: 10px;
   color: red;
   font-family: var(--tipoLetraGeneral);
+  font-size: smaller;
 }
 
 .botonLogin {
@@ -103,6 +106,12 @@
   justify-content: center;
 }
 
+.contOlvidar {
+  display: flex;
+  font-size: 16px;
+  justify-content: center;
+}
+
 .botonEye {
   position: absolute;
   right: 14px;
@@ -118,12 +127,6 @@
   z-index: 2;
 }
 
-.errorLogin {
-  color: red;
-  text-align: center;
-  margin-bottom: 10px;
-  font-size: smaller;
-}
 
 /*Problema Edge*/
 /* 1. Apaga el ojo nativo de Microsoft Edge / Internet Explorer */
