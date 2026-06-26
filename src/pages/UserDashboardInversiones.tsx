@@ -64,7 +64,7 @@ export function DashboardInversiones() {
             <ul>
               {resumenReporte?.map((item) => {
                 const saldoValuado = item.saldo_valuado_actual_cartera || 0;
-                const tenenciaInstrumento = item.tenencia_actual_instrumento || 0;
+                const tenenciaInstrumento = item.tenencia_actual_instrumento.toFixed(5) || 0;
 
                 return (
                   <li key={item.id_instrumento} className={styles.elemLista}>
@@ -76,14 +76,28 @@ export function DashboardInversiones() {
                         {item.nombre}
                       </div>
                       <div className={styles.contSaldo}>
+                        <div className={styles.signoMoneda}>
+                        {saldoValuado < 0 
+                          ? `-US$`
+                          : `U$S`
+                        }
+                        </div >
+                        <div className={styles.saldoValuado}>
                         {/* 🟢 Solución al error: Validación segura usando las nuevas propiedades */}
                         {saldoValuado < 0 
-                          ? `-$ ${Math.abs(saldoValuado).toFixed(2)}`
-                          : `$ ${saldoValuado.toFixed(2)}`
+                          ? `${Math.abs(saldoValuado).toFixed(2)}`
+                          : `${saldoValuado.toFixed(2)}`
                         }
+                        </div>
                       </div>
                       <div className={styles.contIndicador}>
-                        {saldoValuado > 0 ? "🟩" : "🟥"}
+                        <div className={`${styles.gananciaPerdidaPorcentaje} ${item.porcentaje_retorno > 0 ? styles.positivo : styles.negativo}`}>
+                           {`${item.porcentaje_retorno}%`}
+                        </div>
+                        <div className={styles.verdeRojoIndicador}>
+                        {item.porcentaje_retorno > 0 ? "🟩" : "🟥"}
+                        </div>
+
                       </div>
                     </div>
                   </li>
@@ -95,9 +109,8 @@ export function DashboardInversiones() {
 
           {/* Columna Derecha: Gráfico de Distribución de Cartera */}
           <article className={styles.contenedorGrafico}>
-            <h3>Distribución de Cartera</h3>
             {dataGrafico.length > 0 ? (
-              <div style={{ width: "100%", height: 300 }}>
+              <div style={{ width: "100%", height: 300 }} className={styles.grafico}>
                 <ResponsiveContainer width="100%" height="100%">
                   <PieChart>
                     <Pie
