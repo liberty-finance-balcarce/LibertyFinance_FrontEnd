@@ -23,6 +23,7 @@ import { DashboardInversiones } from "./pages/DashboardInversiones";
 import { DashboardTestPerfil } from "./pages/DashboardTestPerfil";
 import AdminDashboard from "./pages/AdminDashboard";
 import {AdminUsersCard} from "./components/AdminUsersCard";
+import { AdminListInstFin } from "./components/AdminListInsFin";
 
 function App() {
   return (
@@ -52,6 +53,8 @@ function App() {
                     />
                   }
                 />
+
+                <Route path="instrumentos-financieros" element={<AdminListInstFin/>}/>
               </Route>
             </Route>
           </Route>

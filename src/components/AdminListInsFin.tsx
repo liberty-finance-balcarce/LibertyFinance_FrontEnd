@@ -1,14 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { FaPen, FaRegTrashAlt, FaPlus } from "react-icons/fa";
-
-import { getInstrumentos } from "../services/api";
-import { deleteInstrumentos } from "../services/api";
-import { updateInstrumento } from "../services/api";
-import { crearInstrumento } from "../services/api";
+import { useInstrumentos } from "../hooks/useInstrumentos";
 
 import type { Instrumento } from "../types/instrumento-financiero";
-import type { UpdateInstrumentoDTO } from "../types/Dto/InstrumentoFinancieroDTO";
-import type { createInstrumentoFinancieroDTO } from "../types/Dto/createInstumentoFinancieroDTO";
 
 import { ModalCrearInstrumento } from "./ModalCrearInstrumento";
 import { ModalEditarInstrumento } from "../components/ModalEditarInstFin";
@@ -16,95 +10,21 @@ import { ModalEliminarInstFin } from "./ModalEliminarInstFin";
 
 import styles from "../styles/components/AdminListInsFin.module.css";
 
-type Props = {
-  instrumentos: Instrumento[];
-};
+export function AdminListInstFin() {
+  const {
+    instrumentosState,
+    handleCrearInstrumento,
+    handleEditarInstrumento,
+    handleEliminarInstrumento,
+  } = useInstrumentos();
 
-export function AdminListInstFin({ instrumentos }: Props) {
-  const [instrumentosState, setInstrumentosState] = useState<Instrumento[]>([]);
   const [instrumentoSeleccionado, setInstrumentoSeleccionado] = useState<Instrumento | null>(null);
-  
   const [instrumentoAEliminar, setInstrumentoAEliminar] = useState<Instrumento | null>(null);
-  const [modalEliminarAbierto, setModalEliminarAbierto] = useState(false);
   
+  const [modalEliminarAbierto, setModalEliminarAbierto] = useState(false);
   const [modalEditarAbierto, setModalEditarAbierto] = useState(false);
   const [modalCrearAbierto, setModalCrearAbierto] = useState(false);
 
-  useEffect(() => {
-    if (instrumentos) {
-      setInstrumentosState(instrumentos);
-    }
-  }, [instrumentos]);
-
-  const editarInstrumento = (instrumento: Instrumento) => {
-    setInstrumentoSeleccionado(instrumento);
-    setModalEditarAbierto(true);
-  };
-
-  const guardarCambios = async (data: UpdateInstrumentoDTO) => {
-    if (!instrumentoSeleccionado) return;
-
-    try {
-      await updateInstrumento(instrumentoSeleccionado.id_instrumento, data);
-
-      setInstrumentosState((instrumentosActuales) =>
-        instrumentosActuales.map((ins) =>
-          ins.id_instrumento === instrumentoSeleccionado.id_instrumento
-            ? { ...ins, ...data }
-            : ins,
-        ),
-      );
-
-      setModalEditarAbierto(false);
-      setInstrumentoSeleccionado(null);
-
-      const nuevosInstrumentos = await getInstrumentos();
-      setInstrumentosState(nuevosInstrumentos);
-    } catch (error) {
-      console.error("Error al guardar los cambios", error)
-      setModalEditarAbierto(false);
-      setInstrumentoSeleccionado(null);
-    }
-  };
-
-  const abrirEliminar = (instrumento: Instrumento) => {
-    setInstrumentoAEliminar(instrumento);
-    setModalEliminarAbierto(true);
-  };
-
-  const confirmarEliminar = async () => {
-    if (!instrumentoAEliminar) return;
-
-    try {
-      await deleteInstrumentos(instrumentoAEliminar.id_instrumento);
-
-      setInstrumentosState((prev) =>
-        prev.filter(
-          (ins) => ins.id_instrumento !== instrumentoAEliminar.id_instrumento,
-        ),
-      );
-
-      setModalEliminarAbierto(false);
-      setInstrumentoAEliminar(null);
-    } catch (error) {
-      console.error("Error al eliminar el instrumento", error)
-    }
-  };
-
-  const handleGuardarNuevo = async (data: createInstrumentoFinancieroDTO) => {
-   try {
-    await crearInstrumento(data);
-    
-    setModalCrearAbierto(false);
-
-    const nuevosInstrumentos = await getInstrumentos();
-    setInstrumentosState(nuevosInstrumentos);
-
-  } catch (error) {
-    console.error("Error crear el instrumento", error);
-    setModalCrearAbierto(false);
-  }
-  };
 
   return (
     <>
@@ -136,14 +56,20 @@ export function AdminListInstFin({ instrumentos }: Props) {
 
             <button
               type="button"
-              onClick={() => editarInstrumento(inst)}
+              onClick={() => {
+                setInstrumentoSeleccionado(inst);
+                setModalEditarAbierto(true);
+              }}
               className={styles.icono}
             >
               <FaPen />
             </button>
             <button
               type="button"
-              onClick={() => abrirEliminar(inst)}
+              onClick={() => {
+                setInstrumentoAEliminar(inst);
+                setModalEliminarAbierto(true);
+              }}
               className={styles.icono}
             >
               <FaRegTrashAlt />
@@ -167,14 +93,28 @@ export function AdminListInstFin({ instrumentos }: Props) {
             setModalEditarAbierto(false);
             setInstrumentoSeleccionado(null);
           }}
-          onSave={guardarCambios}
+          onSave={(data) =>
+            handleEditarInstrumento(instrumentoSeleccionado.id_instrumento, data)
+              .then(() => {
+                setModalEditarAbierto(false);
+                setInstrumentoSeleccionado(null);
+              })
+              .catch(() => setModalEditarAbierto(false))
+          }
         />
       )}
 
       <ModalEliminarInstFin
         abierto={modalEliminarAbierto}
         instrumento={instrumentoAEliminar}
-        onConfirmar={confirmarEliminar}
+        onConfirmar={() =>
+          instrumentoAEliminar &&
+          handleEliminarInstrumento(instrumentoAEliminar.id_instrumento)
+            .then(() => {
+              setModalEliminarAbierto(false);
+              setInstrumentoAEliminar(null);
+            })
+        }
         onClose={() => {
           setModalEliminarAbierto(false);
           setInstrumentoAEliminar(null);
@@ -184,7 +124,11 @@ export function AdminListInstFin({ instrumentos }: Props) {
       <ModalCrearInstrumento
         abierto={modalCrearAbierto}
         onClose={() => setModalCrearAbierto(false)}
-        onSave={handleGuardarNuevo}
+        onSave={(data) =>
+          handleCrearInstrumento(data)
+            .then(() => setModalCrearAbierto(false))
+            .catch(() => setModalCrearAbierto(false))
+        }
       />
     </>
   );

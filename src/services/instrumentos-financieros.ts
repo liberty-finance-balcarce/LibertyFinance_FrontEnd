@@ -52,7 +52,6 @@ export async function getRankingInstrumentos(
   });
 
   return { tradicionales, noTradicionales };
-<<<<<<< HEAD:src/services/api.ts
 }
 
 export async function getInstrumentos(){
@@ -133,18 +132,3 @@ const response = await fetch(`${BASE_API}/instrumentos-financieros/${id}`, {
 
   return result;
 }
-
-export async function getUsers() {
-  const response = await fetch(`${BASE_API}/usuarios`);
-
-  if (!response.ok) {
-    throw new Error("Error al obtener usuarios");
-  }
-
-  const result = await response.json();
-
-  return result.data;
-}
-=======
-}
->>>>>>> 70b94325e98bfd0c245fb887f00e8844f0d607fc:src/services/instrumentos-financieros.ts
