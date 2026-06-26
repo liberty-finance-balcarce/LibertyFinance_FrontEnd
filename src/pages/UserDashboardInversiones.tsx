@@ -16,10 +16,9 @@ import styles from "../styles/pages/DashboardInversiones.module.css";
 const COLORS = ["#F2A900", "#627EEA", "#00D4B2", "#FF6B6B", "#8492A6"];
 
 export function DashboardInversiones() {
-
   const { user, token } = useAuth();
   const { resumenReporte, isLoadingResumen, errorResumen } = useReportes(
-    token || ""
+    token || "",
   );
 
   console.log("Datos de Reportes recibidos:", resumenReporte);
@@ -27,30 +26,27 @@ export function DashboardInversiones() {
   // 2. Procesamos los datos para el gráfico de torta/dona
   // Calculamos el valor monetario de la tenencia (Unidades * Precio Actual)
   // Si tu backend ya envía un campo con el valor total calculado, podés usar esa propiedad directamente.
-  const dataGrafico = resumenReporte?.map((item) => {
-    const cantidad = item.balance_total || 0;
-    const precio = item.valor_actual || 0;
-    return {
-      name: item.nombre,
-      // Si el backend no te da el total, lo calculamos acá en tiempo de ejecución:
-      value: cantidad * precio, 
-      cantidadOriginal: cantidad
-    };
-  }) || [];
+  const dataGrafico =
+    resumenReporte?.map((item) => {
+      const saldoValuado = item.saldo_valuado_actual_cartera || 0;
+      const cantidadOriginal = item.tenencia_actual_instrumento || 0;
+      return {
+        name: item.nombre,
+        value: saldoValuado,
+        cantidadOriginal: cantidadOriginal,
+      };
+}).filter(act => act.value > 0) || []; // Filtramos porciones en 0 para que no ensucien el gráfico
 
-  // Formateador para que los montos en el gráfico se vean como dinero real
+// Formateador para que los montos en el gráfico se vean como dinero real
   const formatCurrency = (value: number) => {
     return new Intl.NumberFormat("es-AR", {
       style: "currency",
-      currency: "USD", // Podés cambiarlo a ARS si tu backend opera en pesos
+      currency: "USD",
       minimumFractionDigits: 2,
     }).format(value);
   };
 
-
-
-
-  return (
+ return (
     <section className={styles.contResumen}>
       <h2>RESUMEN</h2>
       {isLoadingResumen && (
@@ -63,32 +59,40 @@ export function DashboardInversiones() {
         <div className={styles.dashboardGrid}>
           {/* Columna Izquierda: Lista de Tenencias */}
           <article className={styles.listaActivos}>
-                <hr className={styles.lineaDivision}/>
+            <hr className={styles.lineaDivision}/>
             <h3>Tus Activos</h3>
             <ul>
-              {resumenReporte?.map((item) => (
-                <li key={item.id_instrumento} className={styles.elemLista}>
-                  <div className={styles.contActivos}>
-                    <div className={styles.contBalance}>
-                       {item.balance_total}
-                    </div>                    
-                    <div className={styles.contNombre}>
-                      {item.nombre}
-                    </div>
-                    <div className={styles.contSaldo}>
-                       {item.saldo_instrumento<0? `-$ ${(Math.abs(item.saldo_instrumento)).toFixed(2)}`:`$ ${(item.saldo_instrumento).toFixed(2)}`}
-                    </div>
-                    <div className={styles.contIndicador}>
-                      {item.saldo_instrumento>0?"🟩":"🟥"}
-                    </div>
+              {resumenReporte?.map((item) => {
+                const saldoValuado = item.saldo_valuado_actual_cartera || 0;
+                const tenenciaInstrumento = item.tenencia_actual_instrumento || 0;
 
-                  </div>
-                </li>
-        
-              ))}
+                return (
+                  <li key={item.id_instrumento} className={styles.elemLista}>
+                    <div className={styles.contActivos}>
+                      <div className={styles.contBalance}>
+                        {tenenciaInstrumento}
+                      </div>                    
+                      <div className={styles.contNombre}>
+                        {item.nombre}
+                      </div>
+                      <div className={styles.contSaldo}>
+                        {/* 🟢 Solución al error: Validación segura usando las nuevas propiedades */}
+                        {saldoValuado < 0 
+                          ? `-$ ${Math.abs(saldoValuado).toFixed(2)}`
+                          : `$ ${saldoValuado.toFixed(2)}`
+                        }
+                      </div>
+                      <div className={styles.contIndicador}>
+                        {saldoValuado > 0 ? "🟩" : "🟥"}
+                      </div>
+                    </div>
+                  </li>
+                );
+              })}
             </ul>
-           <hr className={styles.lineaDivision}/>
+            <hr className={styles.lineaDivision}/>
           </article>
+
           {/* Columna Derecha: Gráfico de Distribución de Cartera */}
           <article className={styles.contenedorGrafico}>
             <h3>Distribución de Cartera</h3>
@@ -100,10 +104,10 @@ export function DashboardInversiones() {
                       data={dataGrafico}
                       cx="50%"
                       cy="50%"
-                      innerRadius={60}  // Radio interno > 0 genera el efecto Dona moderno
-                      outerRadius={85}  // Radio externo
-                      paddingAngle={4}  // Separación sutil entre porciones
-                      dataKey="value"   // Campo numérico que define el tamaño de la porción
+                      innerRadius={60}
+                      outerRadius={85}
+                      paddingAngle={4}
+                      dataKey="value"
                     >
                       {dataGrafico.map((entry, index) => (
                         <Cell 
@@ -113,7 +117,6 @@ export function DashboardInversiones() {
                       ))}
                     </Pie>
                     
-                    {/* Tooltip personalizado para ver los datos al pasar el mouse */}
                     <Tooltip 
                       formatter={(value: number, name: string, props: any) => [
                         `${formatCurrency(value)} (Volumen: ${props.payload.cantidadOriginal})`,
@@ -127,7 +130,6 @@ export function DashboardInversiones() {
                       }}
                     />
                     
-                    {/* Leyenda interactiva inferior */}
                     <Legend 
                       verticalAlign="bottom" 
                       height={36}
