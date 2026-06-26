@@ -1,9 +1,7 @@
 .container {
-  max-width: 1000px;
+  width: min(100%, 1200px);
   margin: 0 auto;
-  padding: 40px 20px;
-  color: #4a2377;
-  font-family: var(--tipoLetraGeneral);
+  padding: 40px clamp(16px, 4vw, 40px);
 }
 
 .header {
@@ -20,13 +18,14 @@
 
 .panelsContainer {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 30px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(20px, 3vw, 40px);
+  align-items: start;
 }
 
 .panel {
-  border: 1px solid #7c4c9e; 
-  padding: 20px 30px;
+  border: 1px solid #7c4c9e;
+  padding: 20px clamp(18px, 2vw, 26px);
   border-radius: 20px;
   background-color: #ffffff;
 }
@@ -46,15 +45,19 @@
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 15px; 
+  gap: 15px;
 }
 
 .listHeader,
 .listItem {
   display: grid;
-  grid-template-columns: 2fr 1.2fr 1fr 1fr;
+  grid-template-columns:
+    minmax(0, 2fr)
+    110px
+    90px
+    170px;
   align-items: center;
-  column-gap: 8px;
+  column-gap: 16px;
 }
 
 .listHeader {
@@ -64,8 +67,17 @@
   font-weight: bold;
 }
 
+.listHeader span:nth-child(4) {
+  text-align: left;
+}
+
 .listHeader span {
   text-decoration: underline var(--colorPrimario);
+}
+
+.listHeader span,
+.listItem span {
+  min-height: 0;
 }
 
 .listHeader span:not(:first-child) {
@@ -79,15 +91,31 @@
 
 .itemName {
   text-align: left;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  line-height: 1.2;
 }
 
-.itemYield {
-  text-align: center;
+.priceCell {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  min-width: 0;
+  margin-left: 20px;
 }
 
-.itemRisk,
 .itemPrice {
+  display: block;
+  width: 170px;
+  white-space: nowrap;
+  text-align: left;
+  font-variant-numeric: tabular-nums;
+}
+
+.itemYield,
+.itemRisk {
   text-align: center;
+  white-space: nowrap;
 }
 
 .loadingContainer,

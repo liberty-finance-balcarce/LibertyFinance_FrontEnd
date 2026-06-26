@@ -1,0 +1,19 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--colorFondo);
+  font-family: var(--tipoLetraGeneral);
+}
+
+.layout {
+  flex: 1;
+  display: flex;
+  width: 100%;
+}
+
+.mainContent {
+  flex: 1;
+  padding: 24px;
+  min-width: 0;
+}

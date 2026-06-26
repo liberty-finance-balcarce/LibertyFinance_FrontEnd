@@ -6,7 +6,7 @@ interface UserCardsProps {
   totalAdmins: number;
 }
 
-export default function AdminCardUsers({totalRegistrados, totalUsuarios, totalAdmins}: UserCardsProps) {
+export function AdminUsersCard({totalRegistrados, totalUsuarios, totalAdmins}: UserCardsProps) {
   return (
     <div className={styles.container}>
       <div className={styles.card}> 

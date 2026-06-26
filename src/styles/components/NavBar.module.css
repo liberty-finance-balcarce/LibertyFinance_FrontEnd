@@ -34,8 +34,15 @@
   align-items: center;
 }
 
-.usuario{
+.usuario {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.titulo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--tipoLetraGeneral);
 }
