@@ -49,6 +49,7 @@ export function AdminUserList() {
                 setUsuarioSeleccionado(user);
                 setModalEditarAbierto(true);
               }}
+              className={styles.icono}
             >
               <FaPen />
             </button>
@@ -57,6 +58,7 @@ export function AdminUserList() {
                 setUsuarioAEliminar(user);
                 setModalEliminarAbierto(true);
               }}
+              className={styles.icono}
             >
               <FaRegTrashAlt />
             </button>
