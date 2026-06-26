@@ -1,7 +1,7 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { FaShoppingCart, FaChartLine, FaListAlt } from "react-icons/fa";
 import { useAuth } from "../hooks/useAuth";
-import styles from "../styles/components/DashboardSidebar.module.css";
+import styles from "../styles/components/UserDashboardSidebar.module.css";
 
 export function UserDashboardSidebar() {
   const { logout } = useAuth();
@@ -18,14 +18,14 @@ export function UserDashboardSidebar() {
     <aside className={styles.sidebar}>
       <nav className={styles.nav}>
         <NavLink
-          to="/dashboard/user/cart"
+          to="/dashboard/user/carrito"
           className={({ isActive }) =>
             isActive
               ? `${styles.navLink} ${styles.navLinkActive}`
               : styles.navLink
           }
         >
-          <FaShoppingCart size={22} color="var(--colorBordeVentana)" />
+          <FaShoppingCart size={22} color="var(--colorSombraVentana)" />
           <span>Carrito</span>
         </NavLink>
 
@@ -37,7 +37,7 @@ export function UserDashboardSidebar() {
               : styles.navLink
           }
         >
-          <FaChartLine size={22} color="var(--colorBordeVentana)" />
+          <FaChartLine size={22} color="var(--colorSombraVentana)" />
           <span>Mis Inversiones</span>
         </NavLink>
 
@@ -49,7 +49,7 @@ export function UserDashboardSidebar() {
               : styles.navLink
           }
         >
-          <FaListAlt size={22} color="var(--colorBordeVentana)" />
+          <FaListAlt size={22} color="var(--colorSombraVentana)" />
           <span>Test Perfil de Inversor</span>
         </NavLink>
       </nav>

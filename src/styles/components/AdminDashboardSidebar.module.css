@@ -1,0 +1,61 @@
+.sidebar {
+  background-color: #3b2559;
+  width: 300px;
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 400px;
+  font-family: var(--tipoLetraGeneral);
+  color: var(--colorLetrasBoton);
+  margin-bottom: 2vw;
+}
+
+.container {
+  width: 100%;
+}
+
+.layout {
+  display: flex;
+  min-height: 100%;
+}
+
+.mainContent {
+  flex: 1;
+  padding: 20px;
+}
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.navLink {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 12px 15px;
+  text-decoration: none;
+  color: var(--colorSombraVentana);
+  font-size: 1.2rem;
+  border: 1px solid transparent;
+  transition: border 0.2s ease-in-out;
+}
+
+.navLinkActive {
+  border: 1px solid var(--colorBordeVentana);
+}
+
+.logoutButton {
+  background: transparent;
+  border: none;
+  color: var(--colorSombraVentana);
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  padding: 10px 15px;
+  margin-top: auto;
+  font-family: var(--tipoLetraGeneral);
+}

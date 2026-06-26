@@ -1,9 +1,9 @@
 import styles from "../styles/components/RankingInstrumentosFinancieros.module.css";
-import { useRankingInstrumentos } from "../hooks/useRankingInstrumentos";
+import { useInstrumentosFinancieros } from "../hooks/useInstrumentosFinancieros.ts";
 import { LoadingSpinner } from "../components/LoadingSpinner.tsx";
 
 export function RankingInstrumentosFinancieros() {
-  const { data, isLoading, error } = useRankingInstrumentos();
+  const { data, isLoading, error } = useInstrumentosFinancieros();
 
   if (isLoading) {
     return (

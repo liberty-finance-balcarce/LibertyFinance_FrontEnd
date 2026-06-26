@@ -15,7 +15,7 @@ export function NavBar() {
     <nav className={styles.header}>
       <div className={styles.logo}>
         <Button to="/" variant="logo">
-          <img src="../assets/logo-complete.png" alt="Logo Liberty Finance" />
+          <img src="/assets/logo-complete.png" alt="Logo Liberty Finance" />
         </Button>
       </div>
 
@@ -37,7 +37,7 @@ export function NavBar() {
       </div>
         {user ? (
           <div className={styles.usuario}>
-            <Button to="/dashboard" variant="login">
+            <Button to="/dashboard/admin" variant="login">
               <AvatarUsuario usuario={user} />
             </Button>
           </div>

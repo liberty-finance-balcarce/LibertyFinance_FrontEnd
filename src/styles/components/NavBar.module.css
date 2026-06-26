@@ -1,6 +1,7 @@
 .header {
   display: grid;
-  grid-template-areas: "logo links login";
+  grid-template-areas: 
+    "logo links login";
   grid-template-columns: 1fr 2fr 1fr;
   align-items: center;
   padding: 1rem;
@@ -37,4 +38,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.titulo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--tipoLetraGeneral);
 }

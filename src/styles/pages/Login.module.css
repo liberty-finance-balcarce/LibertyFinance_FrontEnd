@@ -34,10 +34,17 @@
   height: 52px;
   font-size: 18px;
   border-radius: 7px;
-  border: 2px solid var(--colorBordeVentana);
+  background-color: var(--colorBordeVentana);
+  color: var(--colorLetraGeneral);
+  border: 2px solid var(--colorFondoGeneral);
   width: 100%; /* <-- CLAVE: obliga a ambos inputs a ocupar todo el ancho del contenedor */
   box-sizing: border-box; /* <-- CLAVE: evita que el padding ensanche la caja */
 }
+
+.inputForm::placeholder {
+  color: var(--colorLetraGeneral);
+}
+
 .inputForm:focus {
   outline: none;
   box-shadow: 0 0 8px 4px var(--colorSombraVentana);

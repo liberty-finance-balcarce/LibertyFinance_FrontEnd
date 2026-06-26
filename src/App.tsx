@@ -18,13 +18,11 @@ import { FAQ } from "./pages/FAQ";
 import { NotFound } from "./pages/NotFound";
 import { Login } from "./pages/Login";
 import { UserDashboard } from "./pages/UserDashboard";
-import { DashboardCart } from "./pages/DashboardCart";
+import { UserDashboardCart } from "./pages/UserDashboardCart";
 import { DashboardInversiones } from "./pages/DashboardInversiones";
 import { DashboardTestPerfil } from "./pages/DashboardTestPerfil";
-import AdminDashboard from "./pages/DashboardAdmin";
-import AdminCardUsers from "./components/AdminCardUsers";
-import { AdminDashboardInstrumentos } from "./components/AdminDashboardInstrumentos";
-import { AdminDashboardPaquetes } from "./components/AdminDashboardPaquetes";
+import AdminDashboard from "./pages/AdminDashboard";
+import {AdminUsersCard} from "./components/AdminUsersCard";
 
 function App() {
   return (
@@ -34,7 +32,7 @@ function App() {
           <Route element={<UserRoute />}>
             <Route element={<UserLayout />}>
               <Route path="/dashboard/user" element={<UserDashboard />}>
-                <Route path="cart" element={<DashboardCart />} />
+                <Route path="carrito" element={<UserDashboardCart />} />
                 <Route path="inversiones" element={<DashboardInversiones />} />
                 <Route path="test-inversor" element={<DashboardTestPerfil />} />
               </Route>
@@ -44,9 +42,16 @@ function App() {
           <Route element={<AdminRoute />}>
             <Route element={<AdminLayout />}>
               <Route path="/dashboard/admin" element={<AdminDashboard />}>
-                <Route path="users" element={<AdminCardUsers totalRegistrados={0} totalUsuarios={0} totalAdmins={0} />} />
-                <Route path="instrumentos-financieros" element={<AdminDashboardInstrumentos />} />
-                <Route path="paquetes-inversion" element={<AdminDashboardPaquetes />} />
+                <Route
+                  path="users"
+                  element={
+                    <AdminUsersCard
+                      totalRegistrados={0}
+                      totalUsuarios={0}
+                      totalAdmins={0}
+                    />
+                  }
+                />
               </Route>
             </Route>
           </Route>

@@ -1,8 +1,8 @@
 import { Outlet } from "react-router-dom";
+import styles from "../styles/pages/AdminDashboard.module.css";
 import { AdminDashboardSidebar } from "../components/AdminDashboardSidebar";
-import styles from "../styles/pages/Dashboard.module.css";
 
-export function AdminDashboard() {
+export default function AdminDashboard() {
   return (
     <div className={styles.container}>
       <div className={styles.layout}>
