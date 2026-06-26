@@ -31,10 +31,7 @@ export default function ForgotPassword() {
         Ingresá tu DNI y te enviaremos un enlace para restablecer tu contraseña.
       </p>
 
-      <form
-        className={styles.formForgotPassword}
-        onSubmit={enviarEnlace}
-      >
+      <form className={styles.formForgotPassword} onSubmit={enviarEnlace}>
         <label htmlFor="dni_usuario" className={styles.label}>
           DNI
         </label>
@@ -64,7 +61,7 @@ export default function ForgotPassword() {
 
         <div className={styles.contRegistro}>
           <span>
-            ¿Ya tienes cuenta? <NavLink to="/login">Inicia sesión</NavLink>
+            <NavLink to="/login">Volver</NavLink>
           </span>
         </div>
       </form>
