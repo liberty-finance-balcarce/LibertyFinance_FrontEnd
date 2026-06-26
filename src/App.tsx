@@ -22,7 +22,8 @@ import { UserDashboardCart } from "./pages/UserDashboardCart";
 import { DashboardInversiones } from "./pages/DashboardInversiones";
 import { DashboardTestPerfil } from "./pages/DashboardTestPerfil";
 import AdminDashboard from "./pages/AdminDashboard";
-import {AdminUsersCard} from "./components/AdminUsersCard";
+import { AdminUsersCard } from "./components/AdminUsersCard";
+import { AdminUserList } from "./components/AdminUsersList";
 
 function App() {
   return (
@@ -45,11 +46,10 @@ function App() {
                 <Route
                   path="users"
                   element={
-                    <AdminUsersCard
-                      totalRegistrados={0}
-                      totalUsuarios={0}
-                      totalAdmins={0}
-                    />
+                    <>
+                      <AdminUsersCard />
+                      <AdminUserList />
+                    </>
                   }
                 />
               </Route>
