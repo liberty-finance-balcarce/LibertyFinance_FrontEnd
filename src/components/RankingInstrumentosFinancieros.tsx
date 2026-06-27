@@ -56,9 +56,11 @@ export function RankingInstrumentosFinancieros() {
                   </span>
                   <span className={styles.itemYield}>{item.rendimiento}%</span>
                   <span className={styles.itemRisk}>{item.riesgo}</span>
-                  <span className={styles.itemPrice}>
-                    {item.precio_instrumento}
-                  </span>
+                  <span className={styles.priceCell}>
+                    <span className={styles.itemPrice}>
+                      US${item.precio_instrumento}
+                    </span>
+                  </span>{" "}
                 </li>
               ))}
             </ul>
@@ -82,9 +84,11 @@ export function RankingInstrumentosFinancieros() {
                   </span>
                   <span className={styles.itemYield}>{item.rendimiento}%</span>
                   <span className={styles.itemRisk}>{item.riesgo}</span>
-                  <span className={styles.itemPrice}>
-                    {item.precio_instrumento}
-                  </span>
+                  <span className={styles.priceCell}>
+                    <span className={styles.itemPrice}>
+                      US${item.precio_instrumento}
+                    </span>
+                  </span>{" "}
                 </li>
               ))}
             </ul>
