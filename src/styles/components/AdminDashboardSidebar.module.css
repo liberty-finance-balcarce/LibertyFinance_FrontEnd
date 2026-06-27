@@ -45,7 +45,9 @@
 }
 
 .navLinkActive {
-  border: 1px solid var(--colorBordeVentana);
+  border: 1px solid var(--colorSombraVentana);
+  border-radius: 5px;
+  box-shadow: 0 0 8px var(--colorSombraVentana);
 }
 
 .logoutButton {

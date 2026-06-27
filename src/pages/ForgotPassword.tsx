@@ -18,7 +18,7 @@ export default function ForgotPassword() {
   const enviarEnlace = (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Aquí irá tu petición al backend
+    // Peticion al back para verificar el usuario y enviar un enlace para restablecer la contraseña
 
     setContador(59);
   };
