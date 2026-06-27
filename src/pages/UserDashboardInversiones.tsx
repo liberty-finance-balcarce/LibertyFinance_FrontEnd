@@ -13,7 +13,7 @@ import styles from "../styles/pages/DashboardInversiones.module.css";
 
 const COLORS = ["#F2A900", "#627EEA", "#00D4B2", "#FF6B6B", "#8492A6"];
 
-export function DashboardInversiones() {
+export function UserDashboardInversiones() {
   const { token } = useAuth();
   const { resumenReporte, isLoadingResumen, errorResumen } = useReportes(
     token || "",

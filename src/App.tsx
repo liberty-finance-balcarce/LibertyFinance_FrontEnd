@@ -19,7 +19,7 @@ import { NotFound } from "./pages/NotFound";
 import { Login } from "./pages/Login";
 import { UserDashboard } from "./pages/UserDashboard";
 import { UserDashboardCart } from "./pages/UserDashboardCart";
-import { DashboardInversiones } from "./pages/UserDashboardInversiones";
+import { UserDashboardInversiones } from "./pages/UserDashboardInversiones";
 import { UserDashboardTestPerfil } from "./pages/UserDashboardTestPerfil";
 import { AdminDashboard } from "./pages/AdminDashboard";
 import { ForgotPassword } from "./pages/ForgotPassword";
@@ -35,7 +35,7 @@ function App() {
               <Route path="/dashboard/user" element={<UserDashboard />}>
                 <Route index element={<Navigate to="inversiones" replace />} />
                 <Route path="carrito" element={<UserDashboardCart />} />
-                <Route path="inversiones" element={<DashboardInversiones />} />
+                <Route path="inversiones" element={<UserDashboardInversiones />} />
                 <Route
                   path="test-inversor"
                   element={<UserDashboardTestPerfil />}
