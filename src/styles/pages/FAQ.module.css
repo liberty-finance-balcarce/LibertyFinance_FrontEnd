@@ -1,5 +1,5 @@
 .container {
-  color: var(--colorPrimario);
+  color: var(--colorLetraGeneral);
   text-align: center;
   padding: 2rem;
   margin-left: 200px;
@@ -21,6 +21,7 @@
   margin: 1rem 0;
   border-radius: var(--radius-md);
   padding: 0.5rem;
+  overflow: hidden;
   transition: background-color 0.3s ease;
 }
 
@@ -32,6 +33,10 @@
   padding-right: 1.5rem;
 }
 
+.details summary::-webkit-details-marker {
+  display: none;
+}
+
 .details summary::after {
   content: "▶";
   position: absolute;
@@ -41,4 +46,31 @@
 
 .details[open] summary::after {
   transform: rotate(90deg);
+}
+
+.details::details-content {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transform: translateY(-8px);
+
+  transition:
+    max-height 0.45s ease,
+    opacity 0.25s ease,
+    transform 0.25s ease,
+    content-visibility 0.45s allow-discrete;
+}
+
+.details[open]::details-content {
+  max-height: 2000px;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@starting-style {
+  .details[open]::details-content {
+    max-height: 0;
+    opacity: 0;
+    transform: translateY(-8px);
+  }
 }

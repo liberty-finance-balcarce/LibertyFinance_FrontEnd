@@ -1,7 +1,9 @@
 .container {
   width: min(100%, 1200px);
   margin: 0 auto;
-  padding: 40px clamp(16px, 4vw, 40px);
+  padding: 40px 20px;
+  color: var(--colorLetraGeneral);
+  font-family: var(--tipoLetraGeneral);
 }
 
 .header {
@@ -11,7 +13,7 @@
 
 .mainTitle {
   font-size: 1.8rem;
-  color: #551a8b;
+  color: var(--colorLetraGeneral);
   margin: 0;
   letter-spacing: 0.5px;
 }
@@ -24,17 +26,24 @@
 }
 
 .panel {
-  border: 1px solid #7c4c9e;
-  padding: 20px clamp(18px, 2vw, 26px);
-  border-radius: 20px;
-  background-color: #ffffff;
+  border: 1px solid var(--colorBordeVentana);
+  border-radius: 8px;
+  padding: 20px;
+  background-color: var(--colorFondoVentana);
+  color: var(--colorLetraGeneral);
+  box-shadow: 0 2px 4px var(--colorPrimario);
+  transition:
+    background-color 0.35s ease,
+    color 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
 }
 
 .panelTitle {
   text-align: center;
   font-size: 1.2rem;
   font-weight: bold;
-  color: #551a8b;
+  color: var(--colorLetraGeneral);
   margin-top: 0;
   margin-bottom: 25px;
 }
@@ -62,7 +71,7 @@
 
 .listHeader {
   margin-bottom: 12px;
-  color: #4a2377;
+  color: var(--colorLetraGeneral);
   font-size: 0.75rem;
   font-weight: bold;
 }
@@ -86,7 +95,7 @@
 
 .listItem {
   font-size: 1.1rem;
-  color: #551a8b;
+  color: var(--colorLetraGeneral);
 }
 
 .itemName {

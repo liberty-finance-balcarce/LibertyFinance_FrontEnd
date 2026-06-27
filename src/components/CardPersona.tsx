@@ -9,9 +9,9 @@ export function CardPersona() {
           <img
             className={styles.img}
             src="/assets/foto1_convertida.png"
-            alt="foto mati"
+            alt="Foto Matías Méndez"
           />
-          <p className={styles.nombre}>Matias Mendez</p>
+          <p className={styles.nombre}>Matías Méndez</p>
           <p className={styles.descripcion}>Desarrollador Full Stack</p>
         </div>
 
@@ -19,9 +19,9 @@ export function CardPersona() {
           <img
             className={styles.img}
             src="/assets/foto2.png"
-            alt="foto Mile"
+            alt="Foto Milena Martínez"
           />
-          <p className={styles.nombre}>Milena Martinez</p>
+          <p className={styles.nombre}>Milena Martínez</p>
           <p className={styles.descripcion}>Desarrollador Full Stack</p>
         </div>
 
@@ -29,7 +29,7 @@ export function CardPersona() {
           <img
             className={styles.img}
             src="/assets/foto_3.png"
-            alt="foto Tizi"
+            alt="Foto Tiziano Luzi Ramos"
           />
           <p className={styles.nombre}>Tiziano Luzi Ramos</p>
           <p className={styles.descripcion}>Desarrollador Full Stack</p>
@@ -39,7 +39,7 @@ export function CardPersona() {
           <img
             className={styles.img}
             src="/assets/foto_4.png"
-            alt="foto Cris"
+            alt="Foto Cristian Falcone"
           />
           <p className={styles.nombre}>Cristian Falcone</p>
           <p className={styles.descripcion}>Desarrollador Full Stack</p>

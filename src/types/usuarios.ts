@@ -2,7 +2,7 @@ import type { Provincia } from "./provincias";
 import type { Rol } from "./rol";
 
 export interface Usuario {
-  imagen: boolean;
+  foto_perfil?: string;
   dni_usuario: number;
   nombre: string;
   apellido: string;

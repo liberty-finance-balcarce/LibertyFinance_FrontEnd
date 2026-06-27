@@ -8,6 +8,8 @@
   --colorBordeVentana: #e6e6fa;
   --colorSombraVentana: #dda0dd;
   --colorFondoGeneral: #f8f8ff;
+  --colorLetraGeneral: #4b0082;
+  --colorFooter: var(--colorSombraVentana);
   --tipoLetraGeneral: "Bricolage Grotesque", sans-serif;
 
   /*espacio para las cards*/
@@ -22,6 +24,19 @@
   --radius-lg: 20px;
 }
 
+/* Estilos para modo oscuro */
+:root.dark {
+  --colorPrimario: #4b0082;
+  --colorSecundario: #800080;
+  --colorLetrasBoton: #f0f0f0;
+  --colorBordeVentana: #3a3a3aa6;
+  --colorSombraVentana: #dda0dd;
+  --colorFondoGeneral: #09030d;
+  --colorLetraGeneral: #d16fff;
+  --colorFooter: var(--colorLetraGeneral);
+  --tipoLetraGeneral: "Bricolage Grotesque", sans-serif;
+}
+
 html,
 body,
 #root {
@@ -30,7 +45,13 @@ body,
   width: 100%;
   height: 100dvh;
   font-family: var(--tipoLetraGeneral);
+  color: var(--colorLetraGeneral);
   background-color: var(--colorFondoGeneral);
+  transition:
+    background-color 0.35s ease,
+    color 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
 }
 
 ::-webkit-scrollbar {
@@ -40,9 +61,9 @@ body,
 ::-webkit-scrollbar-button:vertical:start {
   height: 14px;
   background:
-    linear-gradient(135deg, transparent 50%, var(--colorPrimario) 50%) 2px 4px /
+    linear-gradient(135deg, transparent 50%, var(--colorLetraGeneral) 50%) 2px 4px /
       6px 6px no-repeat,
-    linear-gradient(-135deg, transparent 50%, var(--colorPrimario) 50%) 6px
+    linear-gradient(-135deg, transparent 50%, var(--colorLetraGeneral) 50%) 6px
       4px / 6px 6px no-repeat,
     var(--colorBordeVentana);
 }
@@ -50,15 +71,15 @@ body,
 ::-webkit-scrollbar-button:vertical:end {
   height: 14px;
   background:
-    linear-gradient(45deg, transparent 50%, var(--colorPrimario) 50%) 2px 4px /
+    linear-gradient(45deg, transparent 50%, var(--colorLetraGeneral) 50%) 2px 4px /
       6px 6px no-repeat,
-    linear-gradient(-45deg, transparent 50%, var(--colorPrimario) 50%) 6px 4px /
+    linear-gradient(-45deg, transparent 50%, var(--colorLetraGeneral) 50%) 6px 4px /
       6px 6px no-repeat,
     var(--colorBordeVentana);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--colorPrimario);
+  background: var(--colorLetraGeneral);
   border-radius: 5px;
   border: 2px solid var(--colorBordeVentana);
 }

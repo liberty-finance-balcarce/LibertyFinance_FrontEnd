@@ -1,32 +1,54 @@
 .container {
-    display: flex;
-    flex-direction: row;
-    gap: 20px;
-    justify-content: center;
-    font-family: var(--tipoLetraGeneral);
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  justify-content: center;
+  font-family: var(--tipoLetraGeneral);
 }
 
-.card{
-    border: 1px solid var(--colorBordeVentana);
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 2px 4px var(--colorPrimario);
-    margin: 1%;
-    width: 300px;
-    height: 300px; 
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between; 
-    overflow-y: hidden;               
+.cardScene {
+  width: 300px;
+  height: 300px;
+  margin: 1%;
+  perspective: 1000px;
 }
 
-.button{
-    background-color: var(--colorPrimario);
-    color: var(--colorLetrasBoton);
-    border: none;
-    padding: 10px 20px;
-    border-radius: 4px;
-    cursor: pointer;
+.card {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.7s ease;
+}
+
+.cardFlipped {
+  transform: rotateY(180deg);
+}
+
+.cardFace {
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--colorBordeVentana);
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px var(--colorPrimario);
+  background-color: var(--colorFondoVentana);
+  color: var(--colorLetraGeneral);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.cardFront {
+  transform: rotateY(0deg);
+}
+
+.cardBack {
+  transform: rotateY(180deg);
 }
 
 .title {
@@ -34,11 +56,32 @@
   font-size: 1.2rem;
   font-weight: 600;
   margin-bottom: 10px;
-  color: var(--colorPrimario);
+  color: var(--colorLetraGeneral);
 }
 
-.long-text-container {
-    margin-top: 10px;
-    color: #555;
-    display: block;
+.text {
+  display: flex;
+  flex: 1;
+  margin: auto;
+  line-height: 1.5;
+  overflow-y: auto;
+  text-align: center;
+  align-items: center;
+}
+
+.button {
+  background-color: var(--colorPrimario);
+  color: var(--colorLetrasBoton);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 15px;
+  transition:
+    transform 0.2s ease,
+    background-color 0.3s ease;
+}
+
+.button:hover {
+  transform: scale(1.03);
 }

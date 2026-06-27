@@ -19,6 +19,7 @@ export type Instrumento = {
   riesgo: Riesgo;
   precio_instrumento: string;
   tipo_instrumento: TipoInstrumento;
+  logo_url: string;
 };
 
 export enum Riesgo {
