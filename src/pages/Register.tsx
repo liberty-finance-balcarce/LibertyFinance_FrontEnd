@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
 import styles from "../styles/pages/Register.module.css";
 import { useAuth } from "../hooks/useAuth";
 import { useProvincias } from "../hooks/useProvincias";

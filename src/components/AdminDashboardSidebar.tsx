@@ -25,7 +25,7 @@ export function AdminDashboardSidebar() {
               : styles.navLink
           }
         >
-          <BsPersonFill size={22} color="var(--colorBordeVentana)" />
+          <BsPersonFill size={22} color="var(--colorSombraVentana)" />
           <span>Usuarios</span>
         </NavLink>
 
@@ -37,7 +37,7 @@ export function AdminDashboardSidebar() {
               : styles.navLink
           }
         >
-          <LuClipboardList size={22} color="var(--colorBordeVentana)" />
+          <LuClipboardList size={22} color="var(--colorSombraVentana)" />
           <span>Instrumentos Financieros</span>
         </NavLink>
 
@@ -49,7 +49,7 @@ export function AdminDashboardSidebar() {
               : styles.navLink
           }
         >
-          <FaMoneyBillTrendUp size={22} color="var(--colorBordeVentana)" />
+          <FaMoneyBillTrendUp size={22} color="var(--colorSombraVentana)" />
           <span>Paquetes de Inversión</span>
         </NavLink>
       </nav>

@@ -25,7 +25,7 @@ export function UserDashboardSidebar() {
               : styles.navLink
           }
         >
-          <FaShoppingCart size={22} color="var(--colorBordeVentana)" />
+          <FaShoppingCart size={22} color="var(--colorSombraVentana)" />
           <span>Carrito</span>
         </NavLink>
 
@@ -37,7 +37,7 @@ export function UserDashboardSidebar() {
               : styles.navLink
           }
         >
-          <FaChartLine size={22} color="var(--colorBordeVentana)" />
+          <FaChartLine size={22} color="var(--colorSombraVentana)" />
           <span>Mis Inversiones</span>
         </NavLink>
 
@@ -49,7 +49,7 @@ export function UserDashboardSidebar() {
               : styles.navLink
           }
         >
-          <FaListAlt size={22} color="var(--colorBordeVentana)" />
+          <FaListAlt size={22} color="var(--colorSombraVentana)" />
           <span>Test Perfil de Inversor</span>
         </NavLink>
       </nav>

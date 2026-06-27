@@ -1,5 +1,4 @@
 .containerLogin {
-  color: var(--colorPrimario);
   font-family: var(--tipoLetraGeneral);
   display: flex;
   flex-direction: column;
@@ -27,18 +26,27 @@
   margin-top: 10px;
   font-size: 14px;
   margin-right: auto;
+  margin-left: 5px;
   padding: 0px 0px 8px;
 }
 
 .inputForm {
+  
   padding: 0px 16px;
   height: 52px;
   font-size: 18px;
   border-radius: 7px;
-  border: 2px solid var(--colorBordeVentana);
+  background-color: var(--colorBordeVentana);
+  color: var(--colorLetraGeneral);
+  border: 2px solid var(--colorFondoGeneral);
   width: 100%; /* <-- CLAVE: obliga a ambos inputs a ocupar todo el ancho del contenedor */
   box-sizing: border-box; /* <-- CLAVE: evita que el padding ensanche la caja */
 }
+
+.inputForm::placeholder {
+  color: var(--colorLetraGeneral);
+}
+
 .inputForm:focus {
   outline: none;
   box-shadow: 0 0 8px 4px var(--colorSombraVentana);
@@ -53,12 +61,13 @@
 }
 .errorLogin {
   margin-top: 3px;
+  margin-bottom: 10px;
   text-align: center;
   min-height: 20px;
   display: block;
-  font-size: 10px;
   color: red;
   font-family: var(--tipoLetraGeneral);
+  font-size: smaller;
 }
 
 .botonLogin {
@@ -97,6 +106,20 @@
   justify-content: center;
 }
 
+.contRegistro a {
+color: var(--colorLetraGeneral);
+}
+
+.contOlvidar {
+  display: flex;
+  font-size: 16px;
+  justify-content: center;
+}
+
+.contOlvidar a {
+  color: var(--colorLetraGeneral);
+  }
+
 .botonEye {
   position: absolute;
   right: 14px;
@@ -107,17 +130,11 @@
   border: none;
   cursor: pointer;
   display: flex;
-  color: var(--colorPrimario);
+  color: var(--colorLetraGeneral);
   padding: 0;
   z-index: 2;
 }
 
-.errorLogin {
-  color: red;
-  text-align: center;
-  margin-bottom: 10px;
-  font-size:smaller;
-}
 
 /*Problema Edge*/
 /* 1. Apaga el ojo nativo de Microsoft Edge / Internet Explorer */

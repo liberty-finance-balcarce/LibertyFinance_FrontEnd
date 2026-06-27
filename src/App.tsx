@@ -1,5 +1,5 @@
 import "./App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import { PublicRoute } from "./routes/PublicRoute";
 import { UserRoute } from "./routes/UserRoute";
@@ -19,11 +19,11 @@ import { NotFound } from "./pages/NotFound";
 import { Login } from "./pages/Login";
 import { UserDashboard } from "./pages/UserDashboard";
 import { UserDashboardCart } from "./pages/UserDashboardCart";
-import { DashboardInversiones } from "./pages/DashboardInversiones";
-import { DashboardTestPerfil } from "./pages/DashboardTestPerfil";
-import AdminDashboard from "./pages/AdminDashboard";
-import {AdminUsersCard} from "./components/AdminUsersCard";
-import { AdminListInstFin } from "./components/AdminListInsFin";
+import { DashboardInversiones } from "./pages/UserDashboardInversiones";
+import { UserDashboardTestPerfil } from "./pages/UserDashboardTestPerfil";
+import { AdminDashboard } from "./pages/AdminDashboard";
+import { ForgotPassword } from "./pages/ForgotPassword";
+import { AdminUsers } from "./pages/AdminUsers";
 
 function App() {
   return (
@@ -33,9 +33,13 @@ function App() {
           <Route element={<UserRoute />}>
             <Route element={<UserLayout />}>
               <Route path="/dashboard/user" element={<UserDashboard />}>
+                <Route index element={<Navigate to="inversiones" replace />} />
                 <Route path="carrito" element={<UserDashboardCart />} />
                 <Route path="inversiones" element={<DashboardInversiones />} />
-                <Route path="test-inversor" element={<DashboardTestPerfil />} />
+                <Route
+                  path="test-inversor"
+                  element={<UserDashboardTestPerfil />}
+                />
               </Route>
             </Route>
           </Route>
@@ -43,18 +47,8 @@ function App() {
           <Route element={<AdminRoute />}>
             <Route element={<AdminLayout />}>
               <Route path="/dashboard/admin" element={<AdminDashboard />}>
-                <Route
-                  path="users"
-                  element={
-                    <AdminUsersCard
-                      totalRegistrados={0}
-                      totalUsuarios={0}
-                      totalAdmins={0}
-                    />
-                  }
-                />
-
-                <Route path="instrumentos-financieros" element={<AdminListInstFin/>}/>
+                <Route index element={<Navigate to="users" replace />} />
+                <Route path="users" element={<AdminUsers />} />
               </Route>
             </Route>
           </Route>
@@ -63,6 +57,7 @@ function App() {
             <Route element={<Layout />}>
               <Route path="/" element={<Home />} />
               <Route path="/register" element={<Register />} />
+              <Route path="/forgot-password" element={<ForgotPassword />} />
               <Route path="/sobre-nosotros" element={<NuestroEquipo />} />
               <Route path="/contactenos" element={<Contactenos />} />
               <Route path="/login" element={<Login />} />

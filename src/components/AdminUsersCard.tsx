@@ -1,12 +1,19 @@
-import styles from "../styles/components/AdminUsersCard.module.css"
+import { useUsuarios } from "../hooks/useUsuarios";
+import styles from "../styles/components/AdminUsersCard.module.css"; 
 
-interface UserCardsProps {
-  totalRegistrados: number;
-  totalUsuarios: number;
-  totalAdmins: number;
-}
+export function AdminUsersCard() {
+  const { usuariosState } = useUsuarios();
 
-export function AdminUsersCard({totalRegistrados, totalUsuarios, totalAdmins}: UserCardsProps) {
+  const totalRegistrados = usuariosState.length;
+
+  const totalUsuarios = usuariosState.filter(
+    (user) => user.rol?.nombre?.toLowerCase() !== "admin"
+  ).length;
+
+  const totalAdmins = usuariosState.filter(
+    (user) => user.rol?.nombre?.toLowerCase() === "admin"
+  ).length;
+
   return (
     <div className={styles.container}>
       <div className={styles.card}> 
@@ -19,7 +26,7 @@ export function AdminUsersCard({totalRegistrados, totalUsuarios, totalAdmins}: U
         <p>Usuarios Registrados</p>
       </div>
 
-      <div className={styles.card}>
+      <div className={styles.cardAdmin}>
         <h2>{totalAdmins}</h2>
         <p>Administradores</p>
       </div>

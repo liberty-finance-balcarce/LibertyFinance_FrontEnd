@@ -1,4 +1,4 @@
-import type { UpdateUsuarioDTO } from "../types/usuario/updateUsuarioDTO";
+import type { UpdateUsuario } from "../types/usuarios";
 
 const BASE_API = "http://localhost:3000/api/v1";
 
@@ -14,7 +14,7 @@ export async function getUsers() {
   return result.data;
 }
 
-export async function updateUser(dni: number, data: UpdateUsuarioDTO) {
+export async function updateUser(dni: number, data: UpdateUsuario) {
 
   const response = await fetch(`${BASE_API}/usuarios/${dni}`, {
     method: "PATCH",

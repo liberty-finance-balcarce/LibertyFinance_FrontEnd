@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import type { UpdateUsuarioDTO } from "../types/usuario/updateUsuarioDTO";
+import type { UpdateUsuario } from "../types/usuarios";
 import type { Usuario } from "../types/usuarios";
 
 import styles from "../styles/components/FormEditarUsuario.module.css";
@@ -14,7 +14,7 @@ interface Props {
   provincias: Provincia[];
   roles: Rol[];
   onClose: () => void;
-  onSave: (data: UpdateUsuarioDTO) => void;
+  onSave: (data: UpdateUsuario) => void;
 }
 
 export function FormEditarUsuario({usuario, provincias, roles, onClose, onSave}: Props) {
