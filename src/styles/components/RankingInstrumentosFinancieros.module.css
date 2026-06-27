@@ -26,10 +26,17 @@
 }
 
 .panel {
-  border: 1px solid #7c4c9e;
-  padding: 20px clamp(18px, 2vw, 26px);
-  border-radius: 20px;
-  background-color: var(--colorFondoGeneral);
+  border: 1px solid var(--colorBordeVentana);
+  border-radius: 8px;
+  padding: 20px;
+  background-color: var(--colorFondoVentana);
+  color: var(--colorLetraGeneral);
+  box-shadow: 0 2px 4px var(--colorPrimario);
+  transition:
+    background-color 0.35s ease,
+    color 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
 }
 
 .panelTitle {
