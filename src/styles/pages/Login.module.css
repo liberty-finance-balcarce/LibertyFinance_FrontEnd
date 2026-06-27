@@ -106,11 +106,19 @@
   justify-content: center;
 }
 
+.contRegistro a {
+color: var(--colorLetraGeneral);
+}
+
 .contOlvidar {
   display: flex;
   font-size: 16px;
   justify-content: center;
 }
+
+.contOlvidar a {
+  color: var(--colorLetraGeneral);
+  }
 
 .botonEye {
   position: absolute;
