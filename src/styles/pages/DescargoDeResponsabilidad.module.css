@@ -1,17 +1,17 @@
 .container {
-    color: var(--colorPrimario);
-    text-align: center;
-    padding: 2rem;
-    margin-left: 200px;
-    margin-right: 200px;
-    font-size: 1.2em;
-    font-family: var(--tipoLetraGeneral);
+  color: var(--colorLetraGeneral);
+  text-align: center;
+  padding: 2rem;
+  margin-left: 200px;
+  margin-right: 200px;
+  font-size: 1.2em;
+  font-family: var(--tipoLetraGeneral);
 }
 
 .container h1 {
-    margin-bottom: 1rem;
+  margin-bottom: 1rem;
 }
 
 .container p {
-    line-height: 1.6;
+  line-height: 1.6;
 }
