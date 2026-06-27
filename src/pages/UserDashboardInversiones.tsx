@@ -92,7 +92,7 @@ export function DashboardInversiones() {
                       </div>
                       <div className={styles.contIndicador}>
                         <div className={`${styles.gananciaPerdidaPorcentaje} ${item.porcentaje_retorno > 0 ? styles.positivo : styles.negativo}`}>
-                           {`${item.porcentaje_retorno}%`}
+                           {item.porcentaje_retorno>0?`+${item.porcentaje_retorno.toFixed(2)}%`:`${item.porcentaje_retorno.toFixed(2)}%`}
                         </div>
                         <div className={styles.verdeRojoIndicador}>
                         {item.porcentaje_retorno > 0 ? "🟩" : "🟥"}
