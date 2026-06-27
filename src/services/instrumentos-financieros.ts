@@ -5,8 +5,7 @@ import type {
   GetRankingParams,
 } from "../types/instrumento-financiero";
 import { TipoInstrumento } from "../types/instrumento-financiero";
-
-const BASE_API = "http://localhost:3000/api/v1";
+import { VITE_API_URL } from "../utils/env";
 
 export async function getRankingInstrumentos(
   params?: GetRankingParams,
@@ -23,7 +22,7 @@ export async function getRankingInstrumentos(
     query.append("precio_instrumento", params.precio_instrumento.toString());
   }
 
-  const url = `${BASE_API}/instrumentos-financieros/?${query.toString()}`;
+  const url = `${VITE_API_URL}/instrumentos-financieros/?${query.toString()}`;
 
   const response = await fetch(url);
 
@@ -54,7 +53,7 @@ export async function getRankingInstrumentos(
 }
 
 export async function getInstrumentos(){
-  const response = await fetch(`${BASE_API}/instrumentos-financieros`)
+  const response = await fetch(`${VITE_API_URL}/instrumentos-financieros`)
 
   if(!response.ok){
     throw new Error("Error al cargar los instrumentos");
@@ -67,7 +66,7 @@ export async function getInstrumentos(){
 export async function deleteInstrumentos(id: number){
    const token = localStorage.getItem("token");
 
-  const response = await fetch(`${BASE_API}/instrumentos-financieros/${id}`,
+  const response = await fetch(`${VITE_API_URL}/instrumentos-financieros/${id}`,
     {
       method: "DELETE",
       headers: {
@@ -87,7 +86,7 @@ export async function deleteInstrumentos(id: number){
 export async function crearInstrumento(data: CreateInstrumentoFinanciero){
     const token = localStorage.getItem("token");
 
-    const response = await fetch(`${BASE_API}/instrumentos-financieros`, {
+    const response = await fetch(`${VITE_API_URL}/instrumentos-financieros`, {
 
     method: "POST",
     headers: {
@@ -112,7 +111,7 @@ const errorData = await response.json().catch(() => ({}));
 export async function updateInstrumento(id: number, data: UpdateInstrumentoFinanciero){
   const token = localStorage.getItem("token");
 
-const response = await fetch(`${BASE_API}/instrumentos-financieros/${id}`, {
+const response = await fetch(`${VITE_API_URL}/instrumentos-financieros/${id}`, {
 
     method: "PATCH",
     headers: {

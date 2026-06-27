@@ -1,9 +1,8 @@
 import { type TransaccionHistoricoCompraResponse } from "../types/transaccion-historico-compra";
-
-const BASE_URL: string = "http://localhost:3000/api/v1";
+import { VITE_API_URL } from "../utils/env";
 
 export async function fetchTransaccionCompra(): Promise<TransaccionHistoricoCompraResponse> {
-  const res = await fetch(`${BASE_URL}/transaccion-hitorico-compra`);
+  const res = await fetch(`${VITE_API_URL}/transaccion-hitorico-compra`);
   if (!res.ok) {
     throw new Error(
       `Error ${res.status}: No hay transacciones para este usuario.`,
