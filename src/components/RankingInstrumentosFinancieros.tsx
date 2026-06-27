@@ -1,13 +1,14 @@
 import styles from "../styles/components/RankingInstrumentosFinancieros.module.css";
-import { useRankingInstrumentos } from "../hooks/useRankingInstrumentos";
+import { useInstrumentosFinancieros } from "../hooks/useInstrumentosFinancieros.ts";
+import { LoadingSpinner } from "../components/LoadingSpinner.tsx";
 
 export function RankingInstrumentosFinancieros() {
-  const { data, isLoading, error } = useRankingInstrumentos();
+  const { data, isLoading, error } = useInstrumentosFinancieros();
 
   if (isLoading) {
     return (
       <div className={styles.loadingContainer}>
-        <p>Cargando ranking de instrumentos...</p>
+        <LoadingSpinner logo="assets/logo-icon.png" size={120} />
       </div>
     );
   }
@@ -53,11 +54,13 @@ export function RankingInstrumentosFinancieros() {
                   <span className={styles.itemName}>
                     {item.nombre_instrumento}
                   </span>
-                  <span className={styles.itemYield}>{item.rendimiento}</span>
+                  <span className={styles.itemYield}>{item.rendimiento}%</span>
                   <span className={styles.itemRisk}>{item.riesgo}</span>
-                  <span className={styles.itemPrice}>
-                    {item.precio_instrumento}
-                  </span>
+                  <span className={styles.priceCell}>
+                    <span className={styles.itemPrice}>
+                      US${item.precio_instrumento}
+                    </span>
+                  </span>{" "}
                 </li>
               ))}
             </ul>
@@ -79,11 +82,13 @@ export function RankingInstrumentosFinancieros() {
                   <span className={styles.itemName}>
                     {item.nombre_instrumento}
                   </span>
-                  <span className={styles.itemYield}>{item.rendimiento}</span>
+                  <span className={styles.itemYield}>{item.rendimiento}%</span>
                   <span className={styles.itemRisk}>{item.riesgo}</span>
-                  <span className={styles.itemPrice}>
-                    {item.precio_instrumento}
-                  </span>
+                  <span className={styles.priceCell}>
+                    <span className={styles.itemPrice}>
+                      US${item.precio_instrumento}
+                    </span>
+                  </span>{" "}
                 </li>
               ))}
             </ul>

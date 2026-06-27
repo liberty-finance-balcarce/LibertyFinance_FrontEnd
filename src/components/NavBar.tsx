@@ -1,25 +1,29 @@
 import { useAuth } from "../hooks/useAuth";
 import { AvatarUsuario } from "./AvatarUsuario";
 import { Button } from "./Button";
+import { BsPersonFill } from "react-icons/bs";
+import { ThemeToggle } from "./ThemeToggle";
+import { useThemeMode } from "../hooks/useThemeMode";
 import styles from "../styles/components/NavBar.module.css";
 
 export function NavBar() {
-  const { user } = useAuth();
+  const { user, role } = useAuth();
+  const { theme, toggleTheme } = useThemeMode();
 
   return (
     <nav className={styles.header}>
       <div className={styles.logo}>
         <Button to="/" variant="logo">
-          <img src="../assets/logo-complete.png" alt="Logo Liberty Finance" />
+          <img src="/assets/logo-complete.png" alt="Logo Liberty Finance" />
         </Button>
       </div>
 
       <div className={styles.links}>
         <Button to="/" variant="default">
-          Home
+          Inicio
         </Button>
-        <Button to="/nuestro-equipo" variant="default">
-          Nuestro Equipo
+        <Button to="/sobre-nosotros" variant="default">
+          Sobre Nosotros
         </Button>
         <Button to="/contactenos" variant="default">
           Contactenos
@@ -27,15 +31,25 @@ export function NavBar() {
       </div>
 
       <div className={styles.login}>
+        <div className={styles.themeToggle}>
+          <ThemeToggle theme={theme} onToggle={toggleTheme} />
+        </div>
         {user ? (
           <div className={styles.usuario}>
-            <Button to="/dashboard" variant="login">
+            <Button
+              to={
+                role === "admin"
+                  ? "/dashboard/admin/users"
+                  : "/dashboard/user/inversiones"
+              }
+              variant="login"
+            >
               <AvatarUsuario usuario={user} />
             </Button>
           </div>
         ) : (
           <Button to="/login" variant="login">
-            Login
+            <BsPersonFill />
           </Button>
         )}
       </div>

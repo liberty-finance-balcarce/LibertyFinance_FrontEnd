@@ -1,162 +1,115 @@
-import { useState } from "react";
+import { useForm } from "react-hook-form";
 import styles from "../styles/pages/Contactenos.module.css";
 import { useContactForm } from "../hooks/useContactForm";
 import { Button } from "../components/Button";
 
+interface ContactFormValues {
+  nombre: string;
+  apellido: string;
+  email: string;
+  telefono: string;
+  asunto: string;
+  mensaje: string;
+}
+
 export function Contactenos() {
-  const [formData, setFormData] = useState({
-    nombre: "",
-    apellido: "",
-    email: "",
-    telefono: "",
-    asunto: "",
-    mensaje: "",
-  });
-
-  const [formErrors, setFormErrors] = useState({
-    nombre: "",
-    apellido: "",
-    email: "",
-    telefono: "",
-    asunto: "",
-    mensaje: "",
-  });
-
   const { sendForm, isLoading, error, isSuccess } = useContactForm();
 
-  const validateField = (name: string, value: string) => {
-    let errorMessage = "";
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<ContactFormValues>({
+    mode: "onChange",
+    defaultValues: {
+      nombre: "",
+      apellido: "",
+      email: "",
+      telefono: "",
+      asunto: "",
+      mensaje: "",
+    },
+  });
 
-    switch (name) {
-      case "nombre":
-        if (!value.trim()) {
-          errorMessage = "El nombre es obligatorio.";
-        } else if (value.trim().length < 2) {
-          errorMessage = "El nombre debe tener al menos 2 caracteres.";
-        }
-        break;
-      case "apellido":
-        if (!value.trim()) {
-          errorMessage = "El apellido es obligatorio.";
-        }
-        break;
-      case "email":
-        if (!value.trim()) {
-          errorMessage = "El email es obligatorio.";
-        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
-          errorMessage = "Ingresa un email válido (ej: usuario@correo.com).";
-        }
-        break;
-      case "telefono":
-        if (value.trim() && !/^[0-9+\-\s()]+$/.test(value)) {
-          errorMessage =
-            "El teléfono solo debe contener números y símbolos (+, -, ()).";
-        }
-        break;
-      case "asunto":
-        if (!value.trim()) {
-          errorMessage = "El asunto es obligatorio.";
-        } else if (value.trim().length > 100) {
-          errorMessage = "El asunto no puede superar los 100 caracteres.";
-        }
-        break;
-      case "mensaje":
-        if (!value.trim()) {
-          errorMessage = "El mensaje es obligatorio.";
-        } else if (value.trim().length < 10) {
-          errorMessage = "El mensaje debe tener al menos 10 caracteres.";
-        } else if (value.trim().length > 500) {
-          errorMessage = "El mensaje no puede superar los 500 caracteres.";
-        }
-        break;
-      default:
-        break;
-    }
+  const asunto = watch("asunto") ?? "";
+  const mensaje = watch("mensaje") ?? "";
 
-    return errorMessage;
-  };
-
-  const handleChange = (e: any) => {
-    const { name, value } = e.target;
-
-    setFormData((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-
-    const currentError = validateField(name, value);
-    setFormErrors((prevErrors) => ({
-      ...prevErrors,
-      [name]: currentError,
-    }));
-  };
-
-  const handleSubmit = async (e: any) => {
-    e.preventDefault();
-
-    const newErrors = {
-      nombre: validateField("nombre", formData.nombre),
-      apellido: validateField("apellido", formData.apellido),
-      email: validateField("email", formData.email),
-      telefono: validateField("telefono", formData.telefono),
-      asunto: validateField("asunto", formData.asunto),
-      mensaje: validateField("mensaje", formData.mensaje),
-    };
-
-    setFormErrors(newErrors);
-
-    const hasErrors = Object.values(newErrors).some(
-      (errorMsg) => errorMsg !== "",
-    );
-
-    if (!hasErrors) {
-      await sendForm(formData);
-    }
+  const onSubmit = async (formData: ContactFormValues) => {
+    await sendForm(formData);
   };
 
   return (
     <section className={styles.container}>
       <header className={styles.header}>
         <h1 className={styles.title}>Contáctenos</h1>
-        <p className={styles.subtitle}>
-          <a href="#">Ponte en Contacto con nosotros</a>
-        </p>
       </header>
 
-      <form onSubmit={handleSubmit} className={styles.form} noValidate>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className={styles.form}
+        noValidate
+      >
         <div className={styles.row}>
           <div className={styles.formGroup}>
             <label htmlFor="nombre">
               Nombre <span className={styles.required}>*</span>
             </label>
+
             <input
               type="text"
               id="nombre"
-              name="nombre"
-              value={formData.nombre}
-              onChange={handleChange}
+              minLength={2}
+              maxLength={20}
               placeholder="Juan"
-              className={formErrors.nombre ? styles.inputError : ""}
+              className={errors.nombre ? styles.inputError : ""}
+              {...register("nombre", {
+                required: "El nombre es obligatorio.",
+                minLength: {
+                  value: 2,
+                  message: "El nombre debe tener al menos 2 caracteres.",
+                },
+                maxLength: {
+                  value: 20,
+                  message: "El nombre debe tener maximo 20 caracteres.",
+                },
+                setValueAs: (value) => value.trim(),
+              })}
             />
-            {formErrors.nombre && (
-              <span className={styles.error}>{formErrors.nombre}</span>
+
+            {errors.nombre && (
+              <span className={styles.error}>{errors.nombre.message}</span>
             )}
           </div>
+
           <div className={styles.formGroup}>
             <label htmlFor="apellido">
               Apellido <span className={styles.required}>*</span>
             </label>
+
             <input
               type="text"
               id="apellido"
-              name="apellido"
-              value={formData.apellido}
-              onChange={handleChange}
+              minLength={2}
+              maxLength={20}
               placeholder="Perez"
-              className={formErrors.apellido ? styles.inputError : ""}
+              className={errors.apellido ? styles.inputError : ""}
+              {...register("apellido", {
+                required: "El apellido es obligatorio.",
+                setValueAs: (value) => value.trim(),
+                minLength: {
+                  value: 2,
+                  message: "El apellido debe tener al menos 2 caracteres.",
+                },
+                maxLength: {
+                  value: 20,
+                  message: "El apellido debe tener maximo 20 caracteres.",
+                },
+              })}
             />
-            {formErrors.apellido && (
-              <span className={styles.error}>{formErrors.apellido}</span>
+
+            {errors.apellido && (
+              <span className={styles.error}>{errors.apellido.message}</span>
             )}
           </div>
         </div>
@@ -166,32 +119,73 @@ export function Contactenos() {
             <label htmlFor="email">
               Email <span className={styles.required}>*</span>
             </label>
+
             <input
               type="email"
               id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
               placeholder="juan.perez@gmail.com"
-              className={formErrors.email ? styles.inputError : ""}
+              className={errors.email ? styles.inputError : ""}
+              {...register("email", {
+                required: "El email es obligatorio.",
+                pattern: {
+                  value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                  message: "Ingresa un email valido (ej: usuario@correo.com).",
+                },
+                setValueAs: (value) => value.trim(),
+              })}
             />
-            {formErrors.email && (
-              <span className={styles.error}>{formErrors.email}</span>
+
+            {errors.email && (
+              <span className={styles.error}>{errors.email.message}</span>
             )}
           </div>
+
           <div className={styles.formGroup}>
             <label htmlFor="telefono">Telefono</label>
+
             <input
               type="tel"
               id="telefono"
-              name="telefono"
-              value={formData.telefono}
-              onChange={handleChange}
               placeholder="+542266630218"
-              className={formErrors.telefono ? styles.inputError : ""}
+              maxLength={40}
+              className={errors.telefono ? styles.inputError : ""}
+              {...register("telefono", {
+                setValueAs: (value) => value.trim(),
+
+                validate: (value) => {
+                  if (!value) return true;
+
+                  const phone = value.trim();
+
+                  const validChars = /^[0-9+\-\s()]+$/.test(phone);
+
+                  if (!validChars) {
+                    return "El telefono solo debe contener numeros y simbolos (+, -, ()).";
+                  }
+
+                  const soloNumeros = phone.replace(/\D/g, "");
+
+                  if (soloNumeros.length < 8) {
+                    return "El telefono debe tener al menos 8 numeros.";
+                  }
+
+                  if (soloNumeros.length > 15) {
+                    return "El telefono no puede tener más de 15 numeros.";
+                  }
+
+                  const validFormat = /^\+?[0-9][0-9\s()\-]*[0-9]$/.test(phone);
+
+                  if (!validFormat) {
+                    return "Ingresa un telefono valido.";
+                  }
+
+                  return true;
+                },
+              })}
             />
-            {formErrors.telefono && (
-              <span className={styles.error}>{formErrors.telefono}</span>
+
+            {errors.telefono && (
+              <span className={styles.error}>{errors.telefono.message}</span>
             )}
           </div>
         </div>
@@ -201,22 +195,28 @@ export function Contactenos() {
             <label htmlFor="asunto">
               Asunto <span className={styles.required}>*</span>
             </label>
-            <span className={styles.charCount}>
-              {formData.asunto.length}/100
-            </span>
+
+            <span className={styles.charCount}>{asunto.length}/100</span>
           </div>
+
           <input
             type="text"
             id="asunto"
-            name="asunto"
-            value={formData.asunto}
-            onChange={handleChange}
             placeholder="Consulta sobre instrumentos financieros"
             maxLength={100}
-            className={formErrors.asunto ? styles.inputError : ""}
+            className={errors.asunto ? styles.inputError : ""}
+            {...register("asunto", {
+              required: "El asunto es obligatorio.",
+              maxLength: {
+                value: 100,
+                message: "El asunto no puede superar los 100 caracteres.",
+              },
+              setValueAs: (value) => value.trim(),
+            })}
           />
-          {formErrors.asunto && (
-            <span className={styles.error}>{formErrors.asunto}</span>
+
+          {errors.asunto && (
+            <span className={styles.error}>{errors.asunto.message}</span>
           )}
         </div>
 
@@ -225,22 +225,32 @@ export function Contactenos() {
             <label htmlFor="mensaje">
               Mensaje <span className={styles.required}>*</span>
             </label>
-            <span className={styles.charCount}>
-              {formData.mensaje.length}/500
-            </span>
+
+            <span className={styles.charCount}>{mensaje.length}/500</span>
           </div>
+
           <textarea
             id="mensaje"
-            name="mensaje"
-            value={formData.mensaje}
-            onChange={handleChange}
             placeholder="Quiero recibir mas informacion sobre las inversiones disponibles"
-            rows={4}
+            rows={2}
             maxLength={500}
-            className={formErrors.mensaje ? styles.inputError : ""}
+            className={errors.mensaje ? styles.inputError : ""}
+            {...register("mensaje", {
+              required: "El mensaje es obligatorio.",
+              minLength: {
+                value: 10,
+                message: "El mensaje debe tener al menos 10 caracteres.",
+              },
+              maxLength: {
+                value: 500,
+                message: "El mensaje no puede superar los 500 caracteres.",
+              },
+              setValueAs: (value) => value.trim(),
+            })}
           />
-          {formErrors.mensaje && (
-            <span className={styles.error}>{formErrors.mensaje}</span>
+
+          {errors.mensaje && (
+            <span className={styles.error}>{errors.mensaje.message}</span>
           )}
         </div>
 
@@ -249,6 +259,7 @@ export function Contactenos() {
             Error al enviar: {error}
           </p>
         )}
+
         {isSuccess && (
           <p className={`${styles.statusMessage} ${styles.statusSuccess}`}>
             ¡El mensaje se ha enviado correctamente!
@@ -257,7 +268,9 @@ export function Contactenos() {
 
         <Button
           type="submit"
-          className={`${styles.submitButton} ${isLoading ? styles.buttonLoading : ""}`}
+          className={`${styles.submitButton} ${
+            isLoading ? styles.buttonLoading : ""
+          }`}
           disabled={isLoading}
         >
           {isLoading ? "Enviando..." : "Enviar"}

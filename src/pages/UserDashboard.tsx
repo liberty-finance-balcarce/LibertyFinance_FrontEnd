@@ -1,8 +1,8 @@
 import { Outlet } from "react-router-dom";
-import { DashboardSidebar } from "../components/DashboardSidebar";
+import { UserDashboardSidebar } from "../components/UserDashboardSidebar";
 import styles from "../styles/pages/Dashboard.module.css";
 
-export function Dashboard() {
+export function UserDashboard() {
   return (
     <div className={styles.container}>
       <div className={styles.layout}>
@@ -10,7 +10,7 @@ export function Dashboard() {
           <Outlet />
         </main>
 
-        <DashboardSidebar />
+        <UserDashboardSidebar />
       </div>
     </div>
   );

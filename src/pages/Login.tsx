@@ -1,172 +1,144 @@
-import { useState, type ChangeEvent, type FormEvent } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
-import styles from "../styles/pages/Login.module.css";
+import { useState } from "react";
+import { useNavigate, NavLink } from "react-router-dom";
+import { useForm } from "react-hook-form";
 import { useAuth } from "../hooks/useAuth";
 import { Button } from "../components/Button";
+import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
+import styles from "../styles/pages/Login.module.css";
 
 interface DatosRecibidos {
   dni_usuario: string;
   password: string;
 }
 
-type ValidationErrors = Partial<Record<keyof DatosRecibidos, string>>;
-
 export function Login() {
   const navigate = useNavigate();
   const { login } = useAuth();
 
-  const [formData, setFormData] = useState<DatosRecibidos>({
-    dni_usuario: "",
-    password: "",
+  const [errorServidor, setErrorServidor] = useState<string | null>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<DatosRecibidos>({
+    mode: "onTouched",
+
+    defaultValues: {
+      dni_usuario: "",
+      password: "",
+    },
   });
 
-  const [errors, setErrors] = useState<ValidationErrors>({});
-  const [touched, setTouched] = useState<
-    Partial<Record<keyof DatosRecibidos, boolean>>
-  >({});
-  const [error, setError] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
-
-  const validateField = (name: keyof DatosRecibidos, value: string): string => {
-    if (!value.trim()) {
-      return `Debe ingresar ${name === "dni_usuario" ? "DNI" : "contraseña"}.`;
-    }
-
-    if (name === "dni_usuario") {
-      if (!/^[0-9]+$/.test(value)) return "Solo se permiten números";
-      if (value.length < 7) return "Deben ser mínimo 7 números";
-      if (value.length > 8) return "Deben ser máximo 8 números";
-    }
-
-    return "";
+  const visibleOnOff = () => {
+    setIsVisible((prev) => !prev);
   };
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    const fieldName = name as keyof DatosRecibidos;
-
-    let newValue = value;
-
-    if (fieldName === "dni_usuario") {
-      newValue = newValue.replace(/[^0-9]/g, "").slice(0, 8);
-    }
-
-    setFormData((prev) => ({ ...prev, [fieldName]: newValue }));
-
-    if (touched[fieldName]) {
-      const errorMsg = validateField(fieldName, newValue);
-      setErrors((prev) => ({ ...prev, [fieldName]: errorMsg }));
-    }
-  };
-
-  const handleBlur = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    const fieldName = name as keyof DatosRecibidos;
-
-    setTouched((prev) => ({ ...prev, [fieldName]: true }));
-
-    const errorMsg = validateField(fieldName, value);
-    setErrors((prev) => ({ ...prev, [fieldName]: errorMsg }));
-  };
-
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setError(null);
-
-    const newErrors: ValidationErrors = {};
-    let isValid = true;
-
-    (Object.keys(formData) as Array<keyof DatosRecibidos>).forEach((key) => {
-      const errorMsg = validateField(key, formData[key]);
-      if (errorMsg) {
-        newErrors[key] = errorMsg;
-        isValid = false;
-      }
-    });
-
-    setErrors(newErrors);
-    setTouched({ dni_usuario: true, password: true });
-
-    if (!isValid) return;
-
-    setIsLoading(true);
+  const enviarForm = async (data: DatosRecibidos) => {
+    setErrorServidor(null);
 
     try {
-      const response = await login(
-        Number(formData.dni_usuario),
-        formData.password,
-      );
+      const dniNumerico = Number(data.dni_usuario);
+
+      const response = await login(dniNumerico, data.password);
 
       if (!response.ok) {
-        throw new Error("DNI o contraseña incorrectos.");
+        throw new Error("Credenciales incorrectas.");
       }
 
-      navigate("/");
+      const userRole = localStorage.getItem("role");
+
+      if (userRole === "admin") {
+        navigate("/dashboard/admin/users");
+      } else {
+        navigate("/dashboard/user/inversiones");
+      }
     } catch (err: any) {
-      setError(err.message || "Ocurrió un error al intentar iniciar sesión.");
-    } finally {
-      setIsLoading(false);
+      if (err.message === "Failed to fetch") {
+        setErrorServidor("Error en la conexión con el servidor.");
+      } else {
+        setErrorServidor(err.message || "Ocurrió un error inesperado.");
+      }
     }
   };
 
   return (
     <section className={styles.containerLogin}>
       <h1 className={styles.h1}>Iniciar sesión</h1>
-      <form className={styles.formLogin} onSubmit={handleSubmit} noValidate>
+      <form
+        className={styles.formLogin}
+        onSubmit={handleSubmit(enviarForm)}
+        noValidate
+      >
         <label htmlFor="dni_usuario" className={styles.etiquetaForm}>
           DNI
         </label>
         <input
           className={styles.inputForm}
           id="dni_usuario"
-          name="dni_usuario"
           maxLength={8}
           autoComplete="off"
           type="text"
-          value={formData.dni_usuario}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          placeholder="Ingresa tu DNI"
+          inputMode="numeric"
+          {...register("dni_usuario", {
+            required: "Debe ingresar DNI.",
+            pattern: { value: /^[0-9]+$/, message: "Solo se permiten números" },
+            minLength: { value: 7, message: "Deben ser mínimo 7 números" },
+            maxLength: { value: 8, message: "Deben ser máximo 8 números" },
+          })}
+          placeholder="Ingresá tu DNI"
         />
-        <span className={styles.errorLogin}>{errors.dni_usuario || ""}</span>
+        <span className={styles.errorLogin}>
+          {errors.dni_usuario?.message || ""}
+        </span>
 
         <label htmlFor="password" className={styles.etiquetaForm}>
           Contraseña
         </label>
-        <input
-          className={styles.inputForm}
-          id="password"
-          name="password"
-          autoComplete="off"
-          type="password"
-          value={formData.password}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          placeholder="********"
-        />
-        <span className={styles.errorLogin}>{errors.password || ""}</span>
-
-        {error && (
-          <p
-            style={{ color: "red", textAlign: "center", marginBottom: "10px" }}
+        <div className={styles.contPassword}>
+          <input
+            className={styles.inputForm}
+            id="password"
+            maxLength={16}
+            autoComplete="off"
+            type={isVisible ? "text" : "password"}
+            {...register("password", {
+              required: "Debe ingresar contraseña.",
+            })}
+            placeholder="********"
+          />
+          <button
+            type="button"
+            onClick={visibleOnOff}
+            className={styles.botonEye}
           >
-            {error}
-          </p>
-        )}
+            {isVisible ? <IoEyeOffOutline /> : <IoEyeOutline />}
+          </button>
+        </div>
+        <span className={styles.errorLogin}>
+          {errors.password?.message || ""}
+        </span>
+
+        {errorServidor && <p className={styles.errorLogin}>{errorServidor}</p>}
 
         <Button
           type="submit"
           variant="login"
           className={styles.botonLogin}
-          disabled={isLoading}
+          disabled={isSubmitting}
         >
-          {isLoading ? "Cargando..." : "Login"}
+          {isSubmitting ? "Cargando..." : "Iniciar sesión"}
         </Button>
 
-        <div id={styles.contRegistro}>
+        <div className={styles.contRegistro}>
           <span>
-            ¿No tienes cuenta? <NavLink to="/register">Crear una</NavLink>
+            ¿No tienes cuenta? <NavLink to="/register">Registrarse</NavLink>
           </span>
+        </div>
+
+        <div className={styles.contOlvidar}>
+          <NavLink to="/forgot-password">Olvidé mi contraseña</NavLink>
         </div>
       </form>
     </section>

@@ -1,13 +1,12 @@
 import "./App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
-
 import { PublicRoute } from "./routes/PublicRoute";
 import { UserRoute } from "./routes/UserRoute";
-
+import { AdminRoute } from "./routes/AdminRoute";
 import { Layout } from "./layouts/Layout";
 import { UserLayout } from "./layouts/UserLayout";
-
+import { AdminLayout } from "./layouts/AdminLayout";
 import { Register } from "./pages/Register";
 import { Home } from "./components/Home";
 import { NuestroEquipo } from "./pages/NuestroEquipo";
@@ -18,10 +17,13 @@ import { DerechosReservados } from "./pages/DerechosReservados";
 import { FAQ } from "./pages/FAQ";
 import { NotFound } from "./pages/NotFound";
 import { Login } from "./pages/Login";
-
-import { Dashboard } from "./pages/Dashboard";
-import { DashboardCart } from "./pages/DashboardCart";
-import { DashboardInversiones } from "./pages/DashboardInversiones";
+import { UserDashboard } from "./pages/UserDashboard";
+import { UserDashboardCart } from "./pages/UserDashboardCart";
+import { DashboardInversiones } from "./pages/UserDashboardInversiones";
+import { UserDashboardTestPerfil } from "./pages/UserDashboardTestPerfil";
+import AdminDashboard from "./pages/AdminDashboard";
+import { AdminUsersCard } from "./components/AdminUsersCard";
+import ForgotPassword from "./pages/ForgotPassword";
 
 function App() {
   return (
@@ -30,9 +32,29 @@ function App() {
         <Routes>
           <Route element={<UserRoute />}>
             <Route element={<UserLayout />}>
-              <Route path="/dashboard" element={<Dashboard />}>
-                <Route path="cart" element={<DashboardCart />} />
+              <Route path="/dashboard/user" element={<UserDashboard />}>
+                <Route index element={<Navigate to="inversiones" replace />} />
+                <Route path="carrito" element={<UserDashboardCart />} />
                 <Route path="inversiones" element={<DashboardInversiones />} />
+                <Route path="test-inversor" element={<UserDashboardTestPerfil />} />
+              </Route>
+            </Route>
+          </Route>
+
+          <Route element={<AdminRoute />}>
+            <Route element={<AdminLayout />}>
+              <Route path="/dashboard/admin" element={<AdminDashboard />}>
+                <Route index element={<Navigate to="users" replace />} />
+                <Route
+                  path="users"
+                  element={
+                    <AdminUsersCard
+                      totalRegistrados={0}
+                      totalUsuarios={0}
+                      totalAdmins={0}
+                    />
+                  }
+                />
               </Route>
             </Route>
           </Route>
@@ -41,7 +63,8 @@ function App() {
             <Route element={<Layout />}>
               <Route path="/" element={<Home />} />
               <Route path="/register" element={<Register />} />
-              <Route path="/nuestro-equipo" element={<NuestroEquipo />} />
+              <Route path="/forgot-password" element={<ForgotPassword />} />
+              <Route path="/sobre-nosotros" element={<NuestroEquipo />} />
               <Route path="/contactenos" element={<Contactenos />} />
               <Route path="/login" element={<Login />} />
 

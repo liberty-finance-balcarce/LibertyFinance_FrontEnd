@@ -8,7 +8,22 @@
   min-height: 400px;
   font-family: var(--tipoLetraGeneral);
   color: var(--colorLetrasBoton);
-  margin-bottom: 2vw;
+  border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+}
+
+.container {
+  width: 100vw;
+}
+
+.layout {
+  display: flex;
+  min-height: 100vh;
+  width: 100vw;
+}
+
+.mainContent {
+  flex: 1;
+  padding: 20px;
 }
 
 .nav {
@@ -30,7 +45,9 @@
 }
 
 .navLinkActive {
-  border: 1px solid var(--colorBordeVentana);
+  border: 1px solid var(--colorSombraVentana);
+  border-radius: 5px;
+  box-shadow: 0 0 8px var(--colorSombraVentana);
 }
 
 .logoutButton {

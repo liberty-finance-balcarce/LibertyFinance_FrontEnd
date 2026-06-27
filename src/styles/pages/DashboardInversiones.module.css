@@ -1,0 +1,93 @@
+
+/* font-family: var(--tipoLetraGeneral); */
+.contResumen{
+    font-family: var(--tipoLetraGeneral);
+    font-weight: 700;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+
+    border-radius: 7px;
+    margin: 0px;
+    width: 100%;
+    height: auto;
+}
+.listaActivos{
+    width: 500px;
+}
+.contActivos{
+    display:flex;
+    flex-direction: row;
+
+}
+.contBalance{
+    width: 120px;
+}
+.contIndicador{
+    width: 55px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+    align-content: center;
+}
+.contSaldo{
+    margin-left: 0px;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+.signoMoneda{
+    width: 35px;
+}
+.saldoValuado{
+    width: 95px;
+}
+
+.contIndicador{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 70px;
+}
+.gananciaPerdidaPorcentaje{
+    min-width: 70px;
+}
+.verdeRojoIndicador{
+    width: 20px;
+}
+.contNombre{
+    width: 100px;
+}
+.elemLista{
+    list-style: none;
+}
+
+.lineaDivision{
+  width: 90%;
+  border: 0;
+  height: 1px;
+  background-color: #374151; /* Gris fintech */
+  
+}
+
+.grafico{
+    margin: 0px;
+    padding: 0px;
+}
+
+.contenedorGrafico{
+   margin: 0px;
+   padding: 0px;
+   gap: 0px;
+}
+
+.positivo {
+  color: #579a5b; /* Verde esmeralda moderno */
+}
+
+.negativo {
+  color: #d71313; /* Rojo pastel */
+}

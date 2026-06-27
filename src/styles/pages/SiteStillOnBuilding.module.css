@@ -5,8 +5,7 @@
   justify-content: center;
   min-height: 100vh;
   width: 100%;
-  background-color: #ffffff;
-  font-family: system-ui, -apple-system, sans-serif;
+  font-family: var(--tipoLetraGeneral);
   margin: 0;
   padding: 20px;
   box-sizing: border-box;

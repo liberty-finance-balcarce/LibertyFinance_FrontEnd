@@ -11,10 +11,7 @@ export function TestInversor() {
     <div className={styles.contTestInversor}>
       <h2>¿Querés saber qué tipo de inversor sos?</h2>
 
-      <Button
-        onClick={() => setModalAbierto(true)}
-        variant="test"
-      >
+      <Button onClick={() => setModalAbierto(true)} variant="test">
         TEST
       </Button>
 

@@ -1,16 +1,15 @@
 .container {
   font-family: var(--tipoLetraGeneral);
-
   max-width: 900px;
   margin: 0 auto;
-  padding: clamp(20px, 5vw, 40px) 20px;
-  color: var(--colorPrimario);
+  color: var(--colorLetraGeneral);
+  padding-bottom: 30px;
 }
 
 .title {
   text-align: center;
   font-size: clamp(1.8rem, 4vw, 2.5rem);
-  color: var(--colorPrimario);
+  color: var(--colorLetraGeneral);
   margin-bottom: clamp(25px, 5vw, 40px);
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -51,34 +50,37 @@
 .inputGroup label {
   font-size: 1rem;
   font-weight: 600;
-  color: var(--colorPrimario);
+  color: var(--colorLetraGeneral);
 }
 
 .inputGroup input,
 .inputGroup select {
+  background-color: var(--colorBordeVentana);
+  color: var(--colorLetraGeneral);
+  border: 2px solid var(--colorFondoGeneral);
   box-sizing: border-box;
   width: 100%;
   height: 44px;
   margin: 0;
   padding: 10px 12px;
-  border: 1px solid var(--colorBordeVentana);
   border-radius: var(--radius-sm);
   font-size: 1rem;
-  color: var(--colorPrimario);
-  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  transition:
+    border-color 0.2s ease-in-out,
+    box-shadow 0.2s ease-in-out;
+  font-family: var(--tipoLetraGeneral);
+}
+
+.inputGroup input::placeholder {
+  color: var(--colorLetraGeneral);
+  font-size: 0.95rem;
 }
 
 .inputGroup input:focus-visible,
 .inputGroup select:focus-visible {
   outline: none;
-  border-color: var(--colorPrimario);
+  border-color: var(--colorLetraGeneral);
   box-shadow: 0 0 0 3px var(--colorSombraVentana);
-}
-
-.inputGroup input::placeholder {
-  color: var(--colorSecundario);
-  opacity: 0.6;
-  font-size: 0.95rem;
 }
 
 .phoneGroup {
@@ -125,18 +127,18 @@
   gap: 10px;
   margin-top: 10px;
   font-weight: 600;
-  color: var(--colorPrimario);
+  color: var(--colorLetraGeneral);
 }
 
 .termsGroup input[type="checkbox"] {
   width: 18px;
   height: 18px;
   cursor: pointer;
-  accent-color: var(--colorPrimario);
+  accent-color: var(--colorLetraGeneral);
 }
 
 .link {
-  color: var(--colorPrimario);
+  color: var(--colorLetraGeneral);
   text-decoration: underline;
   text-underline-offset: 4px;
   transition: color 0.2s ease-in-out;
@@ -166,35 +168,31 @@
 
 .btnVolver,
 .btnSubmit {
-  background-color: var(--colorPrimario);
+  height: 50px;
+  width: 191px;
   color: var(--colorLetrasBoton);
-  border: 1px solid transparent;
   padding: 12px 32px;
   border-radius: var(--radius-md);
   font-size: 1rem;
-  font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out,
-    box-shadow 0.2s ease-in-out;
+  transition: transform 0.3s ease;
   display: inline-flex;
   justify-content: center;
   align-items: center;
 }
 
-.btnVolver {
-  background-color: transparent;
-  color: var(--colorPrimario);
-  border-color: var(--colorPrimario);
-}
-
 .btnVolver:hover {
-  background-color: var(--colorBordeVentana);
+  background-color: var(--colorSecundario);
+  color: var(--colorLetrasBoton);
+  transform: scale(1.06);
+  transition: transform 0.3s ease;
 }
 
 .btnSubmit:hover:not(:disabled) {
   background-color: var(--colorSecundario);
-  box-shadow: 0 4px 12px var(--colorSombraVentana);
-  transform: translateY(-1px);
+  color: var(--colorLetrasBoton);
+  transform: scale(1.06);
+  transition: transform 0.3s ease;
 }
 
 .btnSubmit:active:not(:disabled) {
@@ -207,7 +205,11 @@
   cursor: not-allowed;
   opacity: 0.7;
 }
-
+.contPassword {
+  position: relative;
+  width: 100%;
+  box-sizing: border-box; /* Asegura que el contenedor no se desborde */
+}
 .passwordGroup {
   display: flex;
   gap: var(--spacing-sm);
@@ -222,10 +224,10 @@
   cursor: pointer;
   background-color: var(--colorPrimario);
   color: var(--colorLetrasBoton);
-  border: 1px solid var(--colorPrimario);
   border-radius: var(--radius-sm);
   padding: 0 12px;
   height: 44px;
+  width: 80px;
   font-family: var(--tipoLetraGeneral);
   transition: background-color 0.2s ease-in-out;
   display: flex;
@@ -252,4 +254,34 @@
   .btnSubmit {
     width: 100%;
   }
+}
+
+.botonEye {
+  position: absolute;
+  right: 14px; /* Separación desde el borde derecho del input */
+  top: 50%;
+  transform: translateY(-50%); /* Centrado vertical matemático perfecto */
+  font-size: 22px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  color: var(--colorLetraGeneral);
+  padding: 0;
+  z-index: 2; /* Nos asegura que el botón siempre quede por encima del input */
+}
+
+/*Problema Edge*/
+/* 1. Apaga el ojo nativo de Microsoft Edge / Internet Explorer */
+.contPassword::-ms-reveal {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+/* 2. Por seguridad, apaga también el botón nativo de limpiar texto (la X) que mete Edge */
+.contPassword::-ms-clear {
+  display: none;
+  width: 0;
+  height: 0;
 }

@@ -1,48 +1,49 @@
 import styles from "../styles/components/CardPersona.module.css";
 
-const equipo = [
-  {
-    id: 1,
-    nombre: "Roberto Garcia",
-    img: "https://randomuser.me/api/portraits/men/1.jpg",
-    descripcion: "Desarrollador Full Stack",
-  },
-  {
-    id: 2,
-    nombre: "Juan López",
-    img: "https://randomuser.me/api/portraits/men/10.jpg",
-    descripcion: "Diseñador UX",
-  },
-  {
-    id: 3,
-    nombre: "Carlos Rodríguez",
-    img: "https://randomuser.me/api/portraits/men/20.jpg",
-    descripcion: "Analista de Datos",
-  },
-  {
-    id: 4,
-    nombre: "Ana Martínez",
-    img: "https://randomuser.me/api/portraits/women/2.jpg",
-    descripcion: "Especialista en Marketing",
-  },
-];
-
 export function CardPersona() {
   return (
-    // Eliminamos el componente <Card> incompatible y usamos un contenedor semántico
+
     <section>
       <div className={styles.equipo}>
-        {equipo.map((persona) => (
-          <div key={persona.id} className={styles.card}>
-            <img
-              className={styles.img}
-              src={persona.img}
-              alt={persona.nombre}
-            />
-            <p className={styles.nombre}>{persona.nombre}</p>
-            <p className={styles.descripcion}>{persona.descripcion}</p>
-          </div>
-        ))}
+        <div className={styles.card}>
+          <img
+            className={styles.img}
+            src="/assets/foto1_convertida.png"
+            alt="Foto Matías Méndez"
+          />
+          <p className={styles.nombre}>Matías Méndez</p>
+          <p className={styles.descripcion}>Desarrollador Full Stack</p>
+        </div>
+
+        <div className={styles.card}>
+          <img
+            className={styles.img}
+            src="/assets/foto2.png"
+            alt="Foto Milena Martínez"
+          />
+          <p className={styles.nombre}>Milena Martínez</p>
+          <p className={styles.descripcion}>Desarrollador Full Stack</p>
+        </div>
+
+        <div className={styles.card}>
+          <img
+            className={styles.img}
+            src="/assets/foto_3.png"
+            alt="Foto Tiziano Luzi Ramos"
+          />
+          <p className={styles.nombre}>Tiziano Luzi Ramos</p>
+          <p className={styles.descripcion}>Desarrollador Full Stack</p>
+        </div>
+
+        <div className={styles.card}>
+          <img
+            className={styles.img}
+            src="/assets/foto_4.png"
+            alt="Foto Cristian Falcone"
+          />
+          <p className={styles.nombre}>Cristian Falcone</p>
+          <p className={styles.descripcion}>Desarrollador Full Stack</p>
+        </div>
       </div>
     </section>
   );

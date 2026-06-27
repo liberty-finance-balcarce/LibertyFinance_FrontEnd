@@ -1,8 +1,9 @@
 .container {
   max-width: 800px;
   margin: 0 auto;
-  padding: 40px 20px;
-  font-family: sans-serif;
+  padding: 20px;
+  font-family: var(--tipoLetraGeneral);
+  color: var(--colorLetraGeneral);
 }
 
 .header {
@@ -11,19 +12,8 @@
 }
 
 .title {
-  color: #8a2be2;
   font-size: 3rem;
-  margin: 0 0 10px 0;
-}
-
-.subtitle {
-  margin: 0;
-  font-size: 1.2rem;
-}
-
-.subtitle a {
-  color: #551a8b;
-  text-decoration: underline;
+  margin: 0 0 10px;
 }
 
 .form {
@@ -34,7 +24,7 @@
 
 .row {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, 1fr);
   gap: 20px;
 }
 
@@ -46,67 +36,44 @@
 
 .formGroup label {
   font-weight: bold;
-  color: #555;
+  color: var(--colorLetraGeneral);
   font-size: 0.95rem;
+  margin-left: 3px;
 }
 
-.required {
+.required,
+.error,
+.statusError {
   color: #d9534f;
 }
 
 .formGroup input,
 .formGroup textarea {
+  background-color: var(--colorBordeVentana);
+  color: var(--colorLetraGeneral);
+  border: 2px solid var(--colorFondoGeneral);
   padding: 12px 15px;
-  border: 1px solid #f0f0f0;
   border-radius: 8px;
   font-size: 1rem;
   outline: none;
   transition: border-color 0.3s ease;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+  font-family: inherit;
 }
 
-.formGroup input::placeholder {
-  color: #ccc;
+.formGroup input::placeholder,
+.formGroup textarea::placeholder {
+  color: var(--colorLetraGeneral);
 }
 
 .formGroup input:focus,
 .formGroup textarea:focus {
-  border-color: #8a2be2;
+  border-color: var(--colorPrimario);
 }
 
 .formGroup textarea {
   resize: vertical;
-  min-height: 100px;
-}
-
-.submitButton {
-  background-color: #9b2df2;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  padding: 15px;
-  font-size: 1.2rem;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  margin-top: 10px;
-}
-
-.submitButton:hover {
-  background-color: #8a2be2;
-}
-
-.error {
-  color: #d9534f;
-  font-size: 0.85rem;
-  margin-top: 4px;
-  font-weight: 500;
-}
-
-@media (max-width: 600px) {
-  .row {
-    grid-template-columns: 1fr;
-  }
+  min-height: 60px;
 }
 
 .formGroup input.inputError,
@@ -114,22 +81,10 @@
   border-color: #d9534f;
 }
 
-.statusMessage {
-  font-weight: bold;
-  text-align: center;
-}
-
-.statusError {
-  color: #d9534f;
-}
-
-.statusSuccess {
-  color: #5cb85c;
-}
-
-.submitButton.buttonLoading {
-  opacity: 0.7;
-  cursor: not-allowed;
+.error {
+  font-size: 0.85rem;
+  margin-top: 4px;
+  font-weight: 500;
 }
 
 .labelRow {
@@ -141,4 +96,39 @@
 .charCount {
   font-size: 0.8rem;
   color: #888;
+}
+
+.statusMessage {
+  font-weight: bold;
+  text-align: center;
+}
+
+.statusSuccess {
+  color: #5cb85c;
+}
+
+.submitButton {
+  font-family: inherit;
+  border: none;
+  padding: 15px;
+  font-size: 1.2rem;
+  transition: background-color 0.3s ease;
+  margin: 10px auto;
+  transition: transform 0.3s ease;
+}
+
+.submitButton:hover {
+  transform: scale(1.12);
+  transition: transform 0.3s ease;
+}
+
+.submitButton.buttonLoading {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+@media (max-width: 600px) {
+  .row {
+    grid-template-columns: 1fr;
+  }
 }

@@ -1,42 +1,42 @@
-.container{
-    width: 100%;
+.container {
+  width: 100%;
 }
 
 .footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem;
-    background-color: var(--colorSombraVentana);
-    color: var(--colorLetrasBoton);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: var(--colorFooter);
+  color: var(--colorLetrasBoton);
+  font-family: var(--tipoLetraGeneral);
 }
 
 .socials {
-    display: flex;
-    gap: 1rem;
-    justify-content: flex-start;
-    align-items: center;
-    font-size: 1.5rem;
-    color: var(--colorLetrasBoton);
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 1.5rem;
+  color: var(--colorLetrasBoton);
 }
 
 .socials a {
-    color: var(--colorPrimario);
-    text-decoration: none;
+  color: var(--colorPrimario);
+  text-decoration: none;
 }
 
-
 .links {
-    display: flex;
-    gap: 1.5rem;
-    justify-content: flex-end;
-    align-items: center;
-    flex: 1;
-    color: var(--colorLetrasBoton);
-    text-decoration: none;
+  display: flex;
+  gap: 1.5rem;
+  justify-content: flex-end;
+  align-items: center;
+  flex: 1;
+  color: var(--colorLetrasBoton);
+  text-decoration: none;
 }
 
 .links a {
-    color: var(--colorPrimario);
-    text-decoration: none;
+  color: var(--colorPrimario);
+  text-decoration: none;
 }
