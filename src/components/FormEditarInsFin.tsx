@@ -5,26 +5,19 @@ import type { Instrumento } from "../types/instrumento-financiero";
 import { Riesgo, TipoInstrumento } from "../types/instrumento-financiero";
 
 import styles from "../styles/components/FormEditarInstFin.module.css";
-
-export type UpdateInstrumentoDTO = {
-  nombre_instrumento: string;
-  rendimiento: number;
-  riesgo: Riesgo;
-  precio_instrumento: string;
-  tipo_instrumento: TipoInstrumento;
-};
-
+import type { UpdateInstrumentoFinanciero } from "../types/instrumento-financiero";
+ 
 interface Props {
   instrumento: Instrumento | null;
   onClose: () => void;
-  onSave: (data: UpdateInstrumentoDTO) => void;
+  onSave: (data: UpdateInstrumentoFinanciero) => void;
 }
 
 export function FormEditarInstrumento({ instrumento, onClose, onSave }: Props) {
   const [formData, setFormData] = useState({
     nombre_instrumento: "",
     rendimiento: "",
-    precio_instrumento: "",
+    precio_instrumento: 0,
     riesgo: "" as Riesgo,
     tipo_instrumento: "" as TipoInstrumento,
   });
@@ -34,7 +27,7 @@ export function FormEditarInstrumento({ instrumento, onClose, onSave }: Props) {
       setFormData({
         nombre_instrumento: instrumento.nombre_instrumento ?? "",
         rendimiento: instrumento.rendimiento?.toString() ?? "",
-        precio_instrumento: instrumento.precio_instrumento ?? "",
+        precio_instrumento: Number( instrumento.precio_instrumento) ?? 0,
         riesgo: instrumento.riesgo ?? Riesgo.BAJO,
         tipo_instrumento: instrumento.tipo_instrumento ?? TipoInstrumento.TRADICIONAL,
       });
@@ -54,10 +47,10 @@ export function FormEditarInstrumento({ instrumento, onClose, onSave }: Props) {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    const datosEnviar: UpdateInstrumentoDTO = {
+    const datosEnviar: UpdateInstrumentoFinanciero = {
       nombre_instrumento: formData.nombre_instrumento,
       rendimiento: Number(formData.rendimiento) || 0,
-      precio_instrumento: formData.precio_instrumento,
+      precio_instrumento: Number(formData.precio_instrumento) || 0,
       riesgo: formData.riesgo,
       tipo_instrumento: formData.tipo_instrumento,
     };

@@ -1,5 +1,4 @@
-import type { createInstrumentoFinancieroDTO } from "../types/Dto/createInstumentoFinancieroDTO";
-import type { UpdateInstrumentoDTO } from "../types/Dto/InstrumentoFinancieroDTO";
+import type { CreateInstrumentoFinanciero, UpdateInstrumentoFinanciero } from "../types/instrumento-financiero";
 import type {
   Instrumento,
   RankingData,
@@ -85,9 +84,9 @@ export async function deleteInstrumentos(id: number){
   return await response.json();
 }
 
-export async function crearInstrumento(data: createInstrumentoFinancieroDTO){
+export async function crearInstrumento(data: CreateInstrumentoFinanciero){
     const token = localStorage.getItem("token");
-console.log("Datos enviados al backend:", JSON.stringify(data, null, 2));
+
     const response = await fetch(`${BASE_API}/instrumentos-financieros`, {
 
     method: "POST",
@@ -110,7 +109,7 @@ const errorData = await response.json().catch(() => ({}));
   return result;
 }
 
-export async function updateInstrumento(id: number, data: UpdateInstrumentoDTO){
+export async function updateInstrumento(id: number, data: UpdateInstrumentoFinanciero){
   const token = localStorage.getItem("token");
 
 const response = await fetch(`${BASE_API}/instrumentos-financieros/${id}`, {

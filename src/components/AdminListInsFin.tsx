@@ -102,7 +102,7 @@ export function AdminListInstFin() {
               .catch(() => setModalEditarAbierto(false))
           }
         />
-      )}
+      )} 
 
       <ModalEliminarInstFin
         abierto={modalEliminarAbierto}

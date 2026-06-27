@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 import { getInstrumentos, deleteInstrumentos, updateInstrumento, crearInstrumento } from "../services/instrumentos-financieros";
 import type { Instrumento } from "../types/instrumento-financiero";
-import type { UpdateInstrumentoDTO } from "../types/Dto/InstrumentoFinancieroDTO";
-import type { createInstrumentoFinancieroDTO } from "../types/Dto/createInstumentoFinancieroDTO";
+import type { CreateInstrumentoFinanciero, UpdateInstrumentoFinanciero } from "../types/instrumento-financiero";
 
 export function useInstrumentos() {
   const [instrumentosState, setInstrumentosState] = useState<Instrumento[]>([]);
@@ -27,7 +26,7 @@ export function useInstrumentos() {
     cargarInstrumentos();
   }, []);
 
-  const handleCrearInstrumento = async (data: createInstrumentoFinancieroDTO) => {
+  const handleCrearInstrumento = async (data: CreateInstrumentoFinanciero) => {
     try {
       await crearInstrumento(data);
       const nuevos = await getInstrumentos();
@@ -38,7 +37,7 @@ export function useInstrumentos() {
     }
   };
 
-  const handleEditarInstrumento = async (id: number, data: UpdateInstrumentoDTO) => {
+  const handleEditarInstrumento = async (id: number, data: UpdateInstrumentoFinanciero) => {
     try {
       await updateInstrumento(id, data);
       setInstrumentosState((actuales) =>
