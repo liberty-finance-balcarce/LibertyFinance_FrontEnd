@@ -11,24 +11,32 @@ export function Card({ title, shortText, longText }: CardProps) {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const toggleReadMore = () => {
-    setIsExpanded(!isExpanded);
+    setIsExpanded((prev) => !prev);
   };
 
   return (
-    <div className={styles.card}>
-      <h3 className={styles.title}>{title}</h3>
-      <p>
-        {shortText}
-        {isExpanded && (
-          <div className="long-text-container">
-            <p>{longText}</p>
-          </div>
-        )}
-      </p>
+    <div className={styles.cardScene}>
+      <div className={`${styles.card} ${isExpanded ? styles.cardFlipped : ""}`}>
+        <div className={`${styles.cardFace} ${styles.cardFront}`}>
+          <h3 className={styles.title}>{title}</h3>
 
-      <button onClick={toggleReadMore} className={styles.button}>
-        {isExpanded ? "Leer menos" : "Leer más"}
-      </button>
+          <p className={styles.text}>{shortText}</p>
+
+          <button onClick={toggleReadMore} className={styles.button}>
+            Leer más
+          </button>
+        </div>
+
+        <div className={`${styles.cardFace} ${styles.cardBack}`}>
+          <h3 className={styles.title}>{title}</h3>
+
+          <p className={styles.text}>{longText}</p>
+
+          <button onClick={toggleReadMore} className={styles.button}>
+            Leer menos
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
