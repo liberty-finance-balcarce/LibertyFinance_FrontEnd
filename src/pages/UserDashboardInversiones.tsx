@@ -11,8 +11,6 @@ import {
 } from "recharts";
 import styles from "../styles/pages/DashboardInversiones.module.css";
 
-// 1. Definimos una paleta de colores Fintech sofisticada para los activos
-// El orden se aplicará cíclicamente a tus criptomonedas/instrumentos
 const COLORS = ["#F2A900", "#627EEA", "#00D4B2", "#FF6B6B", "#8492A6"];
 
 export function DashboardInversiones() {
@@ -23,9 +21,6 @@ export function DashboardInversiones() {
 
   console.log("Datos de Reportes recibidos:", resumenReporte);
 
-  // 2. Procesamos los datos para el gráfico de torta/dona
-  // Calculamos el valor monetario de la tenencia (Unidades * Precio Actual)
-  // Si tu backend ya envía un campo con el valor total calculado, podés usar esa propiedad directamente.
   const dataGrafico =
     resumenReporte
       ?.map((item) => {
@@ -37,9 +32,8 @@ export function DashboardInversiones() {
           cantidadOriginal: cantidadOriginal,
         };
       })
-      .filter((act) => act.value > 0) || []; // Filtramos porciones en 0 para que no ensucien el gráfico
+      .filter((act) => act.value > 0) || [];
 
-  // Formateador para que los montos en el gráfico se vean como dinero real
   const formatCurrency = (value: number) => {
     return new Intl.NumberFormat("es-AR", {
       style: "currency",
@@ -59,7 +53,6 @@ export function DashboardInversiones() {
 
       {!isLoadingResumen && !errorResumen && (
         <div className={styles.dashboardGrid}>
-          {/* Columna Izquierda: Lista de Tenencias */}
           <article className={styles.listaActivos}>
             <hr className={styles.lineaDivision} />
             <h3>Tus Activos</h3>
@@ -81,7 +74,6 @@ export function DashboardInversiones() {
                           {saldoValuado < 0 ? `-US$` : `U$S`}
                         </div>
                         <div className={styles.saldoValuado}>
-                          {/* 🟢 Solución al error: Validación segura usando las nuevas propiedades */}
                           {saldoValuado < 0
                             ? `${Math.abs(saldoValuado).toFixed(2)}`
                             : `${saldoValuado.toFixed(2)}`}
@@ -107,7 +99,6 @@ export function DashboardInversiones() {
             <hr className={styles.lineaDivision} />
           </article>
 
-          {/* Columna Derecha: Gráfico de Distribución de Cartera */}
           <article className={styles.contenedorGrafico}>
             {dataGrafico.length > 0 ? (
               <div
