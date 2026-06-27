@@ -1,16 +1,13 @@
 import { useState, useEffect } from "react";
-import { getInstrumentos, deleteInstrumentos, updateInstrumento, crearInstrumento } from "../services/api";
-
+import { getInstrumentos, deleteInstrumentos, updateInstrumento, crearInstrumento } from "../services/instrumentos-financieros";
 import type { Instrumento } from "../types/instrumento-financiero";
-import type { UpdateInstrumentoDTO } from "../types/Dto/InstrumentoFinancieroDTO";
-import type { createInstrumentoFinancieroDTO } from "../types/Dto/createInstumentoFinancieroDTO";
+import type { CreateInstrumentoFinanciero, UpdateInstrumentoFinanciero } from "../types/instrumento-financiero";
 
 export function useInstrumentos() {
   const [instrumentosState, setInstrumentosState] = useState<Instrumento[]>([]);
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  // Carga inicial de todos los instrumentos
   const cargarInstrumentos = async () => {
     try {
       setCargando(true);
@@ -29,8 +26,7 @@ export function useInstrumentos() {
     cargarInstrumentos();
   }, []);
 
-  // Guardar un nuevo instrumento
-  const handleCrearInstrumento = async (data: createInstrumentoFinancieroDTO) => {
+  const handleCrearInstrumento = async (data: CreateInstrumentoFinanciero) => {
     try {
       await crearInstrumento(data);
       const nuevos = await getInstrumentos();
@@ -41,22 +37,20 @@ export function useInstrumentos() {
     }
   };
 
-  // Guardar cambios de uno existente
-  const handleEditarInstrumento = async (id: number, data: UpdateInstrumentoDTO) => {
+  const handleEditarInstrumento = async (id: number, data: UpdateInstrumentoFinanciero) => {
     try {
       await updateInstrumento(id, data);
       setInstrumentosState((actuales) =>
         actuales.map((ins) => (ins.id_instrumento === id ? { ...ins, ...data } : ins))
       );
-      const nuevos = await getInstrumentos();
-      setInstrumentosState(nuevos);
+      const nuevosInstrumentos = await getInstrumentos();
+      setInstrumentosState(nuevosInstrumentos);
     } catch (err) {
       console.error("Error al actualizar el instrumento:", err);
       throw err;
     }
   };
 
-  // Eliminar un instrumento
   const handleEliminarInstrumento = async (id: number) => {
     try {
       await deleteInstrumentos(id);

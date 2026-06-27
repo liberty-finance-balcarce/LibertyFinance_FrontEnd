@@ -1,3 +1,4 @@
+import type { CreateInstrumentoFinanciero, UpdateInstrumentoFinanciero } from "../types/instrumento-financiero";
 import type {
   Instrumento,
   RankingData,
@@ -50,4 +51,83 @@ export async function getRankingInstrumentos(
   });
 
   return { tradicionales, noTradicionales };
+}
+
+export async function getInstrumentos(){
+  const response = await fetch(`${BASE_API}/instrumentos-financieros`)
+
+  if(!response.ok){
+    throw new Error("Error al cargar los instrumentos");
+  }
+  const result = await response.json();
+
+  return result.data;
+}
+
+export async function deleteInstrumentos(id: number){
+   const token = localStorage.getItem("token");
+
+  const response = await fetch(`${BASE_API}/instrumentos-financieros/${id}`,
+    {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error("Error al eliminar el instrumento");
+  }
+
+  return await response.json();
+}
+
+export async function crearInstrumento(data: CreateInstrumentoFinanciero){
+    const token = localStorage.getItem("token");
+
+    const response = await fetch(`${BASE_API}/instrumentos-financieros`, {
+
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+        body: JSON.stringify(data)
+  });
+ 
+  if (!response.ok) {
+const errorData = await response.json().catch(() => ({}));
+    console.error("Detalle del error 400 del Backend:", errorData);
+    throw new Error("Error al crear el instrumento");
+  }
+
+
+  const result = await response.json();
+
+  return result;
+}
+
+export async function updateInstrumento(id: number, data: UpdateInstrumentoFinanciero){
+  const token = localStorage.getItem("token");
+
+const response = await fetch(`${BASE_API}/instrumentos-financieros/${id}`, {
+
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(data)
+  });
+ 
+  if (!response.ok) {
+
+    throw new Error("Error al actualizar usuario");
+  }
+
+  const result = await response.json();
+
+  return result;
 }
