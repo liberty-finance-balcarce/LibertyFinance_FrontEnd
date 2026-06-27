@@ -21,9 +21,9 @@ import { UserDashboard } from "./pages/UserDashboard";
 import { UserDashboardCart } from "./pages/UserDashboardCart";
 import { DashboardInversiones } from "./pages/UserDashboardInversiones";
 import { UserDashboardTestPerfil } from "./pages/UserDashboardTestPerfil";
-import AdminDashboard from "./pages/AdminDashboard";
-import { AdminUsersCard } from "./components/AdminUsersCard";
-import ForgotPassword from "./pages/ForgotPassword";
+import { AdminDashboard } from "./pages/AdminDashboard";
+import { ForgotPassword } from "./pages/ForgotPassword";
+import { AdminUsers } from "./pages/AdminUsers";
 
 function App() {
   return (
@@ -36,7 +36,10 @@ function App() {
                 <Route index element={<Navigate to="inversiones" replace />} />
                 <Route path="carrito" element={<UserDashboardCart />} />
                 <Route path="inversiones" element={<DashboardInversiones />} />
-                <Route path="test-inversor" element={<UserDashboardTestPerfil />} />
+                <Route
+                  path="test-inversor"
+                  element={<UserDashboardTestPerfil />}
+                />
               </Route>
             </Route>
           </Route>
@@ -45,16 +48,7 @@ function App() {
             <Route element={<AdminLayout />}>
               <Route path="/dashboard/admin" element={<AdminDashboard />}>
                 <Route index element={<Navigate to="users" replace />} />
-                <Route
-                  path="users"
-                  element={
-                    <AdminUsersCard
-                      totalRegistrados={0}
-                      totalUsuarios={0}
-                      totalAdmins={0}
-                    />
-                  }
-                />
+                <Route path="users" element={<AdminUsers />} />
               </Route>
             </Route>
           </Route>

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import styles from "../styles/pages/ForgotPassword.module.css";
 
-export default function ForgotPassword() {
+export  function ForgotPassword() {
   const [contador, setContador] = useState(0);
 
   useEffect(() => {

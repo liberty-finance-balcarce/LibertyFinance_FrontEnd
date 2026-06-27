@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom";
 import styles from "../styles/pages/AdminDashboard.module.css";
 import { AdminDashboardSidebar } from "../components/AdminDashboardSidebar";
 
-export default function AdminDashboard() {
+export function AdminDashboard() {
   return (
     <div className={styles.container}>
       <div className={styles.layout}>
