@@ -47,7 +47,13 @@ export function Login() {
         throw new Error("Credenciales incorrectas.");
       }
 
-      navigate("/");
+      const userRole = localStorage.getItem("role");
+
+      if (userRole === "admin") {
+        navigate("/dashboard/admin/users");
+      } else {
+        navigate("/dashboard/user/inversiones");
+      }
     } catch (err: any) {
       if (err.message === "Failed to fetch") {
         setErrorServidor("Error en la conexión con el servidor.");

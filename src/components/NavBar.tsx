@@ -7,7 +7,7 @@ import { useThemeMode } from "../hooks/useThemeMode";
 import styles from "../styles/components/NavBar.module.css";
 
 export function NavBar() {
-  const { user } = useAuth();
+  const { user, role } = useAuth();
   const { theme, toggleTheme } = useThemeMode();
 
   return (
@@ -36,7 +36,14 @@ export function NavBar() {
         </div>
         {user ? (
           <div className={styles.usuario}>
-            <Button to="/dashboard/admin" variant="login">
+            <Button
+              to={
+                role === "admin"
+                  ? "/dashboard/admin/users"
+                  : "/dashboard/user/inversiones"
+              }
+              variant="login"
+            >
               <AvatarUsuario usuario={user} />
             </Button>
           </div>
