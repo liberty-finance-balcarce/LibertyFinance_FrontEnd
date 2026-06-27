@@ -122,7 +122,7 @@ export function Login() {
           className={styles.botonLogin}
           disabled={isSubmitting}
         >
-          {isSubmitting ? "Cargando..." : "Login"}
+          {isSubmitting ? "Cargando..." : "Iniciar sesión"}
         </Button>
 
         <div className={styles.contRegistro}>
