@@ -116,7 +116,7 @@ export function DashboardInversiones() {
                       paddingAngle={4}
                       dataKey="value"
                     >
-                      {dataGrafico.map((entry, index) => (
+                      {dataGrafico.map((_, index) => (
                         <Cell
                           key={`cell-${index}`}
                           fill={COLORS[index % COLORS.length]}
@@ -125,8 +125,8 @@ export function DashboardInversiones() {
                     </Pie>
 
                     <Tooltip
-                      formatter={(value: number, name: string, props: any) => [
-                        `${formatCurrency(value)} (Volumen: ${props.payload.cantidadOriginal})`,
+                      formatter={(value: any, name: any, props: any) => [
+                        `${formatCurrency(Number(value))} (Volumen: ${props.payload.cantidadOriginal})`,
                         name,
                       ]}
                       contentStyle={{
