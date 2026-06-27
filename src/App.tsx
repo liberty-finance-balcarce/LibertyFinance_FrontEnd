@@ -1,5 +1,5 @@
 import "./App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import { PublicRoute } from "./routes/PublicRoute";
 import { UserRoute } from "./routes/UserRoute";
@@ -22,7 +22,8 @@ import { UserDashboardCart } from "./pages/UserDashboardCart";
 import { DashboardInversiones } from "./pages/DashboardInversiones";
 import { DashboardTestPerfil } from "./pages/DashboardTestPerfil";
 import AdminDashboard from "./pages/AdminDashboard";
-import {AdminUsersCard} from "./components/AdminUsersCard";
+import { AdminUsersCard } from "./components/AdminUsersCard";
+import ForgotPassword from "./pages/ForgotPassword";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
           <Route element={<UserRoute />}>
             <Route element={<UserLayout />}>
               <Route path="/dashboard/user" element={<UserDashboard />}>
+                <Route index element={<Navigate to="inversiones" replace />} />
                 <Route path="carrito" element={<UserDashboardCart />} />
                 <Route path="inversiones" element={<DashboardInversiones />} />
                 <Route path="test-inversor" element={<DashboardTestPerfil />} />
@@ -42,6 +44,7 @@ function App() {
           <Route element={<AdminRoute />}>
             <Route element={<AdminLayout />}>
               <Route path="/dashboard/admin" element={<AdminDashboard />}>
+                <Route index element={<Navigate to="users" replace />} />
                 <Route
                   path="users"
                   element={
@@ -60,6 +63,7 @@ function App() {
             <Route element={<Layout />}>
               <Route path="/" element={<Home />} />
               <Route path="/register" element={<Register />} />
+              <Route path="/forgot-password" element={<ForgotPassword />} />
               <Route path="/sobre-nosotros" element={<NuestroEquipo />} />
               <Route path="/contactenos" element={<Contactenos />} />
               <Route path="/login" element={<Login />} />

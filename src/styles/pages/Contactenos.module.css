@@ -3,6 +3,7 @@
   margin: 0 auto;
   padding: 20px;
   font-family: var(--tipoLetraGeneral);
+  color: var(--colorLetraGeneral);
 }
 
 .header {
@@ -11,7 +12,6 @@
 }
 
 .title {
-  color: var(--colorPrimario);
   font-size: 3rem;
   margin: 0 0 10px;
 }
@@ -36,7 +36,7 @@
 
 .formGroup label {
   font-weight: bold;
-  color: #555;
+  color: var(--colorLetraGeneral);
   font-size: 0.95rem;
   margin-left: 3px;
 }
@@ -49,8 +49,10 @@
 
 .formGroup input,
 .formGroup textarea {
+  background-color: var(--colorBordeVentana);
+  color: var(--colorLetraGeneral);
+  border: 2px solid var(--colorFondoGeneral);
   padding: 12px 15px;
-  border: 1px solid #f0f0f0;
   border-radius: 8px;
   font-size: 1rem;
   outline: none;
@@ -61,7 +63,7 @@
 
 .formGroup input::placeholder,
 .formGroup textarea::placeholder {
-  color: #ccc;
+  color: var(--colorLetraGeneral);
 }
 
 .formGroup input:focus,

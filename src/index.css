@@ -8,6 +8,8 @@
   --colorBordeVentana: #e6e6fa;
   --colorSombraVentana: #dda0dd;
   --colorFondoGeneral: #f8f8ff;
+  --colorLetraGeneral: #4b0082;
+  --colorFooter: var(--colorSombraVentana);
   --tipoLetraGeneral: "Bricolage Grotesque", sans-serif;
 
   /*espacio para las cards*/
@@ -22,6 +24,19 @@
   --radius-lg: 20px;
 }
 
+/* Estilos para modo oscuro */
+:root.dark {
+  --colorPrimario: #4b0082;
+  --colorSecundario: #800080;
+  --colorLetrasBoton: #f0f0f0;
+  --colorBordeVentana: #3a3a3aa6;
+  --colorSombraVentana: #dda0dd;
+  --colorFondoGeneral: #09030d;
+  --colorLetraGeneral: #d16fff;
+  --colorFooter: var(--colorLetraGeneral);
+  --tipoLetraGeneral: "Bricolage Grotesque", sans-serif;
+}
+
 html,
 body,
 #root {
@@ -30,7 +45,13 @@ body,
   width: 100%;
   height: 100dvh;
   font-family: var(--tipoLetraGeneral);
+  color: var(--colorLetraGeneral);
   background-color: var(--colorFondoGeneral);
+  transition:
+    background-color 0.35s ease,
+    color 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
 }
 
 ::-webkit-scrollbar {
