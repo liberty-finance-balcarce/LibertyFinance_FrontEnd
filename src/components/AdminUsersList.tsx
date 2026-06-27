@@ -9,7 +9,7 @@ import { ModalEliminarUsuario } from "./ModalEliminarUsuario";
 
 import { AvatarUsuario } from "./AvatarUsuario";
 import styles from "../styles/components/AdminUserList.module.css";
-
+ 
 export function AdminUserList() {
   const {
     usuariosState,
