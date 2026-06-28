@@ -1,5 +1,6 @@
 import { createContext, useState, useEffect, type ReactNode } from "react";
 import type { Usuario } from "../types/usuarios";
+import { VITE_API_URL } from "../utils/env";
 
 interface RegisterData {
   dni_usuario: number;
@@ -77,7 +78,7 @@ export function AuthProvider({ children }: Props) {
   }, []);
 
   const login = async (dni: number, password: string) => {
-    const response = await fetch("http://localhost:3000/api/v1/auth/login", {
+    const response = await fetch(`${VITE_API_URL}/auth/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json; charset=utf-8",
@@ -102,7 +103,7 @@ export function AuthProvider({ children }: Props) {
   };
 
   const register = async (data: RegisterData) => {
-    const response = await fetch("http://localhost:3000/api/v1/auth/register", {
+    const response = await fetch(`${VITE_API_URL}/auth/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json; charset=utf-8",
@@ -125,7 +126,7 @@ export function AuthProvider({ children }: Props) {
 
     try {
       const response = await fetch(
-        "http://localhost:3000/api/v1/auth/refresh-token",
+        `${VITE_API_URL}/auth/refresh-token`,
         {
           method: "POST",
           headers: {
@@ -155,7 +156,7 @@ export function AuthProvider({ children }: Props) {
 
     if (!token) return;
 
-    const response = await fetch("http://localhost:3000/api/v1/auth/profile", {
+    const response = await fetch(`${VITE_API_URL}/auth/profile`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${token}`,

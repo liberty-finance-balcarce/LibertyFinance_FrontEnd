@@ -1,0 +1,118 @@
+.contResumen {
+  font-family: var(--tipoLetraGeneral);
+  font-weight: 700;
+  color: var(--colorLetraGeneral);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  border-radius: 7px;
+  width: 100%;
+  background-color: var(--colorFondoGeneral);
+}
+
+.listaActivos {
+  display: flex;
+  flex-direction: column;
+  width: 650px;
+}
+
+.listHeader,
+.contActivos {
+  display: grid;
+  grid-template-columns: 1fr 2fr 2fr 2fr;
+  align-items: center;
+  width: 100%;
+  column-gap: 10px;
+}
+
+.listHeader {
+  padding: 10px;
+  font-weight: bold;
+  text-decoration: underline var(--colorLetraGeneral);
+}
+
+.listHeader span {
+  text-align: center;
+}
+
+.contBalance {
+  text-align: center;
+}
+
+.contNombre {
+  text-align: center;
+}
+
+.contSaldo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.signoMoneda {
+  width: auto;
+}
+
+.saldoValuado {
+  width: auto;
+}
+
+.contIndicador {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.gananciaPerdidaPorcentaje {
+  min-width: 70px;
+  text-align: right;
+}
+
+.verdeRojoIndicador {
+  width: 20px;
+  text-align: center;
+}
+
+.elemLista {
+  list-style: none;
+  width: 100%;
+}
+
+.listaActivos ul {
+  margin-top: 10px;
+  padding: 10px;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.lineaDivision {
+  width: 100%;
+  border: 0;
+  height: 3px;
+  background-color: var(--colorLetraGeneral);
+  border-radius: 20px;
+}
+
+.grafico {
+  margin: 0;
+  padding: 0;
+}
+
+.contenedorGrafico {
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.positivo {
+  color: #579a5b;
+}
+
+.negativo {
+  color: #d71313;
+}
