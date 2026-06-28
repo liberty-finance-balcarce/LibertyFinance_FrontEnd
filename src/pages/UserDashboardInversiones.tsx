@@ -81,14 +81,14 @@ export function UserDashboardInversiones() {
                       </div>
                       <div className={styles.contIndicador}>
                         <div
-                          className={`${styles.gananciaPerdidaPorcentaje} ${item.porcentaje_retorno > 0 ? styles.positivo : styles.negativo}`}
+                          className={`${styles.gananciaPerdidaPorcentaje} ${item.porcentaje_retorno >= 0 ? styles.positivo : styles.negativo}`}
                         >
-                          {item.porcentaje_retorno > 0
+                          {item.porcentaje_retorno >= 0
                             ? `+${item.porcentaje_retorno.toFixed(2)}%`
                             : `${item.porcentaje_retorno.toFixed(2)}%`}
                         </div>
                         <div className={styles.verdeRojoIndicador}>
-                          {item.porcentaje_retorno > 0 ? "🟩" : "🟥"}
+                          {item.porcentaje_retorno >= 0 ? "🟩" : "🟥"}
                         </div>
                       </div>
                     </div>
