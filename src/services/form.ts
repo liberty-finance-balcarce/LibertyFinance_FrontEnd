@@ -1,4 +1,5 @@
-const FORM_ENDPOINT = "https://formsubmit.co/ajax/libertyfinancebalcarce@gmail.com";
+const FORM_ENDPOINT =
+  "https://formsubmit.co/ajax/libertyfinancebalcarce@gmail.com";
 
 export async function sendContactForm(datos: object): Promise<void> {
   const response = await fetch(FORM_ENDPOINT, {

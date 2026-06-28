@@ -2,7 +2,13 @@ import type { UpdateUsuario } from "../types/usuarios";
 import { VITE_API_URL } from "../utils/env";
 
 export async function getUsers() {
-  const response = await fetch(`${VITE_API_URL}/usuarios`);
+  const token = localStorage.getItem("token");
+  const response = await fetch(`${VITE_API_URL}/usuarios`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
 
   if (!response.ok) {
     throw new Error("Error al obtener usuarios");
@@ -14,10 +20,13 @@ export async function getUsers() {
 }
 
 export async function updateUser(dni: number, data: UpdateUsuario) {
+  const token = localStorage.getItem("token");
+
   const response = await fetch(`${VITE_API_URL}/usuarios/${dni}`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify(data),
   });
@@ -50,7 +59,14 @@ export async function deleteUser(dni: number) {
 }
 
 export async function getRoles() {
-  const response = await fetch(`${VITE_API_URL}/rol`);
+  const token = localStorage.getItem("token");
+
+  const response = await fetch(`${VITE_API_URL}/rol`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
 
   if (!response.ok) {
     throw new Error("Error al obtener usuarios");
