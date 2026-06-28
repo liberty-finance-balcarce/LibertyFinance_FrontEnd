@@ -24,6 +24,8 @@ import { UserDashboardTestPerfil } from "./pages/UserDashboardTestPerfil";
 import { AdminDashboard } from "./pages/AdminDashboard";
 import { ForgotPassword } from "./pages/ForgotPassword";
 import { AdminUsers } from "./pages/AdminUsers";
+import { AdminListInstFin } from "./components/AdminListInsFin";
+import { SiteStillOnBuilding } from "./pages/SiteStillOnBuilding";
 
 function App() {
   return (
@@ -49,6 +51,8 @@ function App() {
               <Route path="/dashboard/admin" element={<AdminDashboard />}>
                 <Route index element={<Navigate to="users" replace />} />
                 <Route path="users" element={<AdminUsers />} />
+                <Route path="instrumentos-financieros" element={<AdminListInstFin />} />
+                <Route path="paquetes-inversion" element={<SiteStillOnBuilding />} />
               </Route>
             </Route>
           </Route>
