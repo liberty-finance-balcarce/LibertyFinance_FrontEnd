@@ -1,27 +1,27 @@
 import { useState } from "react";
 import { FaPen, FaRegTrashAlt } from "react-icons/fa";
 import { useUsuarios } from "../hooks/useUsuarios";
-
-
 import type { Usuario } from "../types/usuarios";
-import { ModalEditarUsuario } from "./ModalEditarUsuario";
-import { ModalEliminarUsuario } from "./ModalEliminarUsuario";
-
+import { AdminModalEditarUsuario } from "./AdminModalEditarUsuario";
+import { AdminModalEliminarUsuario } from "./AdminModalEliminarUsuario";
 import { AvatarUsuario } from "./AvatarUsuario";
 import styles from "../styles/components/AdminUserList.module.css";
- 
+
 export function AdminUserList() {
   const {
     usuariosState,
     provinciasState,
     rolesState,
     modificarUsuarioEnLista,
-    eliminarUsuarioDeLista
+    eliminarUsuarioDeLista,
   } = useUsuarios();
 
-  const [usuarioSeleccionado, setUsuarioSeleccionado] = useState<Usuario | null>(null);
+  const [usuarioSeleccionado, setUsuarioSeleccionado] =
+    useState<Usuario | null>(null);
   const [modalEditarAbierto, setModalEditarAbierto] = useState(false);
-  const [usuarioAEliminar, setUsuarioAEliminar] = useState<Usuario | null>(null);
+  const [usuarioAEliminar, setUsuarioAEliminar] = useState<Usuario | null>(
+    null,
+  );
   const [modalEliminarAbierto, setModalEliminarAbierto] = useState(false);
 
   return (
@@ -67,7 +67,7 @@ export function AdminUserList() {
       </div>
 
       {modalEditarAbierto && usuarioSeleccionado && (
-        <ModalEditarUsuario
+        <AdminModalEditarUsuario
           usuario={usuarioSeleccionado}
           provincias={provinciasState}
           roles={rolesState}
@@ -83,7 +83,7 @@ export function AdminUserList() {
         />
       )}
 
-      <ModalEliminarUsuario
+      <AdminModalEliminarUsuario
         abierto={modalEliminarAbierto}
         usuario={usuarioAEliminar}
         onConfirmar={() =>

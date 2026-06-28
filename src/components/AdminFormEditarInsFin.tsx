@@ -1,19 +1,21 @@
 import { useEffect, useState } from "react";
 import { Button } from "./Button";
-
 import type { Instrumento } from "../types/instrumento-financiero";
 import { Riesgo, TipoInstrumento } from "../types/instrumento-financiero";
-
-import styles from "../styles/components/FormEditarInstFin.module.css";
+import styles from "../styles/components/AdminFormEditarInstFin.module.css";
 import type { UpdateInstrumentoFinanciero } from "../types/instrumento-financiero";
- 
+
 interface Props {
   instrumento: Instrumento | null;
   onClose: () => void;
   onSave: (data: UpdateInstrumentoFinanciero) => void;
 }
 
-export function FormEditarInstrumento({ instrumento, onClose, onSave }: Props) {
+export function AdminFormEditarInstrumento({
+  instrumento,
+  onClose,
+  onSave,
+}: Props) {
   const [formData, setFormData] = useState({
     nombre_instrumento: "",
     rendimiento: "",
@@ -27,15 +29,16 @@ export function FormEditarInstrumento({ instrumento, onClose, onSave }: Props) {
       setFormData({
         nombre_instrumento: instrumento.nombre_instrumento ?? "",
         rendimiento: instrumento.rendimiento?.toString() ?? "",
-        precio_instrumento: Number( instrumento.precio_instrumento) ?? 0,
+        precio_instrumento: Number(instrumento.precio_instrumento) ?? 0,
         riesgo: instrumento.riesgo ?? Riesgo.BAJO,
-        tipo_instrumento: instrumento.tipo_instrumento ?? TipoInstrumento.TRADICIONAL,
+        tipo_instrumento:
+          instrumento.tipo_instrumento ?? TipoInstrumento.TRADICIONAL,
       });
     }
   }, [instrumento]);
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -120,7 +123,9 @@ export function FormEditarInstrumento({ instrumento, onClose, onSave }: Props) {
           </select>
 
           <div className={styles.boton}>
-            <Button type="button" onClick={onClose}>Cancelar</Button>
+            <Button type="button" onClick={onClose}>
+              Cancelar
+            </Button>
 
             <Button type="submit">Guardar</Button>
           </div>

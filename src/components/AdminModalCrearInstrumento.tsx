@@ -1,16 +1,21 @@
-import { FormCrearInstrumento } from "./FormCrearInstrumento"; // Asegúrate de ajustar la ruta
-import type { createInstrumentoFinancieroDTO } from "../types/Dto/createInstumentoFinancieroDTO";
+import { FormCrearInstrumento } from "./AdminFormCrearInstrumento"; // Asegúrate de ajustar la ruta
+import type { CreateInstrumentoFinanciero } from "../types/instrumento-financiero";
 import type { Instrumento } from "../types/instrumento-financiero";
-import styles from "../styles/components/ModalCrearInstrumento.module.css"
+import styles from "../styles/components/AdminModalCrearInstrumento.module.css";
 
 interface Props {
   abierto: boolean;
   instrumento?: Instrumento | null;
   onClose: () => void;
-  onSave: (data: createInstrumentoFinancieroDTO) => void;
+  onSave: (data: CreateInstrumentoFinanciero) => void;
 }
 
-export function ModalCrearInstrumento({abierto, instrumento, onClose, onSave}: Props) {
+export function AdminModalCrearInstrumento({
+  abierto,
+  instrumento,
+  onClose,
+  onSave,
+}: Props) {
   if (!abierto) return null;
 
   return (

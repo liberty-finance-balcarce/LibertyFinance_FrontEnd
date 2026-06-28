@@ -23,17 +23,20 @@ export type Instrumento = {
 };
 
 export enum Riesgo {
-  BAJO = 'Bajo',
-  MEDIO = 'Medio',
-  ALTO = 'Alto',
+  BAJO = "Bajo",
+  MEDIO = "Medio",
+  ALTO = "Alto",
 }
 
 export enum TipoInstrumento {
-  TRADICIONAL = 'Tradicional',
-  NO_TRADICIONAL = 'No tradicional',
+  TRADICIONAL = "Tradicional",
+  NO_TRADICIONAL = "No tradicional",
 }
 
-export interface CreateInstrumentoFinanciero extends Instrumento {}
+export interface CreateInstrumentoFinanciero extends Partial<
+  Omit<Instrumento, "id_instrumento">
+> {}
+
 export interface UpdateInstrumentoFinanciero extends Partial<
   Omit<CreateInstrumentoFinanciero, "id_instrumento">
 > {}
