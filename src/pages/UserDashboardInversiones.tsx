@@ -9,7 +9,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import styles from "../styles/pages/DashboardInversiones.module.css";
+import styles from "../styles/pages/UserDashboardInversiones.module.css";
 
 const COLORS = ["#F2A900", "#627EEA", "#00D4B2", "#FF6B6B", "#8492A6"];
 
@@ -56,7 +56,13 @@ export function UserDashboardInversiones() {
           <article className={styles.listaActivos}>
             <hr className={styles.lineaDivision} />
             <h3>Tus Activos</h3>
-            <ul>
+            <div className={styles.listHeader}>
+              <span>Cantidad</span>
+              <span>Nombre</span>
+              <span>Valuación</span>
+              <span>Ganancia/Pérdida</span>
+            </div>
+            <ul className={styles.listaActivos}>
               {resumenReporte?.map((item) => {
                 const saldoValuado = item.saldo_valuado_actual_cartera || 0;
                 const tenenciaInstrumento =
@@ -86,9 +92,6 @@ export function UserDashboardInversiones() {
                           {item.porcentaje_retorno > 0
                             ? `+${item.porcentaje_retorno.toFixed(2)}%`
                             : `${item.porcentaje_retorno.toFixed(2)}%`}
-                        </div>
-                        <div className={styles.verdeRojoIndicador}>
-                          {item.porcentaje_retorno > 0 ? "🟩" : "🟥"}
                         </div>
                       </div>
                     </div>
