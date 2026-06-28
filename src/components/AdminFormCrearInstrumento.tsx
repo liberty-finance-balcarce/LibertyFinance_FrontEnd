@@ -6,6 +6,7 @@ import {
   Riesgo,
 } from "../types/instrumento-financiero";
 import styles from "../styles/components/AdminFormCrearInstrumento.module.css";
+import { Button } from "./Button";
 
 interface Props {
   instrumento?: Instrumento | null;
@@ -143,11 +144,11 @@ export function FormCrearInstrumento({ instrumento, onClose, onSave }: Props) {
             </div>
           </div>
           <div className={styles.boton}>
-            <button type="button" onClick={onClose}>
+            <Button type="button" onClick={onClose}>
               Cancelar
-            </button>
+            </Button>
 
-            <button type="submit">Guardar</button>
+            <Button type="submit">Guardar</Button>
           </div>
         </form>
       </div>
