@@ -1,5 +1,5 @@
 import type { Usuario } from "../types/usuarios";
-import styles from "../styles/components/ModalEliminarUsuario.module.css"
+import styles from "../styles/components/AdminModalEliminarUsuario.module.css"
 
 interface Props {
   abierto: boolean;
@@ -8,7 +8,7 @@ interface Props {
   onClose: () => void;
 }
 
-export function ModalEliminarUsuario({abierto, usuario, onConfirmar, onClose}: Props) {
+export function AdminModalEliminarUsuario({abierto, usuario, onConfirmar, onClose}: Props) {
   if (!abierto || !usuario) return null;
 
   return (

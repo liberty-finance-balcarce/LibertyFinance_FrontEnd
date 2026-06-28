@@ -1,13 +1,10 @@
 import { useState } from "react";
 import { FaPen, FaRegTrashAlt, FaPlus } from "react-icons/fa";
 import { useInstrumentos } from "../hooks/useInstrumentos";
-
 import type { Instrumento } from "../types/instrumento-financiero";
-
-import { ModalCrearInstrumento } from "./ModalCrearInstrumento";
-import { ModalEditarInstrumento } from "../components/ModalEditarInstFin";
-import { ModalEliminarInstFin } from "./ModalEliminarInstFin";
-
+import { AdminModalCrearInstrumento } from "./AdminModalCrearInstrumento";
+import { AdminModalEditarInstrumento } from "./AdminModalEditarInstFin";
+import { AdminModalEliminarInstFin } from "./AdminModalEliminarInstFin";
 import styles from "../styles/components/AdminListInsFin.module.css";
 
 export function AdminListInstFin() {
@@ -18,13 +15,14 @@ export function AdminListInstFin() {
     handleEliminarInstrumento,
   } = useInstrumentos();
 
-  const [instrumentoSeleccionado, setInstrumentoSeleccionado] = useState<Instrumento | null>(null);
-  const [instrumentoAEliminar, setInstrumentoAEliminar] = useState<Instrumento | null>(null);
-  
+  const [instrumentoSeleccionado, setInstrumentoSeleccionado] =
+    useState<Instrumento | null>(null);
+  const [instrumentoAEliminar, setInstrumentoAEliminar] =
+    useState<Instrumento | null>(null);
+
   const [modalEliminarAbierto, setModalEliminarAbierto] = useState(false);
   const [modalEditarAbierto, setModalEditarAbierto] = useState(false);
   const [modalCrearAbierto, setModalCrearAbierto] = useState(false);
-
 
   return (
     <>
@@ -87,14 +85,17 @@ export function AdminListInstFin() {
       </div>
 
       {modalEditarAbierto && instrumentoSeleccionado && (
-        <ModalEditarInstrumento
+        <AdminModalEditarInstrumento
           instrumento={instrumentoSeleccionado}
           onClose={() => {
             setModalEditarAbierto(false);
             setInstrumentoSeleccionado(null);
           }}
           onSave={(data) =>
-            handleEditarInstrumento(instrumentoSeleccionado.id_instrumento, data)
+            handleEditarInstrumento(
+              instrumentoSeleccionado.id_instrumento,
+              data,
+            )
               .then(() => {
                 setModalEditarAbierto(false);
                 setInstrumentoSeleccionado(null);
@@ -102,18 +103,19 @@ export function AdminListInstFin() {
               .catch(() => setModalEditarAbierto(false))
           }
         />
-      )} 
+      )}
 
-      <ModalEliminarInstFin
+      <AdminModalEliminarInstFin
         abierto={modalEliminarAbierto}
         instrumento={instrumentoAEliminar}
         onConfirmar={() =>
           instrumentoAEliminar &&
-          handleEliminarInstrumento(instrumentoAEliminar.id_instrumento)
-            .then(() => {
+          handleEliminarInstrumento(instrumentoAEliminar.id_instrumento).then(
+            () => {
               setModalEliminarAbierto(false);
               setInstrumentoAEliminar(null);
-            })
+            },
+          )
         }
         onClose={() => {
           setModalEliminarAbierto(false);
@@ -121,7 +123,7 @@ export function AdminListInstFin() {
         }}
       />
 
-      <ModalCrearInstrumento
+      <AdminModalCrearInstrumento
         abierto={modalCrearAbierto}
         onClose={() => setModalCrearAbierto(false)}
         onSave={(data) =>

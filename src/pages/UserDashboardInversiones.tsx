@@ -46,7 +46,7 @@ export function UserDashboardInversiones() {
     <section className={styles.contResumen}>
       <h2>RESUMEN</h2>
       {isLoadingResumen && (
-        <LoadingSpinner logo="../public/assets/logo-icon.png" size={60} />
+        <LoadingSpinner logo="/assets/logo-icon.png" size={60} />
       )}
 
       {errorResumen && <p className={styles.error}>{errorResumen}</p>}

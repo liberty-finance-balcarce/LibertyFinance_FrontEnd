@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
-
-import type { createInstrumentoFinancieroDTO } from "../types/Dto/createInstumentoFinancieroDTO";
-import {TipoInstrumento, type Instrumento, Riesgo} from "../types/instrumento-financiero";
-
-import styles from "../styles/components/FormCrearInstrumento.module.css";
+import type { CreateInstrumentoFinanciero } from "../types/instrumento-financiero";
+import {
+  TipoInstrumento,
+  type Instrumento,
+  Riesgo,
+} from "../types/instrumento-financiero";
+import styles from "../styles/components/AdminFormCrearInstrumento.module.css";
 
 interface Props {
   instrumento?: Instrumento | null;
   onClose: () => void;
-  onSave: (data: createInstrumentoFinancieroDTO) => void;
+  onSave: (data: CreateInstrumentoFinanciero) => void;
 }
 
 export function FormCrearInstrumento({ instrumento, onClose, onSave }: Props) {
@@ -29,7 +31,7 @@ export function FormCrearInstrumento({ instrumento, onClose, onSave }: Props) {
         precio_instrumento: instrumento.precio_instrumento?.toString() ?? "",
         riesgo: instrumento.riesgo ?? ("" as Riesgo),
         tipo_instrumento:
-        instrumento.tipo_instrumento ?? ("" as TipoInstrumento),
+          instrumento.tipo_instrumento ?? ("" as TipoInstrumento),
         logo_url: "",
       });
     }
@@ -48,7 +50,7 @@ export function FormCrearInstrumento({ instrumento, onClose, onSave }: Props) {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    const dataAEnviar: createInstrumentoFinancieroDTO = {
+    const dataAEnviar: CreateInstrumentoFinanciero = {
       nombre_instrumento: formData.nombre_instrumento.trim(),
       rendimiento: Number(formData.rendimiento) || 0,
       precio_instrumento: Number(formData.precio_instrumento) || 0,
@@ -131,19 +133,20 @@ export function FormCrearInstrumento({ instrumento, onClose, onSave }: Props) {
             </select>
 
             <div>
-            <label>URL del Logo:</label>
-            <input
-              type="text"
-              name="logo_url"
-              value={formData.logo_url}
-              onChange={handleChange}
-            />
-          </div>
-
+              <label>URL del Logo:</label>
+              <input
+                type="text"
+                name="logo_url"
+                value={formData.logo_url}
+                onChange={handleChange}
+              />
+            </div>
           </div>
           <div className={styles.boton}>
-            <button type="button" onClick={onClose}>Cancelar</button>
-            
+            <button type="button" onClick={onClose}>
+              Cancelar
+            </button>
+
             <button type="submit">Guardar</button>
           </div>
         </form>
