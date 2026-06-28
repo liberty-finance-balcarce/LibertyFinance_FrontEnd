@@ -1,10 +1,7 @@
 import { useEffect, useState } from "react";
-
-import type { UpdateUsuarioDTO } from "../types/usuario/updateUsuarioDTO";
+import type { UpdateUsuario } from "../types/usuarios";
 import type { Usuario } from "../types/usuarios";
-
-import styles from "../styles/components/FormEditarUsuario.module.css";
-
+import styles from "../styles/components/AdminFormEditarUsuario.module.css";
 import type { Provincia } from "../types/provincias";
 import type { Rol } from "../types/rol";
 import { Button } from "./Button";
@@ -14,10 +11,16 @@ interface Props {
   provincias: Provincia[];
   roles: Rol[];
   onClose: () => void;
-  onSave: (data: UpdateUsuarioDTO) => void;
+  onSave: (data: UpdateUsuario) => void;
 }
 
-export function FormEditarUsuario({usuario, provincias, roles, onClose, onSave}: Props) {
+export function AdminFormEditarUsuario({
+  usuario,
+  provincias,
+  roles,
+  onClose,
+  onSave,
+}: Props) {
   const [formData, setFormData] = useState({
     nombre: "",
     apellido: "",
@@ -148,8 +151,10 @@ export function FormEditarUsuario({usuario, provincias, roles, onClose, onSave}:
           </select>
 
           <div className={styles.boton}>
-            <Button type="button" onClick={onClose}>Cancelar</Button>
-            
+            <Button type="button" onClick={onClose}>
+              Cancelar
+            </Button>
+
             <Button type="submit">Guardar</Button>
           </div>
         </form>

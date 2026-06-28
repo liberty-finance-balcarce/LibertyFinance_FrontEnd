@@ -1,9 +1,8 @@
-import type { UpdateUsuarioDTO } from "../types/usuario/updateUsuarioDTO";
-
-const BASE_API = "http://localhost:3000/api/v1";
+import type { UpdateUsuario } from "../types/usuarios";
+import { VITE_API_URL } from "../utils/env";
 
 export async function getUsers() {
-  const response = await fetch(`${BASE_API}/usuarios`);
+  const response = await fetch(`${VITE_API_URL}/usuarios`);
 
   if (!response.ok) {
     throw new Error("Error al obtener usuarios");
@@ -14,18 +13,16 @@ export async function getUsers() {
   return result.data;
 }
 
-export async function updateUser(dni: number, data: UpdateUsuarioDTO) {
-
-  const response = await fetch(`${BASE_API}/usuarios/${dni}`, {
+export async function updateUser(dni: number, data: UpdateUsuario) {
+  const response = await fetch(`${VITE_API_URL}/usuarios/${dni}`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(data),
   });
- 
-  if (!response.ok) {
 
+  if (!response.ok) {
     throw new Error("Error al actualizar usuario");
   }
 
@@ -37,15 +34,13 @@ export async function updateUser(dni: number, data: UpdateUsuarioDTO) {
 export async function deleteUser(dni: number) {
   const token = localStorage.getItem("token");
 
-  const response = await fetch(`${BASE_API}/usuarios/${dni}`,
-    {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
+  const response = await fetch(`${VITE_API_URL}/usuarios/${dni}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
 
   if (!response.ok) {
     throw new Error("Error al eliminar usuario");
@@ -54,8 +49,8 @@ export async function deleteUser(dni: number) {
   return await response.json();
 }
 
-export async function getRoles(){
-   const response = await fetch(`${BASE_API}/rol`);
+export async function getRoles() {
+  const response = await fetch(`${VITE_API_URL}/rol`);
 
   if (!response.ok) {
     throw new Error("Error al obtener usuarios");

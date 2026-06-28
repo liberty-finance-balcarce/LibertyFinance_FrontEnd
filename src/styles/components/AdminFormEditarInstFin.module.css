@@ -1,0 +1,40 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  width: 100%;
+  margin: 4px;
+
+  align-items: center;
+}
+
+.form input,
+.form select {
+  width: 95%;
+  max-width: none;
+
+  padding: 8px;
+  font-size: 14px;
+
+  border: 1px solid #ccc;
+  border-radius: 6px;
+
+  box-sizing: border-box;
+}
+
+.boton {
+  width: 90%;
+  max-width: 400px;
+
+  display: flex;
+  justify-content: space-between;
+
+  margin-top: 10px;
+}
+
+.titulo {
+  display: flex;
+  align-items: center;
+  font-family: var(--tipoLetraGeneral);
+}

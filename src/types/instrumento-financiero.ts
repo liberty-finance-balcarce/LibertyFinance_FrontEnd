@@ -17,18 +17,26 @@ export type Instrumento = {
   nombre_instrumento: string;
   rendimiento: number;
   riesgo: Riesgo;
-  precio_instrumento: string;
+  precio_instrumento: number;
   tipo_instrumento: TipoInstrumento;
   logo_url: string;
 };
 
 export enum Riesgo {
-  BAJO = 'Bajo',
-  MEDIO = 'Medio',
-  ALTO = 'Alto',
+  BAJO = "Bajo",
+  MEDIO = "Medio",
+  ALTO = "Alto",
 }
 
 export enum TipoInstrumento {
-  TRADICIONAL = 'Tradicional',
-  NO_TRADICIONAL = 'No tradicional',
+  TRADICIONAL = "Tradicional",
+  NO_TRADICIONAL = "No tradicional",
 }
+
+export interface CreateInstrumentoFinanciero extends Partial<
+  Omit<Instrumento, "id_instrumento">
+> {}
+
+export interface UpdateInstrumentoFinanciero extends Partial<
+  Omit<CreateInstrumentoFinanciero, "id_instrumento">
+> {}

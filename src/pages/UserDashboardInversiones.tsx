@@ -13,7 +13,7 @@ import styles from "../styles/pages/DashboardInversiones.module.css";
 
 const COLORS = ["#F2A900", "#627EEA", "#00D4B2", "#FF6B6B", "#8492A6"];
 
-export function DashboardInversiones() {
+export function UserDashboardInversiones() {
   const { token } = useAuth();
   const { resumenReporte, isLoadingResumen, errorResumen } = useReportes(
     token || "",
@@ -46,7 +46,7 @@ export function DashboardInversiones() {
     <section className={styles.contResumen}>
       <h2>RESUMEN</h2>
       {isLoadingResumen && (
-        <LoadingSpinner logo="../public/assets/logo-icon.png" size={60} />
+        <LoadingSpinner logo="/assets/logo-icon.png" size={60} />
       )}
 
       {errorResumen && <p className={styles.error}>{errorResumen}</p>}
