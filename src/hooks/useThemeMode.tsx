@@ -7,21 +7,26 @@ function getSystemTheme() {
 
 export function useThemeMode() {
 
-    const [theme, setTheme] = useState<ThemeMode>(getSystemTheme());
-
+const [theme, setTheme] = useState<ThemeMode>(() => {
+        const temaGuardado = localStorage.getItem('cambioTema') as ThemeMode | null;
+        return temaGuardado ? temaGuardado : getSystemTheme();
+    });
+    
 
     useEffect(() => {
+        console.log(theme);
+        
         if (theme === 'dark') {
             document.documentElement.classList.add('dark');
         } else {
             document.documentElement.classList.remove('dark')
         }
+    localStorage.setItem('cambioTema', theme);    
     }, [theme]);
 
     const toggleTheme = () => {
         setTheme((prevState) => prevState === 'light' ? 'dark' : 'light')
     }
-
     return { theme, toggleTheme }
 
 }
