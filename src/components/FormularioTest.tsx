@@ -230,7 +230,7 @@ export function FormularioTest({ onClose }: { onClose?: () => void }) {
 
           <img
             className={styles.trophy}
-            src="../assets/trophy.png"
+            src="/assets/trophy.png"
             alt="Trofeo Liberty Finance"
           />
           
