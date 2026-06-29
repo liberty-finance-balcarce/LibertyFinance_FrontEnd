@@ -27,7 +27,6 @@ const [theme, setTheme] = useState<ThemeMode>(() => {
     const toggleTheme = () => {
         setTheme((prevState) => prevState === 'light' ? 'dark' : 'light')
     }
-
     return { theme, toggleTheme }
 
 }
