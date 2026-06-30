@@ -1,6 +1,7 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
+import { CarritoProvider } from "./context/CarritoContext";
 import { PublicRoute } from "./routes/PublicRoute";
 import { UserRoute } from "./routes/UserRoute";
 import { AdminRoute } from "./routes/AdminRoute";
@@ -18,7 +19,7 @@ import { FAQ } from "./pages/FAQ";
 import { NotFound } from "./pages/NotFound";
 import { Login } from "./pages/Login";
 import { UserDashboard } from "./pages/UserDashboard";
-import { UserDashboardCart } from "./pages/UserDashboardCart";
+import { UserDashboardCarrito } from "./pages/UserDashboardCarrito";
 import { UserDashboardInversiones } from "./pages/UserDashboardInversiones";
 import { UserDashboardTestPerfil } from "./pages/UserDashboardTestPerfil";
 import { AdminDashboard } from "./pages/AdminDashboard";
@@ -36,7 +37,7 @@ function App() {
             <Route element={<UserLayout />}>
               <Route path="/dashboard/user" element={<UserDashboard />}>
                 <Route index element={<Navigate to="inversiones" replace />} />
-                <Route path="carrito" element={<UserDashboardCart />} />
+                <Route path="carrito" element={<CarritoProvider> <UserDashboardCarrito /> </CarritoProvider>} />
                 <Route path="inversiones" element={<UserDashboardInversiones />} />
                 <Route
                   path="test-inversor"

@@ -2,7 +2,10 @@ export interface TransaccionHistoricoCompra {
     fecha_operacion: string;
     id_instrumento: number;
     precio_instrumento: number;
-    dni_ususario: number;
+    cantidad_paquetes: number;
+    precio_paquete: number;
+    dni_usuario: number;
+    cantidad_instrumento_comprado: number;
 }
 
 export interface TransaccionHistoricoCompraResponse {
@@ -11,5 +14,5 @@ export interface TransaccionHistoricoCompraResponse {
     data: TransaccionHistoricoCompra | TransaccionHistoricoCompra[];
 }
 
-export interface CreateTansaccionHistoricoCompra extends Omit<TransaccionHistoricoCompra, 'id_transaccion_compra'>{}
-export interface UpdateTransaccionHistoricoCompra extends Partial<CreateTansaccionHistoricoCompra>{}
+export interface CreateTransaccionHistoricoCompra extends Omit<TransaccionHistoricoCompra, 'id_transaccion_compra'> { }
+export interface UpdateTransaccionHistoricoCompra extends Partial<CreateTransaccionHistoricoCompra> { }
