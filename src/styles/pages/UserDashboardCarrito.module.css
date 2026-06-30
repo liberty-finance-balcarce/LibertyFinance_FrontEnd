@@ -64,7 +64,7 @@
     border: 1px solid var(--colorPrimario);
     border-radius: 8px;
 
-    background-color: #fff;
+    background-color: transparent;
     color: var(--colorPrimario);
 
     cursor: pointer;
