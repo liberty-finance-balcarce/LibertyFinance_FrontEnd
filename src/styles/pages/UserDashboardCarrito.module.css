@@ -47,20 +47,65 @@
     justify-items: center;
 }
 
-.comprarButton {
+.accionesCarrito {
     position: absolute;
     right: 0;
     top: 50%;
     transform: translateY(-50%);
 
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.comprarButton {
     padding: 8px 16px;
 
-    border: none;
+    border: 1px solid var(--colorPrimario);
     border-radius: 8px;
 
-    background-color: var(--colorPrimario);
-    color: var(--colorLetrasBoton);
+    background-color: #fff;
+    color: var(--colorPrimario);
 
     cursor: pointer;
     font-size: 0.95rem;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.comprarButton:hover {
+    background-color: var(--colorPrimario);
+    color: var(--colorLetrasBoton);
+}
+
+.vaciarButton {
+    padding: 8px 16px;
+
+    border: 1px solid var(--colorPrimario);
+    border-radius: 8px;
+
+    background-color: transparent;
+    color: var(--colorPrimario);
+
+    cursor: pointer;
+    font-size: 0.95rem;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.vaciarButton:hover {
+    background-color: var(--colorPrimario);
+    color: var(--colorLetrasBoton);
+}
+
+.vaciarIcono {
+    font-size: 1rem;
 }

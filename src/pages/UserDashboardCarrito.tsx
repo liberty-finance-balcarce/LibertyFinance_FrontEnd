@@ -1,7 +1,8 @@
-import { useState } from "react";
-import { FaShoppingCart } from "react-icons/fa";
+import { useMemo, useState } from "react";
+import { FaCreditCard, FaShoppingCart, FaTrash } from "react-icons/fa";
 import { UserDashboardCarritoInstrumentoFinancieroCard } from "../components/UserDashboardCarritoInstrumentoFinancieroCard";
 import { UserDashboardCarritoModal } from "../components/UserDashboardCarritoModal";
+import { UserDashboardCarritoBusqueda } from "../components/UserDashboardCarritoBusqueda";
 import { useInstrumentosFinancieros } from "../hooks/useInstrumentosFinancieros";
 import { useCarrito } from "../hooks/useCarrito";
 import { useAuth } from "../hooks/useAuth";
@@ -9,6 +10,7 @@ import { useTransaccionHistoricoCompra } from "../hooks/useTransaccionHistoricoC
 import type { CreateTransaccionHistoricoCompra } from "../types/transaccion-historico-compra";
 import styles from "../styles/pages/UserDashboardCarrito.module.css";
 import { useNavigate } from "react-router-dom";
+import { LoadingSpinner } from "../components/LoadingSpinner";
 
 export function UserDashboardCarrito() {
   const navigate = useNavigate();
@@ -20,13 +22,37 @@ export function UserDashboardCarrito() {
   const [modalAbierto, setModalAbierto] = useState(false);
   const [procesando, setProcesando] = useState(false);
   const [errorCompra, setErrorCompra] = useState<string | null>(null);
+  const [busqueda, setBusqueda] = useState("");
 
+  const normalizar = (texto: string) =>
+    texto.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
+  const filtrar = (lista: typeof data.tradicionales | undefined) => {
+    if (!lista) return [];
+    const termino = normalizar(busqueda.trim());
+    if (!termino) return lista;
+    return lista.filter((instrumento) =>
+      normalizar(instrumento.nombre_instrumento).includes(termino) ||
+      normalizar(instrumento.tipo_instrumento).includes(termino)
+    );
+  };
+
+  const tradicionalesFiltrados = useMemo(
+    () => filtrar(data?.tradicionales),
+    [data?.tradicionales, busqueda]
+  );
+
+  const noTradicionalesFiltrados = useMemo(
+    () => filtrar(data?.noTradicionales),
+    [data?.noTradicionales, busqueda]
+  );
 
   const handlePayment = async () => {
     setProcesando(true);
     setErrorCompra(null);
 
-    const fechaOperacion = new Date().toISOString().split("T")[0];
+    // Utilizamos el formato suecia porque nosotros usamos el AÑO-MES-DIA
+    const fechaOperacion = new Date().toLocaleDateString("sv-SE");
 
     try {
       for (const item of items) {
@@ -51,7 +77,7 @@ export function UserDashboardCarrito() {
       );
     }
     setProcesando(false);
-    navigate("/dashboard/user/inversiones")
+    navigate("/dashboard/user/inversiones");
   };
 
   return (
@@ -61,27 +87,48 @@ export function UserDashboardCarrito() {
         <FaShoppingCart className={styles.cartIcon} />
 
         {items.length > 0 && (
-          <button
-            className={styles.comprarButton}
-            onClick={() => setModalAbierto(true)}
-          >
-            Comprar ({items.length})
-          </button>
+          <div className={styles.accionesCarrito}>
+            <button
+              className={styles.vaciarButton}
+              onClick={vaciarCarrito}
+            >
+              <FaTrash className={styles.vaciarIcono} />
+              Vaciar
+            </button>
+
+            <button
+              className={styles.comprarButton}
+              onClick={() => setModalAbierto(true)}
+            >
+              <FaCreditCard className={styles.comprarIcono} />
+              Comprar ({items.length})
+            </button>
+          </div>
         )}
+
       </div>
 
-      {isLoading && <p>Cargando instrumentos...</p>}
+      <UserDashboardCarritoBusqueda valor={busqueda} onCambiar={setBusqueda} />
+
+      {isLoading && <LoadingSpinner logo="/assets/logo-icon.png" size={120} />}
 
       {error && <p style={{ color: "red" }}>{error}</p>}
 
+      {!isLoading &&
+        !error &&
+        tradicionalesFiltrados.length === 0 &&
+        noTradicionalesFiltrados.length === 0 && (
+          <p>No se encontraron instrumentos para "{busqueda}"</p>
+        )}
+
       <div className={styles.cardsGrid}>
-        {data?.tradicionales.map((instrumento) => (
+        {tradicionalesFiltrados.map((instrumento) => (
           <UserDashboardCarritoInstrumentoFinancieroCard
             key={instrumento.id_instrumento}
             instrumentoFinanciero={instrumento}
           />
         ))}
-        {data?.noTradicionales.map((instrumento) => (
+        {noTradicionalesFiltrados.map((instrumento) => (
           <UserDashboardCarritoInstrumentoFinancieroCard
             key={instrumento.id_instrumento}
             instrumentoFinanciero={instrumento}

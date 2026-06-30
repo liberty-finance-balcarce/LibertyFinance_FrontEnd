@@ -18,8 +18,8 @@
     padding: 24px;
     border-radius: 10px;
 
-    background-color: #1a1025;
-    color: #ffffff;
+    background-color: var(--colorFondoGeneral);
+    color: var(--colorLetraGeneral);
 
     border: 2px solid var(--colorPrimario);
     box-shadow: 0 0 30px var(--colorPrimario);
@@ -78,7 +78,7 @@
     border-radius: 8px;
 
     border: 1px solid var(--colorBordeVentana);
-    background-color: var(--colorFondo);
+    background-color: var(--colorFondoGeneral);
     color: var(--colorLetraGeneral);
 
     font-size: 0.95rem;
@@ -128,12 +128,13 @@
 
 .botonCerrar {
     background-color: transparent;
-    color: #ffffff;
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: var(--colorLetraGeneral);
+    border: 1px solid var(--colorBordeVentana);
 }
 
 .botonCerrar:hover:not(:disabled) {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: var(--colorSombraVentana);
+    opacity: 0.5;
 }
 
 .botonConfirmar:disabled,

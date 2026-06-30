@@ -32,9 +32,30 @@ function validarLuhn(numero: string): boolean {
     return suma % 10 === 0;
 }
 
+function validarVencimiento(valor: string): boolean {
+    const match = valor.match(/^(\d{2})\/(\d{2})$/);
+    if (!match) return false;
+
+    const mes = Number(match[1]);
+    const anio = Number(`20${match[2]}`);
+
+    if (mes < 1 || mes > 12) return false;
+
+    const hoy = new Date();
+    const vencimiento = new Date(anio, mes, 0);
+
+    return vencimiento >= new Date(hoy.getFullYear(), hoy.getMonth(), 1);
+}
+
 function darFormatoNumeroTarjeta(valor: string): string {
     const digitos = valor.replace(/\D/g, "").slice(0, 16);
     return digitos.replace(/(.{4})/g, "$1 ").trim();
+}
+
+function darFormatoVencimiento(valor: string): string {
+    const digitos = valor.replace(/\D/g, "").slice(0, 4);
+    if (digitos.length < 3) return digitos;
+    return `${digitos.slice(0, 2)}/${digitos.slice(2)}`;
 }
 
 export function UserDashboardCarritoModal({
@@ -49,6 +70,7 @@ export function UserDashboardCarritoModal({
     const [vencimiento, setVencimiento] = useState("");
     const [cvv, setCvv] = useState("");
     const [tarjetaInvalida, setTarjetaInvalida] = useState(false);
+    const [vencimientoInvalido, setVencimientoInvalido] = useState(false);
 
     const handleNumeroChange = (valor: string) => {
         setNumeroTarjeta(darFormatoNumeroTarjeta(valor));
@@ -56,10 +78,13 @@ export function UserDashboardCarritoModal({
     };
 
     const handleConfirmarClick = () => {
-        if (!validarLuhn(numeroTarjeta)) {
-            setTarjetaInvalida(true);
-            return;
-        }
+        const tarjetaOk = validarLuhn(numeroTarjeta);
+        const vencimientoOk = validarVencimiento(vencimiento);
+
+        setTarjetaInvalida(!tarjetaOk);
+        setVencimientoInvalido(!vencimientoOk);
+
+        if (!tarjetaOk || !vencimientoOk) return;
 
         onConfirmar();
     };
@@ -110,7 +135,7 @@ export function UserDashboardCarritoModal({
                                 placeholder="MM/AA"
                                 maxLength={5}
                                 value={vencimiento}
-                                onChange={(e) => setVencimiento(e.target.value)}
+                                onChange={(e) => setVencimiento(darFormatoVencimiento(e.target.value))}
                                 disabled={procesando}
                                 className={styles.tarjetaInput}
                             />
@@ -135,6 +160,10 @@ export function UserDashboardCarritoModal({
 
                 {tarjetaInvalida && (
                     <p className={styles.error}>El numero de tarjeta no es valido.</p>
+                )}
+
+                {vencimientoInvalido && (
+                    <p className={styles.error}>El vencimiento no es valido.</p>
                 )}
 
                 {errorCompra && <p className={styles.error}>{errorCompra}</p>}

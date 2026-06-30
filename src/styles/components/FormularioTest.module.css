@@ -9,12 +9,10 @@
 
 .testCard {
   position: relative;
-  background-color: #ffffff;
+  background-color: var(--colorFondoGeneral);
   width: auto;
-  /*border-radius: 16px;*/
-  /*box-shadow: 0 10px 25px rgba(0,0,0,0.1);*/
   overflow: hidden;
-  color: var(--colorPrimario);
+  color: var(--colorLetraGeneral);
   padding-bottom: 0px;
 }
 
@@ -22,9 +20,9 @@
   position: absolute !important;
   top: 15px !important;
   right: 15px !important;
-  background: transparent !important; 
+  background: transparent !important;
   border: none !important;
-  box-shadow: none !important; 
+  box-shadow: none !important;
   font-size: 32px !important;
   line-height: 1 !important;
   color: var(--primary-color, #800080) !important;
@@ -79,8 +77,8 @@
   font-size: 18px;
   font-weight: 700;
   color: var(--text-dark, #333);
-  padding: 25px 45px 0 30px; 
-  
+  padding: 25px 45px 0 30px;
+
 }
 
 .subtext {
@@ -165,13 +163,12 @@
 
 .resultCard {
   position: relative;
-  background-color:#ffffff;
+  background-color: var(--colorFondoGeneral);
   width: 100%;
   max-width: 500px;
- /* border-radius: 20px;*/
   padding: 40px;
   text-align: center;
-  /*box-shadow: 0 10px 30px rgba(0,0,0,0.1);*/
+  color: var(--colorLetraGeneral);
 }
 
 .scoreBadge {
@@ -185,22 +182,24 @@
 
 .resultDetails {
   text-align: left;
-  background: #fcfcfc;
+  background: var(--colorFondoGeneral);
   padding: 20px;
   border-radius: 15px;
   margin-bottom: 30px;
-  border: 1px solid #eee;
+  border: 1px solid var(--colorBordeVentana);
+  color: var(--colorLetraGeneral);
 }
 
 .highlightBox {
-  background: #fff9f2;
-  border-left: 4px solid var(--primary-color, #800080);
+  background: var(--colorBordeVentana);
+  border-left: 4px solid var(--colorSecundario, #800080);
   padding: 10px;
   margin-top: 15px;
+  color: var(--colorLetraGeneral);
 }
 
 .btnReset {
-  display: block; 
+  display: block;
   width: 100%;
   background: var(--colorSecundario, #4B0082);
   color: white;
@@ -215,28 +214,40 @@
   opacity: 0.9;
 }
 
-.perfil-conservador h2 { color: #0984e3; }
-.perfil-moderado h2 { color: #00b894; }
-.perfil-agresivo h2 { color: #e17055; }
-.perfil-experto h2 { color: #6c5ce7; }
+.perfil-conservador h2 {
+  color: #0984e3;
+}
 
-.trophy{
+.perfil-moderado h2 {
+  color: #00b894;
+}
+
+.perfil-agresivo h2 {
+  color: #e17055;
+}
+
+.perfil-experto h2 {
+  color: #6c5ce7;
+}
+
+.trophy {
   height: 98px;
   width: 98px;
 }
 
-.botonCerrar{
-    display: block; 
-    width: 100%;
-    padding: 10px;
-    background-color: var(--colorPrimario);
-    color: var(--colorLetrasBoton);
-    border-radius: 4px;
-    border:none;
-    transition: 0.2s, background-color 0.2s;
+.botonCerrar {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: var(--colorPrimario);
+  color: var(--colorLetrasBoton);
+  border-radius: 4px;
+  border: none;
+  transition: 0.2s, background-color 0.2s;
 }
-.botonCerrar:hover{
-cursor:pointer;        
-background-color: var(--colorSecundario); 
-transform: scale(1.1);   
+
+.botonCerrar:hover {
+  cursor: pointer;
+  background-color: var(--colorSecundario);
+  transform: scale(1.1);
 }

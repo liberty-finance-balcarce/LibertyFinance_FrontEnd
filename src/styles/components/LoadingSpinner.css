@@ -22,7 +22,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: white;
+  background: var(--colorFondoGeneral);
   z-index: 1;
 }
 
@@ -48,7 +48,9 @@
   0% {
     filter: grayscale(100%) opacity(60%);
   }
+
   100% {
-    filter: grayscale(0%); /* Aquí recupera todo su color original */
+    filter: grayscale(0%);
+    /* Aquí recupera todo su color original */
   }
 }
