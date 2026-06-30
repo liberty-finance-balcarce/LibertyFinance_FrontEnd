@@ -72,7 +72,7 @@
 .listHeader {
   margin-bottom: 12px;
   color: var(--colorLetraGeneral);
-  font-size: 0.75rem;
+  font-size: 1.02rem;
   font-weight: bold;
 }
 
@@ -81,7 +81,7 @@
 }
 
 .listHeader span {
-  text-decoration: underline var(--colorPrimario);
+  text-decoration: underline var(--colorLetraGeneral);
 }
 
 .listHeader span,

@@ -26,7 +26,7 @@ export function AdminUsersCard() {
         <p>Usuarios Registrados</p>
       </div>
 
-      <div className={styles.cardAdmin}>
+      <div className={styles.card}>
         <h2>{totalAdmins}</h2>
         <p>Administradores</p>
       </div>

@@ -1,64 +1,60 @@
 .container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-
-    background: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(4px);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .modal {
     width: 320px;
     background: white;
-
     padding: 20px;
     border-radius: 10px;
-
     text-align: center;
-
     border: 1px solid var(--colorBordeVentana);
     box-shadow: 0 5px 15px var(--colorSombraVentana);
+    background-color: #f8f8ff;
 }
 
 .titulo {
-    margin-bottom: 10px;
-    color: var(--colorPrimario);
+  margin-bottom: 10px;
+  color: var(--colorPrimario);
 }
 
 .nombre {
-    margin-bottom: 20px;
-    font-weight: bold;
+  color: var(--colorPrimario);
+  margin-bottom: 20px;
+  font-weight: bold;
 }
 
 .boton {
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
 }
 
 .boton button {
-    flex: 1;
-    padding: 8px;
-
-    border-radius: 6px;
-    border: none;
-
-    cursor: pointer;
+  flex: 1;
+  padding: 8px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
 }
 
 .delete {
-    background-color: red;
-    color: white;
+  background-color: red;
+  color: #f8f8ff;
 }
 
 .cancel {
-    background-color: transparent;
-    border: 1px solid var(--colorBordeVentana);
-    color: var(--colorPrimario);
+  background-color: var(--colorPrimario);
+  border: 1px solid var(--colorBordeVentana);
+  color: var(--colorLetrasBoton);
 }
