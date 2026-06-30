@@ -1,5 +1,6 @@
 import type { Usuario } from "../types/usuarios";
 import styles from "../styles/components/AdminModalEliminarUsuario.module.css";
+import { Button } from "./Button";
 
 interface Props {
   abierto: boolean;
@@ -26,13 +27,13 @@ export function AdminModalEliminarUsuario({
         </p>
 
         <div className={styles.boton}>
-          <button className={styles.cancel} onClick={onClose}>
+          <Button className={styles.cancel} onClick={onClose}>
             Cancelar
-          </button>
+          </Button>
 
-          <button className={styles.delete} onClick={onConfirmar}>
+          <Button className={styles.delete} onClick={onConfirmar}>
             Sí, eliminar
-          </button>
+          </Button>
         </div>
       </div>
     </div>

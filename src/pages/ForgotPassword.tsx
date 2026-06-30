@@ -54,9 +54,12 @@ export  function ForgotPassword() {
         </button>
 
         {contador > 0 && (
-          <p className={styles.reenviar}>
-            Reenviar mensaje en {contador} segundos
-          </p>
+          <>
+            <p className={styles.reenviar}>¡Enlace enviado exitosamente!</p>
+            <p className={styles.reenviar}>
+              Reenviar enlace en {contador} segundos
+            </p>
+          </>
         )}
 
         <div className={styles.contRegistro}>
