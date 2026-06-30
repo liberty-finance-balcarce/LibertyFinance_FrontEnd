@@ -100,8 +100,6 @@ export async function crearInstrumento(data: CreateInstrumentoFinanciero) {
   });
 
   if (!response.ok) {
-    const errorData = await response.json().catch(() => ({}));
-    console.error("Detalle del error 400 del Backend:", errorData);
     throw new Error("Error al crear el instrumento");
   }
 

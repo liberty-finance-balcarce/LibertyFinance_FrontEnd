@@ -25,12 +25,12 @@ export function AdminModalEliminarInstFin({
         <p className={styles.nombre}>{instrumento.nombre_instrumento}</p>
 
         <div className={styles.boton}>
-          <Button className={styles.delete} onClick={onConfirmar}>
-            Si, eliminar
-          </Button>
-
           <Button className={styles.cancel} onClick={onClose}>
             Cancelar
+          </Button>
+
+          <Button className={styles.delete} onClick={onConfirmar}>
+            Sí, eliminar
           </Button>
         </div>
       </div>

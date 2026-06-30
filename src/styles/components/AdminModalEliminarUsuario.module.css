@@ -13,14 +13,14 @@
 }
 
 .modal {
-    width: 320px;
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center;
-    border: 1px solid var(--colorBordeVentana);
-    box-shadow: 0 5px 15px var(--colorSombraVentana);
-    background-color: #f8f8ff;
+  width: 320px;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  border: 1px solid var(--colorBordeVentana);
+  box-shadow: 0 5px 15px var(--colorSombraVentana);
+  background-color: #f8f8ff;
 }
 
 .titulo {
@@ -51,6 +51,10 @@
 .delete {
   background-color: red;
   color: #f8f8ff;
+}
+
+.delete:hover {
+  background-color: red;
 }
 
 .cancel {

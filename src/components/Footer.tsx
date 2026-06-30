@@ -13,10 +13,10 @@ export function Footer() {
           <NavLink to="https://www.linkedin.com/" target="_blank">
             <FaLinkedin />
           </NavLink>
-          <NavLink to="https://www.instagram.com/" target="_blank">
+          <NavLink to="https://www.instagram.com/libertyfinancebalcarce/" target="_blank">
             <FaInstagram />
           </NavLink>
-          <NavLink to="https://www.youtube.com/" target="_blank">
+          <NavLink to="https://www.youtube.com/@LibertyFinanceBalcarce/" target="_blank">
             <FaYoutube />
           </NavLink>
         </div>
