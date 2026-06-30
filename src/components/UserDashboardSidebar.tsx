@@ -9,12 +9,10 @@ export function UserDashboardSidebar() {
 
   const handleLogout = () => {
     logout();
-    navigate("/login"); 
+    navigate("/login");
   };
 
   return (
-
-    
     <aside className={styles.sidebar}>
       <nav className={styles.nav}>
         <NavLink
@@ -42,7 +40,7 @@ export function UserDashboardSidebar() {
         </NavLink>
 
         <NavLink
-          to="/dashboard/user/test-inversor" 
+          to="/dashboard/user/test-inversor"
           className={({ isActive }) =>
             isActive
               ? `${styles.navLink} ${styles.navLinkActive}`
@@ -53,11 +51,10 @@ export function UserDashboardSidebar() {
           <span>Test Perfil de Inversor</span>
         </NavLink>
       </nav>
-    
+
       <button onClick={handleLogout} className={styles.logoutButton}>
         <span>&larr;</span> Cerrar sesión
       </button>
     </aside>
-
   );
 }

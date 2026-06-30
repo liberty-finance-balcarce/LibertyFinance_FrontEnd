@@ -1,0 +1,63 @@
+.buscador {
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto 24px;
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 10px 16px;
+    border-radius: 8px;
+    box-sizing: border-box;
+
+    background-color: var(--colorFondoVentana);
+    color: var(--colorLetraGeneral);
+    border: 1px solid var(--colorBordeVentana);
+
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.buscador:focus-within {
+    border-color: var(--colorPrimario);
+    box-shadow: 0 0 6px var(--colorPrimario);
+}
+
+.icono {
+    font-size: 1.1rem;
+    color: var(--colorPrimario);
+    flex-shrink: 0;
+}
+
+.input {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+
+    font-size: 1rem;
+    color: var(--colorLetraGeneral);
+}
+
+.input::placeholder {
+    color: var(--colorLetraGeneral);
+    opacity: 0.6;
+}
+
+.limpiar {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+
+    font-size: 1.2rem;
+    line-height: 1;
+    color: var(--colorLetraGeneral);
+    opacity: 0.6;
+
+    transition: opacity 0.2s ease;
+}
+
+.limpiar:hover {
+    opacity: 1;
+}
