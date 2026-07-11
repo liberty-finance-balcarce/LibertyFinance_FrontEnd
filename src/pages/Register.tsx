@@ -123,7 +123,7 @@ export function Register() {
         <div className={styles.gridContainer}>
           <div className={styles.column}>
             <div className={styles.inputGroup}>
-              <label htmlFor="nombre">Nombre:</label>
+              <label htmlFor="nombre">Nombre *</label>
               <input
                 id="nombre"
                 placeholder="Juan"
@@ -138,11 +138,10 @@ export function Register() {
                   {errors.nombre.message}
                 </span>
               )}
-              <span className={styles.hint}>* CAMPO OBLIGATORIO</span>
             </div>
 
             <div className={styles.inputGroup}>
-              <label htmlFor="apellido">Apellido:</label>
+              <label htmlFor="apellido">Apellido *</label>
               <input
                 id="apellido"
                 placeholder="Pérez"
@@ -157,11 +156,10 @@ export function Register() {
                   {errors.apellido.message}
                 </span>
               )}
-              <span className={styles.hint}>* CAMPO OBLIGATORIO</span>
             </div>
 
             <div className={styles.inputGroup}>
-              <label htmlFor="mail">Mail:</label>
+              <label htmlFor="mail">Mail *</label>
               <input
                 type="email"
                 id="mail"
@@ -179,11 +177,10 @@ export function Register() {
               {errors.mail && (
                 <span className={styles.fieldError}>{errors.mail.message}</span>
               )}
-              <span className={styles.hint}>* CAMPO OBLIGATORIO</span>
             </div>
 
             <div className={styles.inputGroup}>
-              <label htmlFor="contraseña">Contraseña:</label>
+              <label htmlFor="contraseña">Contraseña *</label>
 
               <div className={styles.contPassword}>
                 <input
@@ -197,17 +194,17 @@ export function Register() {
                     minLength: {
                       value: 8,
                       message:
-                        "La contraseña debe tener entre 8 y 16 caracteres.",
+                        "La contraseña no cumple con los requisitos.",
                     },
                     maxLength: {
                       value: 16,
                       message:
-                        "La contraseña debe tener entre 8 y 16 caracteres.",
+                        "La contraseña no cumple con los requisitos.",
                     },
                     pattern: {
                       value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[#*])/,
                       message:
-                        "La contraseña debe incluir al menos una minuscula, una mayuscula y un caracter especial (# o *).",
+                        "La contraseña no cumple con los requisitos.",
                     },
                   })}
                 />
@@ -233,13 +230,13 @@ export function Register() {
                   {errors.contraseña.message}
                 </span>
               )}
-              <span className={styles.hint}>* CAMPO OBLIGATORIO</span>
+              <span className={styles.reqPassword}>La contraseña debe tener entre 8 y 16 caracteres, incluir al menos una mayúscula, una minúscula y un carácter especial (# o *).</span>
             </div>
           </div>
 
           <div className={styles.column}>
             <div className={styles.inputGroup}>
-              <label>Número de teléfono:</label>
+              <label>Número de teléfono *</label>
 
               <div className={styles.phoneGroup}>
                 <input
@@ -295,12 +292,11 @@ export function Register() {
                   {errors.telefono.message}
                 </span>
               )}
-              <span className={styles.hint}>* CAMPO OBLIGATORIO</span>
             </div>
 
             <div className={styles.row}>
               <div className={styles.inputGroup}>
-                <label htmlFor="fecha_nacimiento">Fecha de nacimiento:</label>
+                <label htmlFor="fecha_nacimiento">Fecha de nacimiento *</label>
                 <input
                   type="date"
                   id="fecha_nacimiento"
@@ -317,11 +313,10 @@ export function Register() {
                     {errors.fecha_nacimiento.message}
                   </span>
                 )}
-                <span className={styles.hint}>* CAMPO OBLIGATORIO</span>
               </div>
 
               <div className={styles.inputGroup}>
-                <label htmlFor="dni">DNI:</label>
+                <label htmlFor="dni">DNI *</label>
                 <input
                   id="dni"
                   type="text"
@@ -350,13 +345,12 @@ export function Register() {
                     {errors.dni.message}
                   </span>
                 )}
-                <span className={styles.hint}>* CAMPO OBLIGATORIO</span>
               </div>
             </div>
 
             <div className={styles.row}>
               <div className={styles.inputGroup}>
-                <label htmlFor="provincia">Provincia:</label>
+                <label htmlFor="provincia">Provincia *</label>
                 <select
                   id="provincia"
                   className={errors.provincia ? styles.inputError : ""}
@@ -379,11 +373,10 @@ export function Register() {
                     {errors.provincia.message}
                   </span>
                 )}
-                <span className={styles.hint}>* CAMPO OBLIGATORIO</span>
               </div>
 
               <div className={styles.inputGroup}>
-                <label htmlFor="localidad">Localidad:</label>
+                <label htmlFor="localidad">Localidad *</label>
                 <input
                   id="localidad"
                   placeholder="Balcarce"
@@ -399,7 +392,6 @@ export function Register() {
                     {errors.localidad.message}
                   </span>
                 )}
-                <span className={styles.hint}>* CAMPO OBLIGATORIO</span>
               </div>
             </div>
           </div>
@@ -409,6 +401,9 @@ export function Register() {
           type="hidden"
           {...register("perfilInversor")}
         />
+        <span className={styles.hint}>
+          * Campos Obligatorios.
+        </span>
 
         <div className={styles.termsGroup}>
           <input

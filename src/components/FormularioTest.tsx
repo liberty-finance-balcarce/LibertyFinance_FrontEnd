@@ -305,13 +305,14 @@ export function FormularioTest({ onClose }: { onClose?: () => void }) {
                 backgroundColor:
                   selections[currentIdx] === null
                     ? "grey"
-                    : "var(--colorSecundario, #4B0082)",
+                    : "var(--colorPrimario)",
+                    marginLeft: "-10px",
                 cursor:
                   selections[currentIdx] === null ? "not-allowed" : "pointer",
                 boxShadow:
                   selections[currentIdx] === null
                     ? "none"
-                    : "0px 0px 15px 10px #DDA0DD",
+                    : "0px 0px 15px 5px #DDA0DD",
                 transition: "background-color 0.3s ease",
               }}
             >

@@ -1,167 +1,139 @@
 .modalOverlay {
-    position: fixed;
-    inset: 0;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    background-color: rgba(0, 0, 0, 0.75);
-    z-index: 1000;
-
-    animation: fadeIn 0.2s ease;
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.75);
+  z-index: 1000;
+  animation: fadeIn 0.2s ease;
 }
 
 .modalContent {
-    width: 90%;
-    max-width: 400px;
-    padding: 24px;
-    border-radius: 10px;
-
-    background-color: var(--colorFondoGeneral);
-    color: var(--colorLetraGeneral);
-
-    border: 2px solid var(--colorPrimario);
-    box-shadow: 0 0 30px var(--colorPrimario);
-
-    animation: modalAparecer 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  width: 90%;
+  max-width: 400px;
+  padding: 24px;
+  border-radius: 10px;
+  background-color: var(--colorFondoGeneral);
+  color: var(--colorLetraGeneral);
+  border: 2px solid var(--colorPrimario);
+  box-shadow: 0 0 30px var(--colorPrimario);
+  animation: modalAparecer 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .modalContent h2 {
-    margin: 0 0 12px;
+  margin: 0 0 12px;
 }
 
 .modalContent p {
-    margin: 0 0 20px;
-    line-height: 1.4;
+  margin: 0 0 20px;
+  line-height: 1.4;
 }
 
 .error {
-    margin-bottom: 16px;
-    color: #ff6b6b;
-    font-size: 0.9rem;
+  margin-bottom: 16px;
+  color: #ff6b6b;
+  font-size: 0.9rem;
 }
 
 .tarjetaForm {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    margin: 16px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin: 16px 0;
 }
 
 .campoTarjeta {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
 }
 
 .campoTarjeta label {
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--colorLetraGeneral);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--colorLetraGeneral);
 }
 
 .filaDoble {
-    display: flex;
-    gap: 14px;
+  display: flex;
+  gap: 14px;
 }
 
 .filaDoble .campoTarjeta {
-    flex: 1;
+  flex: 1;
 }
 
 .tarjetaInput {
-    width: 100%;
-    box-sizing: border-box;
-    padding: 10px 12px;
-    border-radius: 8px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--colorBordeVentana);
+  background-color: var(--colorFondoGeneral);
+  color: var(--colorLetraGeneral);
+  font-family: var(--tipoLetraGeneral);
+  font-size: 0.95rem;
 
-    border: 1px solid var(--colorBordeVentana);
-    background-color: var(--colorFondoGeneral);
-    color: var(--colorLetraGeneral);
-
-    font-size: 0.95rem;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .tarjetaInput:focus {
-    outline: none;
-    border-color: var(--colorPrimario);
-    box-shadow: 0 0 6px var(--colorPrimario);
+  outline: none;
+  border-color: var(--colorPrimario);
+  box-shadow: 0 0 6px var(--colorPrimario);
 }
 
 .tarjetaInput:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .botonesContainer {
-    display: flex;
-    justify-content: flex-end;
-    gap: 12px;
-    margin-top: 24px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 24px;
 }
 
 .botonConfirmar,
 .botonCerrar {
-    padding: 10px 20px;
-    border-radius: 8px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
 
-    font-size: 0.95rem;
-    font-weight: 500;
-    cursor: pointer;
-
-    transition: transform 0.15s ease, opacity 0.15s ease, background-color 0.15s ease;
-}
-
-.botonConfirmar {
-    border: none;
-    background-color: var(--colorPrimario);
-    color: var(--colorLetrasBoton);
-}
-
-.botonConfirmar:hover:not(:disabled) {
-    opacity: 0.9;
-    transform: scale(1.03);
-}
-
-.botonCerrar {
-    background-color: transparent;
-    color: var(--colorLetraGeneral);
-    border: 1px solid var(--colorBordeVentana);
-}
-
-.botonCerrar:hover:not(:disabled) {
-    background-color: var(--colorSombraVentana);
-    opacity: 0.5;
+  transition: transform 0.15s ease;
 }
 
 .botonConfirmar:disabled,
 .botonCerrar:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-    transform: none;
+  cursor: not-allowed;
+  transform: none;
 }
 
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
+  from {
+    opacity: 0;
+  }
 
-    to {
-        opacity: 1;
-    }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes modalAparecer {
-    from {
-        opacity: 0;
-        transform: scale(0.92) translateY(12px);
-    }
+  from {
+    opacity: 0;
+    transform: scale(0.92) translateY(12px);
+  }
 
-    to {
-        opacity: 1;
-        transform: scale(1) translateY(0);
-    }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
 }

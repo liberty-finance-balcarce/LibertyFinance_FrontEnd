@@ -11,6 +11,7 @@ import type { CreateTransaccionHistoricoCompra } from "../types/transaccion-hist
 import styles from "../styles/pages/UserDashboardCarrito.module.css";
 import { useNavigate } from "react-router-dom";
 import { LoadingSpinner } from "../components/LoadingSpinner";
+import { Button } from "../components/Button";
 
 export function UserDashboardCarrito() {
   const navigate = useNavigate();
@@ -25,26 +26,30 @@ export function UserDashboardCarrito() {
   const [busqueda, setBusqueda] = useState("");
 
   const normalizar = (texto: string) =>
-    texto.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    texto
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "");
 
   const filtrar = (lista: typeof data.tradicionales | undefined) => {
     if (!lista) return [];
     const termino = normalizar(busqueda.trim());
     if (!termino) return lista;
-    return lista.filter((instrumento) =>
-      normalizar(instrumento.nombre_instrumento).includes(termino) ||
-      normalizar(instrumento.tipo_instrumento).includes(termino)
+    return lista.filter(
+      (instrumento) =>
+        normalizar(instrumento.nombre_instrumento).includes(termino) ||
+        normalizar(instrumento.tipo_instrumento).includes(termino),
     );
   };
 
   const tradicionalesFiltrados = useMemo(
     () => filtrar(data?.tradicionales),
-    [data?.tradicionales, busqueda]
+    [data?.tradicionales, busqueda],
   );
 
   const noTradicionalesFiltrados = useMemo(
     () => filtrar(data?.noTradicionales),
-    [data?.noTradicionales, busqueda]
+    [data?.noTradicionales, busqueda],
   );
 
   const handlePayment = async () => {
@@ -73,7 +78,7 @@ export function UserDashboardCarrito() {
       setModalAbierto(false);
     } catch (err) {
       setErrorCompra(
-        err instanceof Error ? err.message : "Error al procesar la compra"
+        err instanceof Error ? err.message : "Error al procesar la compra",
       );
     }
     setProcesando(false);
@@ -82,30 +87,25 @@ export function UserDashboardCarrito() {
 
   return (
     <div className={styles.dashboard}>
-
       <div className={styles.header}>
         <FaShoppingCart className={styles.cartIcon} />
 
         {items.length > 0 && (
           <div className={styles.accionesCarrito}>
-            <button
-              className={styles.vaciarButton}
-              onClick={vaciarCarrito}
-            >
+            <Button className={styles.vaciarButton} onClick={vaciarCarrito}>
               <FaTrash className={styles.vaciarIcono} />
               Vaciar
-            </button>
+            </Button>
 
-            <button
+            <Button
               className={styles.comprarButton}
               onClick={() => setModalAbierto(true)}
             >
               <FaCreditCard className={styles.comprarIcono} />
               Comprar ({items.length})
-            </button>
+            </Button>
           </div>
         )}
-
       </div>
 
       <UserDashboardCarritoBusqueda valor={busqueda} onCambiar={setBusqueda} />
@@ -145,7 +145,6 @@ export function UserDashboardCarrito() {
           onCerrar={() => setModalAbierto(false)}
         />
       )}
-
     </div>
   );
 }

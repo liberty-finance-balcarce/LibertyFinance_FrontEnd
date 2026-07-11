@@ -98,10 +98,13 @@
 }
 
 .hint {
-  font-size: 0.75rem;
-  color: var(--colorSecundario);
+  display: flex;
+  font-size: 0.85rem;
+  color: var(--colorLetraGeneral);
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  justify-content: center;
+  font-weight: bold;
 }
 
 .fieldError,
@@ -238,6 +241,11 @@
 
 .btnPassword:hover {
   background-color: var(--colorSecundario);
+}
+
+.reqPassword {
+  font-size: 0.8rem;
+  font-weight: 500;
 }
 
 @media (max-width: 600px) {
