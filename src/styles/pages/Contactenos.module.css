@@ -7,8 +7,9 @@
 }
 
 .header {
+  margin-top: -15px;
+  margin-bottom: 20px;
   text-align: center;
-  margin-bottom: 40px;
 }
 
 .title {
@@ -44,7 +45,7 @@
 .required,
 .error,
 .statusError {
-  color: #d9534f;
+  color: var(--colorLetraGeneral);
 }
 
 .formGroup input,
@@ -85,6 +86,16 @@
   font-size: 0.85rem;
   margin-top: 4px;
   font-weight: 500;
+}
+
+.hint {
+  display: flex;
+  font-size: 0.85rem;
+  color: var(--colorLetraGeneral);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  justify-content: center;
+  font-weight: bold;
 }
 
 .labelRow {

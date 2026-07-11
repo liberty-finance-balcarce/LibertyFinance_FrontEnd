@@ -25,7 +25,7 @@
   box-shadow: none !important;
   font-size: 32px !important;
   line-height: 1 !important;
-  color: var(--primary-color, #800080) !important;
+  color: var(--colorLetraGeneral) !important;
   cursor: pointer !important;
   padding: 0 !important;
   margin: 0 !important;
@@ -49,7 +49,7 @@
 
 .progressFill {
   height: 100%;
-  background: var(--primary-color, #800080);
+  background: var(--colorPrimario);
   transition: width 0.4s ease;
 }
 
@@ -76,7 +76,7 @@
 .titulo {
   font-size: 18px;
   font-weight: 700;
-  color: var(--text-dark, #333);
+  color: var(--colorLetraGeneral);
   padding: 25px 45px 0 30px;
 
 }
@@ -85,7 +85,7 @@
   font-size: 15px;
   padding: 10px 30px 20px;
   font-weight: 500;
-  color: var(--text-light, #666);
+  color: var(--colorLetraGeneral);
 }
 
 .optionsGrid {
@@ -99,7 +99,7 @@
 .optionBtn {
   width: 300px;
   height: 65px;
-  background: var(--white, #fff);
+  background: #f8f8ff;
   border: 2px solid #edf2f4;
   padding: 15px 20px;
   border-radius: 12px;
@@ -134,13 +134,13 @@
 .paginador {
   max-height: 20px;
   font-weight: bold;
-  color: var(--colorPrimario);
+  color: var(--colorLetraGeneral);
 }
 
 .btnNav {
   background: none;
   border: none;
-  color: var(--text-light, #4B0082);
+  color: var(--colorLetraGeneral);
   font-weight: bold;
   cursor: pointer;
 }
