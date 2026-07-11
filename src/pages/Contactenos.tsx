@@ -254,6 +254,10 @@ export function Contactenos() {
           )}
         </div>
 
+        <span className={styles.hint}>
+          * Campos Obligatorios.
+        </span>
+        
         {error && (
           <p className={`${styles.statusMessage} ${styles.statusError}`}>
             Error al enviar: {error}
