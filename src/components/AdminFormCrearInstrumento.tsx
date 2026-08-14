@@ -129,7 +129,7 @@ export function FormCrearInstrumento({ instrumento, onClose, onSave }: Props) {
               <option value="">Seleccione...</option>
               <option value={TipoInstrumento.TRADICIONAL}>Tradicional</option>
               <option value={TipoInstrumento.NO_TRADICIONAL}>
-                No tradicional
+                No Tradicional
               </option>
             </select>
 
