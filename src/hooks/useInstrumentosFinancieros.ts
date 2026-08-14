@@ -17,7 +17,7 @@ export function useInstrumentosFinancieros() {
       try {
         const ranking = await getRankingInstrumentos({
           orderby: "rendimiento:DESC",
-          limit: 8,
+          limit: 10,
         });
         if (!cancelled) setData(ranking);
       } catch (err: any) {
