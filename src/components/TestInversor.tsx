@@ -4,7 +4,11 @@ import { FormularioTest } from "./FormularioTest";
 import styles from "../styles/components/TestInversor.module.css";
 import { Button } from "./Button";
 
-export function TestInversor() {
+interface TestInversorProps{
+  onComplete?:()=> void;
+}
+
+export function TestInversor({onComplete}:TestInversorProps) {
   const [modalAbierto, setModalAbierto] = useState(false);
 
   return (
@@ -16,7 +20,10 @@ export function TestInversor() {
       </Button>
 
       <Modal estaAbierto={modalAbierto} cerrar={() => setModalAbierto(false)}>
-        <FormularioTest onClose={() => setModalAbierto(false)} />
+        <FormularioTest 
+            onClose={() => setModalAbierto(false)} 
+            onComplete={onComplete}
+          />
       </Modal>
     </div>
   );
