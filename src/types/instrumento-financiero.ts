@@ -30,7 +30,7 @@ export enum Riesgo {
 
 export enum TipoInstrumento {
   TRADICIONAL = "Tradicional",
-  NO_TRADICIONAL = "No tradicional",
+  NO_TRADICIONAL = "No Tradicional",
 }
 
 export interface CreateInstrumentoFinanciero extends Partial<

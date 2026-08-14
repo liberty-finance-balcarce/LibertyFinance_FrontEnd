@@ -113,8 +113,12 @@ const questions = [
     ],
   },
 ];
+interface FormularioTestProps {
+  onClose?: () => void;
+  onComplete?: () => void;
+}
 
-export function FormularioTest({ onClose }: { onClose?: () => void }) {
+export function FormularioTest({ onClose, onComplete }: FormularioTestProps) {
   const finalProfile = localStorage.getItem("perfilInv");
   const parsedProfile = finalProfile ? JSON.parse(finalProfile) : null;
 
@@ -210,8 +214,11 @@ export function FormularioTest({ onClose }: { onClose?: () => void }) {
     );
 
     localStorage.removeItem("testInversor");
-
     setFinished(true);
+  if (onComplete) {
+      onComplete();
+    }
+
   };
 
   if (finished) {
