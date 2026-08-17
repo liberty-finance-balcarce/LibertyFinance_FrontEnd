@@ -37,8 +37,19 @@ function App() {
             <Route element={<UserLayout />}>
               <Route path="/dashboard/user" element={<UserDashboard />}>
                 <Route index element={<Navigate to="inversiones" replace />} />
-                <Route path="carrito" element={<CarritoProvider> <UserDashboardCarrito /> </CarritoProvider>} />
-                <Route path="inversiones" element={<UserDashboardInversiones />} />
+                <Route
+                  path="carrito"
+                  element={
+                    <CarritoProvider>
+                      {" "}
+                      <UserDashboardCarrito />{" "}
+                    </CarritoProvider>
+                  }
+                />
+                <Route
+                  path="inversiones"
+                  element={<UserDashboardInversiones />}
+                />
                 <Route
                   path="test-inversor"
                   element={<UserDashboardTestPerfil />}
@@ -52,8 +63,14 @@ function App() {
               <Route path="/dashboard/admin" element={<AdminDashboard />}>
                 <Route index element={<Navigate to="users" replace />} />
                 <Route path="users" element={<AdminUsers />} />
-                <Route path="instrumentos-financieros" element={<AdminListInstFin />} />
-                <Route path="paquetes-inversion" element={<SiteStillOnBuilding />} />
+                <Route
+                  path="instrumentos-financieros"
+                  element={<AdminListInstFin />}
+                />
+                <Route
+                  path="paquetes-inversion"
+                  element={<SiteStillOnBuilding />}
+                />
               </Route>
             </Route>
           </Route>
@@ -84,9 +101,8 @@ function App() {
 
               <Route path="/faq" element={<FAQ />} />
             </Route>
+            <Route path="*" element={<NotFound />} />
           </Route>
-
-          <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </AuthProvider>

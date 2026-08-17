@@ -1,3 +1,4 @@
+import { Button } from "../components/Button";
 import styles from "../styles/pages/NotFound.module.css";
 
 export function NotFound() {
@@ -11,6 +12,8 @@ export function NotFound() {
         />
         <h1 className={styles.title}>Error 404</h1>
         <p className={styles.subtitle}>Page Not Found</p>
+        <br />
+        <Button to="/">Volver al inicio</Button>
       </div>
     </section>
   );
